@@ -1,0 +1,26 @@
+{
+  "name": "is2g28",
+  "version": "1.0.0",
+  "description": "Sistema para unagauchada",
+  "main": "index.php",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ManuColo/IS2G28.git"
+  },
+  "author": "Grupo 28",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ManuColo/IS2G28/issues"
+  },
+  "homepage": "https://github.com/ManuColo/IS2G28#readme",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "moment": "^2.18.1"
+  }
+}
