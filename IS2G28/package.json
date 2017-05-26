@@ -21,6 +21,7 @@
   "homepage": "https://github.com/ManuColo/IS2G28#readme",
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1",
     "moment": "^2.18.1"
   }
 }
