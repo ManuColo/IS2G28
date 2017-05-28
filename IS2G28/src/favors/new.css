@@ -1,0 +1,19 @@
+/* 
+    Created on : 28/05/2017, 16:55:06
+    Author     : Juan Manuel Cipollone
+*/
+
+/* Estilos aplicados al panel que contiene el nuevo favor */
+.favor-new {
+  margin-top: 20px;  
+}
+
+/* Estilos aplicados al titulo del panel */
+.favor-new h3 {
+  font-weight: bold;
+  text-align: center;
+  font-variant: small-caps;
+}
+
+
+
