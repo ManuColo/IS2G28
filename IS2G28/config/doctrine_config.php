@@ -12,6 +12,7 @@ use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 
 require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/config.php';
 
 // Crear configuracion default para el ORM Doctrine
 $isDevMode = true;
@@ -19,11 +20,11 @@ $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__.'/../src/mo
 
 // Especificar parametros de configuracion de la base de datos
 $conn = array(
-    'driver' => 'pdo_mysql',
-    'dbname' => 'una_gauchada',
-    'user' => 'root',
-    'password' => 'UnaGauchada2017',
-    'host' => 'localhost'        
+	'driver' => $cfg->driver,
+	'dbname' => $cfg->dbname,
+	'user' => $cfg->user,
+	'password' => $cfg->password,
+	'host' => $cfg->host
 );
 
 // Obtener gestor de entidades del ORM Doctrine
