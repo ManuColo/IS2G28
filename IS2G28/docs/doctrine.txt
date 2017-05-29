@@ -1,0 +1,141 @@
+Doctrine
+===============================================
+
+Gestor de entidades (EntityManager)
+
+La interfaz publica de Doctrine es un objeto EntityManager. Por ende, cada vez que necesitemos persistir un objeto a la base de datos o recuperar objetos de la base de datos, vamos a hacerlo a traves del gestor de entidades (EntityManager). La instanciacion y configuracion de dicho objeto se realiza en el archivo PHP config/doctrine_config.php. En este archivo, se define la configuracion del gestor de entidades, se establecen los parametros de conexion a la base de datos (podria estar en otro archivo), y se instancia el gestor de entidades. Cada vez que necesitemos usar el gestor de entidades, deberemos hacer un require de este archivo, y dispondremos asi de una instancia del mismo a traves de la variable $entityManager.
+
+Creacion del esquema de la base de datos
+
+Doctrine incluye un herramienta de linea de comandos para generar o actualizar el esquema de la base de datos asociada a traves de una serie de comandos. Para que la interfaz de linea de comandos funcione, es necesario incluir el archivo cli_config.php en el directorio raiz del proyecto. Una vez hecho esto, desde el directorio raiz del proyecto, podemos ejecutar los siguientes comandos:
+
+$ vendor/bin/doctrine orm:schema-tool:create
+
+o
+
+$ vendor/bin/doctrine orm:schema-tool:update --dump-sql --force
+
+El primer comando genera el esquema de la base de datos asociada a partir de la informacion de mapeo definida en el modelo de objetos de la aplicacion. Es necesario que la BD este creada. Por su parte, el segundo comando se usa para actualizar el esquema de la base de datos asociada al introducir cambios en la informacion de mapeo del modelo de objetos.
+
+Definicion de entidades e informacion de mapeo
+
+Una entidad es una clase PHP que se persiste a una base de datos. En nuestro proyecto, Doctrine se configuro para que la informacion de mapeo se especifique mediante anotaciones y que las entidades se encuentren declaradas en el directorio src/model (esta configuracion esta en config/doctrine_config.php). A continuacion vemos como ejemplo la definicion de la clase Favor con las anotaciones que especifican la informacion de mapeo. En la definicion de la clase Favor, se observan diferentes anotaciones:
+
+@Entity sirve para indicar que la clase PHP es una entidad y se persiste a la BD
+@Table sirve para indicar la tabla en la BD asociada
+@Id sirve para indicar que un campo es clave primaria
+@Column sirve para indicar informacion del campo asociado a cada propiedad (tipo, nombre, etc)
+@GeneratedValue sirve para indicar que es un identificador autoincremental
+
+Para mas informacion, ver la documentacion de Doctrine: http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/
+
+Aclaracion: Es importante definir los getters y setter porque son usados como metodos hook por Doctrine.
+
+
+/**
+ * Description of Favor
+ *
+ * @author juan
+ * @Entity @Table(name="favors")
+ */
+class Favor 
+{
+  /**
+   * @Id @Column(type="integer") @GeneratedValue
+   * @var integer 
+   */
+  protected $id;
+  
+  /**
+   * @Column(type="string")
+   * @var string 
+   */
+  protected $title;
+  
+  /**
+   * @Column(type="string")
+   * @var string 
+   */
+  protected $description;
+  
+  /**
+   * @Column(type="string")
+   * @var string 
+   */
+  protected $photo;
+  
+  /**
+   * @Column(type="string")
+   * @var string 
+   */
+  protected $city;
+  
+  /**
+   * @Column(type="date")
+   * @var DateTime 
+   */
+  protected $deadline;
+  
+  public function getId()
+  {
+    return $this->id;
+  }
+  
+  public function getTitle()
+  {
+    return $this->title;
+  }
+  
+  public function setTitle($title)
+  {
+    $this->title = $title;
+  }
+  
+  public function getDescription()
+  {
+    return $this->description;
+  }
+  
+  public function setDescription($description)
+  {
+    $this->description = $description;
+  }
+  
+  public function getPhoto()
+  {
+    return $this->photo;
+  }
+  
+  public function setPhoto($photo)
+  {
+    $this->photo = $photo;
+  }
+  
+  public function getCity()
+  {
+    return $this->city;
+  }
+  
+  public function setCity($city)
+  {
+    $this->city = $city;
+  }
+  
+  public function getDeadline()
+  {
+    return $this->deadline;
+  }
+  
+  public function setDeadline($deadline)
+  {
+    $this->deadline = $deadline;
+  }
+  
+  
+}
+
+
+
+
+
+
