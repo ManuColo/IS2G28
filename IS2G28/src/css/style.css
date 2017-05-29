@@ -1,0 +1,22 @@
+/* 
+    Created on : 29/05/2017, 8:45:06
+    Author     : Manuel Colombini
+*/
+
+/* Página general de estilos */
+
+.login {
+	margin: auto;
+	width: 420px;
+}
+
+.favor-new {
+	margin-top: 20px;  
+}
+
+/* Estilos aplicados al titulo del panel */
+.favor-new h3 {
+	font-weight: bold;
+	text-align: center;
+	font-variant: small-caps;
+}
