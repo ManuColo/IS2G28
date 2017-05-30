@@ -24,25 +24,25 @@
 				</div>
 				<div class="panel-body">
 					<!-- Formulario de alta de login -->
-					<form class="form-horizontal" id="login-form">
+					<form class="form-horizontal" method="post" action="access.php" id="login-form">
 						<!-- Usuario -->
 						<div class="form-group">
 							<label for="user" class="col-sm-2 control-label">Usuario</label>
 							<div class="col-sm-10">
-	                    		<input type="text" class="form-control" id="user" required/>
+	                    		<input type="email" class="form-control" id="user" name="user" required/>
 							</div>
 						</div>
 						<!-- Clave -->
 						<div class="form-group">
 							<label for="pass" class="col-sm-2 control-label">Clave</label>
 							<div class="col-sm-10">
-								<input type="password" class="form-control" id="pass" required/>
+								<input type="password" name="password" class="form-control" id="pass" required/>
 							</div>
 						</div>
 						<!-- Botones del formulario -->
 						<div class="form-group">
 							<div class="col-sm-10 col-sm-offset-2">                                  
-								<input type="submit" class="btn btn-primary" value="Ingresar">
+								<input id="submit" type="submit" class="btn btn-primary" value="Ingresar">
 								<input type="button" class="btn btn-default" value="Cancelar" onClick="goBack();">
 							</div>
 						</div>              
