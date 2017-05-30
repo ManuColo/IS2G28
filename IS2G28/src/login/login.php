@@ -25,6 +25,11 @@
 				<div class="panel-body">
 					<!-- Formulario de alta de login -->
 					<form class="form-horizontal" method="post" action="access.php" id="login-form">
+						<?php 
+						if (isset($_GET)&& ($_GET['message']=='loginFail')) { ?>
+							<div class="alert alert-danger">Usuario o Clave Incorrectos</div>
+						<?php }
+						?>
 						<!-- Usuario -->
 						<div class="form-group">
 							<label for="user" class="col-sm-2 control-label">Usuario</label>
