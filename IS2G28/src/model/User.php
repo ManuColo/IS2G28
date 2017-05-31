@@ -106,7 +106,7 @@ Class User {
 		return $this->salt;
 	}
 	
-	public function encrypt_password($password,$salt=''){
+	public function encryptPassword($password,$salt=''){
 		return hash("sha256",$salt . $password);
 	}
 	
