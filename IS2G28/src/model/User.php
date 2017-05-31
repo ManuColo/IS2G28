@@ -110,5 +110,9 @@ Class User {
 		return hash("sha256",$salt . $password);
 	}
 	
+	public function generateSalt(){
+		return '$2y$11$'.substr(md5(uniqid(rand(),true)), 0, 22);
+	}
+	
 }
 ?>
