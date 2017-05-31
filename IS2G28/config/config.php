@@ -14,4 +14,9 @@ $cfg->dataRoot = substr(__DIR__, 0, -6);
 // Ubicación Base de archivos por URL
 $cfg->wwwRoot = 'http://localhost/IS2G28';
 
-?>
+// Agregado de carpeta base en include path
+$includePath = substr(__DIR__,0,-7);
+set_include_path(get_include_path() . PATH_SEPARATOR . $includePath );
+
+// Seteo de default time zone
+date_default_timezone_set('America/Buenos_Aires');

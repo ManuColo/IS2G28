@@ -1,4 +1,7 @@
-<?php require '../../config/config.php';?>
+<?php 
+$path = substr(__DIR__,0,-10);
+require_once $path.'config/config.php';
+?>
 <!-- Librerias javascript requeridas por diferentes paginas del proyecto -->
 <script type="text/javascript" src="<?php echo $cfg->wwwRoot?>/node_modules/jquery/dist/jquery.js"></script>
 <script type="text/javascript" src="<?php echo $cfg->wwwRoot?>/node_modules/bootstrap/dist/js/bootstrap.js"></script>
