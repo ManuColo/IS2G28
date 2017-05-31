@@ -2,9 +2,17 @@
 <html>
   <head>
 	<title>Una Gauchada - Registro de usuarios</title>
-	<script src="../js/functions.js"></script>
 	<?php require '../common/common_headers.php' ;?>
-	<?php require '../common/common_javascripts.php' ;?>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#login-form').on('submit', function() {
+			var user = $('#user').val();
+			if (!isEmail(user)) {
+				return false;
+				}
+			});
+		});
+	</script>
   </head>
 	<body>
       <!-- Contenedor principal, requerido por Bootstrap -->
