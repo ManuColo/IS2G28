@@ -8,7 +8,7 @@ if (isset($_POST)&&($_POST['user']!=null)&&($_POST['password']!=null)) {
 			$_SESSION['logged']=true;
 			$_SESSION['loginTime']=date();
 			$_SESSION['userId']=$user->getId();
-			header("location:../favors/");
+			header("location:../favors/list.php");
 		}
 		
 	} else {
