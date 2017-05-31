@@ -2,7 +2,9 @@
 <html>
   <head>
 	<title>Una Gauchada - Registro de usuarios</title>
+	<script src="../js/functions.js"></script>
 	<?php require '../common/common_headers.php' ;?>
+	<?php require '../common/common_javascripts.php' ;?>
   </head>
 	<body>
       <!-- Contenedor principal, requerido por Bootstrap -->
@@ -17,40 +19,40 @@
 			</div>
         <div class="panel-body">
         <!-- Formulario de alta de usuario -->
-          <form class="form-horizontal">
+          <form class="form-horizontal" method="post" action="signin.php">
 			<!-- Nombre del usuario -->
 			<div class="form-group">
-			  <label for="user" class="col-sm-2 control-label">Nombre</label>
+			  <label for="name" class="col-sm-2 control-label" onchange="validarN('name')">Nombre</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="user" />
+					<input type="text" class="form-control" id="name" name="name" />
 			  	</div>
 			</div>
             <!-- Apellido del usuario -->
             <div class="form-group">
-			  <label for="pass" class="col-sm-2 control-label">Apellido</label>
+			  <label for="lastname" class="col-sm-2 control-label">Apellido</label>
 				<div class="col-sm-10">
-                    <input type="text" class="form-control" id="user" />
+                    <input type="text" class="form-control" id="lastname" name="lastname" />
                 </div>
             </div>
             <!-- Email del usuario -->
             <div class="form-group">
-			  <label for="user" class="col-sm-2 control-label">E-mail</label>
+			  <label for="mail" class="col-sm-2 control-label">E-mail</label>
               	<div class="col-sm-10">
-					<input type="email" class="form-control" id="user" />
+					<input type="email" class="form-control" id="mail" name="mail" />
                 </div>
             </div>
             <!-- Teléfono del usuario -->
             <div class="form-group">
-			  <label for="user" class="col-sm-2 control-label">Teléfono</label>
+			  <label for="phone" class="col-sm-2 control-label">Teléfono</label>
 				<div class="col-sm-10">
-					<input type="tel" class="form-control" id="user" />
+					<input type="tel" class="form-control" id="phone" name="phone" />
                 </div>
             </div>
             <!-- Contraseña del usuario -->
             <div class="form-group">
-			  <label for="user" class="col-sm-2 control-label">Clave</label>
+			  <label for="password" class="col-sm-2 control-label">Clave</label>
 				<div class="col-sm-10">
-					<input type="password" class="form-control" id="user" />
+					<input type="password" class="form-control" id="password" name="password" />
                 </div>
             </div>
              
@@ -59,7 +61,7 @@
                 <div class="col-sm-10 col-sm-offset-1">                                  
                   <input type="submit" class="btn btn-primary" value="Enviar">
                   <input type="reset" class="btn btn-primary" value="Reiniciar">
-                  <a type="button" class="btn btn-primary" href="../login/index.php">Inicio</a>
+                  <a type="button" class="btn btn-primary" onClick="goBack();">Cancelar</a>
 				</div>
 			</div>              
           </form>
