@@ -17,34 +17,41 @@
 			</div>
         <div class="panel-body">
         <!-- Formulario de solicitud de crédito -->
-          <form class="form-horizontal" method="post">
+          <form class="form-horizontal" method="post" action="#">
 			<!-- Tipo de tarjeta -->
 			<div class="form-group">
 			  <label for="card" class="col-sm-2 control-label">Tarjeta</label>
 				<div class="col-sm-10">
 					<select class="selectpicker" id="card" name="card">
 						<option id="0"> </option>
-						<option id="vd">VISA Débito</option>
-						<option id="vc">VISA Crédito</option>
+						<option id="vd">VISA</option>
+						<option id="vc">MASTERCARD</option>
 					</select>
 			  	</div>
 			</div>
-            <!-- Banco -->
-            <div class="form-group">
-			  <label for="bank" class="col-sm-2 control-label">Banco</label>
-				<div class="col-sm-10">
-                    <select class="selectpicker" id="bank" name="bank">
-						<option id="0"> </option>
-						<option id="bp">Provincia</option>
-						<option id="bn">Nación</option>
-					</select>
-                </div>
-            </div>
             <!-- Número -->
             <div class="form-group">
 			  <label for="numCard" class="col-sm-2 control-label">Número</label>
               	<div class="col-sm-10">
 					<input type="text" class="form-control" id="numCard" name="numCard" placeholder="Sólo números" />
+                </div>
+            </div>
+            <!-- Fecha de Emisión -->
+            <div class="form-group">
+			  <label for="cardE" class="col-sm-2 control-label">Emisión</label>
+              	<div class="col-sm-10">
+					<input type="date" class="form-control" id="cardE" name="cardE" 
+							data-provide="datepicker" data-date-format="mm/yy" 
+                           	data-date-autoclose="true" placeholder="Fecha de emisión mm/yy" />
+                </div>
+            </div>
+            <!-- Fecha de Vencimiento -->
+            <div class="form-group">
+			  <label for="cardV" class="col-sm-2 control-label">Vencim.</label>
+              	<div class="col-sm-10">
+					<input type="date" class="form-control" id="cardV" name="cardV" 
+							data-provide="datepicker" data-date-format="mm/yy" 
+                           	data-date-autoclose="true" placeholder="Fecha de vencimiento mm/yy" />
                 </div>
             </div>
             <!-- Código de seguridad -->
