@@ -20,3 +20,19 @@
 	text-align: center;
 	font-variant: small-caps;
 }
+
+body {
+	background-color:#f3f3f3;
+	margin:0;
+}
+
+.panel-heading h3 {
+	font-size:30px;
+}
+
+.panel-heading img {
+	float:right;
+	top:0;
+	left:0;
+	width:40px;
+}
