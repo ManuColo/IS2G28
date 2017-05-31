@@ -6,7 +6,7 @@ if (isset($_POST)&&($_POST['user']!=null)&&($_POST['password']!=null)) {
 		if (($user->encryptPassword($_POST['password'],$user->getSalt())) == $user->getPass() ) {
 			session_start();
 			$_SESSION['logged']=true;
-			$_SESSION['loginTime']=date();
+			$_SESSION['loginTime']=time();
 			$_SESSION['userId']=$user->getId();
 			header("location:../favors/list.php");
 		}
