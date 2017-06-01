@@ -45,6 +45,12 @@ class Favor
    */
   protected $deadline;
   
+  /**
+   * @Column(type="integer")
+   * @var integer
+   */
+  private $cantApplications;
+  
   public function getId()
   {
     return $this->id;
@@ -100,5 +106,12 @@ class Favor
     $this->deadline = $deadline;
   }
   
+  public function setCantApplications($cant){
+  	$this->cantApplications = $cant;
+  }
+    
+  public function getCantCredits(){
+  	return $this->cantCredits;
+  }
   
 }
