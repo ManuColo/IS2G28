@@ -50,7 +50,13 @@ Class User {
 	 */
 	private $salt;
 	
-	public function setId($id){
+	/**
+	 * @Column(type="integer")
+	 * @var integer
+	 */
+	private $cantCredits;
+	
+		public function setId($id){
 		$this->id = $id;
 	}
 	
@@ -76,6 +82,10 @@ Class User {
 	
 	public function setSalt($salt){
 		$this->salt = $salt;
+	}
+	
+	public function setCantCredits($cant){
+		$this->cantCredits = $cant;
 	}
 	
 	public function getId(){
@@ -104,6 +114,10 @@ Class User {
 	
 	public function getSalt(){
 		return $this->salt;
+	}
+		
+	public function getCantApplications(){
+		return $this->cantApplications;
 	}
 	
 	public function encryptPassword($password,$salt=''){
