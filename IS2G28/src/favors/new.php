@@ -1,3 +1,6 @@
+<?php 
+session_start();
+if ($_SESSION['logged']) { ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,7 +11,13 @@
   </head>
   <body>
     <!-- Contenedor principal, requerido por Bootstrap -->
-    <div class="container-fluid">    
+    <div class="container-fluid">
+	  <div id="header">
+		 <img class="img-responsive" src="<?php echo $cfg->wwwRoot;?>/src/images/header-gauchada.png"/>
+	  </div>
+	  <?php 	
+		include('../common/menu.php');	
+	  ?>    
       <div class="panel panel-default favor-new">
         <div class="panel-heading">
           <!-- Titulo de la seccion -->
@@ -81,3 +90,8 @@
     </div>    
   </body>    
 </html>
+<?php 
+} else {
+	header("location:../login/login.php");
+}
+?>
