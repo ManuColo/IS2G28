@@ -2,7 +2,7 @@
 session_start();
 if ($_SESSION['logged']) {
 	require '../../config/doctrine_config.php';
-	$favors = $entityManager->getRepository("Favor")->findAll(); ?>
+	$favors = $entityManager->getRepository("Favor")->findBy(array(),array('deadline'=>'ASC')); ?>
 	<!DOCTYPE html>
 		<html>
 		<head>
