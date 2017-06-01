@@ -17,10 +17,9 @@ if ($_SESSION['logged']) {
 			<div id=header>
 				<img class="img-responsive" src="<?php echo $cfg->wwwRoot;?>/src/images/header-gauchada.png"/>
 			</div>
-		  	<ul class="nav nav-pills pull-right">
-			  <li class="active"><a href="../index.php">Inicio</a></li>
-			  <li><a href="../login/logout.php">Cerrar Sesión</a></li>
-			</ul>
+		  	<?php 	
+			include('../common/menu.php');	
+		  	?>
 			<div class="jumbotron">
 				<div class="panel panel-default index" style="text-align:center;">
 				<!-- Titulo de la seccion -->

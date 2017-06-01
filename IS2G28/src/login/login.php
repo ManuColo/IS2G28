@@ -19,7 +19,11 @@
 		<div class="container">
 			<div id=header>
 				<img class="img-responsive" src="../images/header-gauchada.png"/>
-			</div>    
+			</div>
+			<?php 	
+		  	session_start();
+			include('common/menu.php');	
+		  	?>    
 			<div class="panel panel-default login">
 				<div class="panel-heading">
 					<!-- Titulo de la seccion -->

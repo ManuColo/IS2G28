@@ -1,3 +1,6 @@
+<?php
+use function Composer\Autoload\includeFile;
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -12,20 +15,10 @@
 		<div id=header>
 			<img class="img-responsive" src="<?php echo $cfg->wwwRoot;?>/src/images/header-gauchada.png"/>
 		</div>
-	  	<ul class="nav nav-pills pull-right">
 	  	<?php 	
 	  	session_start();
-			if (isset($_SESSION['logged'])) {
-				if($_SESSION['logged']== true){ ?>
-					<li class="active"><a href="#">Inicio</a></li>
-					<li><a href="<?php echo $cfg->wwwRoot;?>/src/login/logout.php">Cerrar Sesión</a></li>
-					<?php } }
-		    else { ?>
-		  			<li class="active"><a href="#">Inicio</a></li>
-		  			<li><a href="./login/login.php">Iniciar Sesión</a></li>
-		  			<li><a href="./registro/registro.php">Registrate</a></li>
-		  	<?php }?>
-		</ul>
+		include('common/menu.php');	
+	  	?>
 		<div class="jumbotron">
 			<div class="panel panel-default index" style="text-align:center;">
 			<!-- Titulo de la seccion -->
