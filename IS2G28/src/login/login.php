@@ -23,7 +23,7 @@
 			<div class="panel panel-default login">
 				<div class="panel-heading">
 					<!-- Titulo de la seccion -->
-					<h3 class="panel-title">Acceso de usuarios</h3>
+					<h3 class="panel-title">Acceso de usuarios <img src="../images/logo-gauchada.png"/></h3>
 				</div>
 				<div class="panel-body">
 					<!-- Formulario de alta de login -->
