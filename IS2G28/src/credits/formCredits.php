@@ -1,3 +1,6 @@
+<?php 
+session_start();
+if ($_SESSION['logged']) { ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -18,11 +21,11 @@
         <div class="panel-body">
         <!-- Formulario de solicitud de crédito -->
           <form class="form-horizontal" method="post" action="#">
-			<!-- Tipo de tarjeta -->
+			<!-- Tarjeta -->
 			<div class="form-group">
 			  <label for="card" class="col-sm-2 control-label">Tarjeta</label>
 				<div class="col-sm-10">
-					<select class="selectpicker" id="card" name="card">
+					<select class="selectpicker" id="card" name="card" required >
 						<option id="0"> </option>
 						<option id="vd">VISA</option>
 						<option id="vc">MASTERCARD</option>
@@ -33,7 +36,7 @@
             <div class="form-group">
 			  <label for="numCard" class="col-sm-2 control-label">Número</label>
               	<div class="col-sm-10">
-					<input type="text" class="form-control" id="numCard" name="numCard" placeholder="Sólo números" />
+					<input type="text" class="form-control" id="numCard" name="numCard" placeholder="Sólo números" required />
                 </div>
             </div>
             <!-- Fecha de Emisión -->
@@ -42,7 +45,7 @@
               	<div class="col-sm-10">
 					<input type="date" class="form-control" id="cardE" name="cardE" 
 							data-provide="datepicker" data-date-format="mm/yy" 
-                           	data-date-autoclose="true" placeholder="Fecha de emisión mm/yy" />
+                           	data-date-autoclose="true" placeholder="Fecha de emisión mm/yy" required />
                 </div>
             </div>
             <!-- Fecha de Vencimiento -->
@@ -51,23 +54,23 @@
               	<div class="col-sm-10">
 					<input type="date" class="form-control" id="cardV" name="cardV" 
 							data-provide="datepicker" data-date-format="mm/yy" 
-                           	data-date-autoclose="true" placeholder="Fecha de vencimiento mm/yy" />
+                           	data-date-autoclose="true" placeholder="Fecha de vencimiento mm/yy" required />
                 </div>
             </div>
             <!-- Código de seguridad -->
             <div class="form-group">
 			  <label for="codCard" class="col-sm-2 control-label">Código</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="codCard" name="codCard" placeholder="Tres dígitos" />
+					<input type="text" class="form-control" id="codCard" name="codCard" placeholder="Tres dígitos" required />
                 </div>
             </div>
             <!-- Cantidad de créditos -->
             <div class="form-group">
-			  <label for="cantCred" class="col-sm-2 control-label">Cantidad</label>
+			  <label for="cantCredSol" class="col-sm-2 control-label">Cantidad</label>
 				<div class="col-sm-10">
-					<select class="selectpicker">
-						<option id="0"> - </option>
-  						<option id="1"> 1 </option>
+					<select class="selectpicker" id="cantCredSol" name="cantCredSol" required >
+						<option id="0"> </option>
+  						<option id="1">1</option>
 					</select>
                 </div>
             </div>
@@ -86,3 +89,8 @@
     </div>        
   </body>    
 </html>
+<?php 
+} else {
+	header("location:../login/login.php");
+}
+?>
