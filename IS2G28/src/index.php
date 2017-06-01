@@ -13,9 +13,18 @@
 			<img class="img-responsive" src="<?php echo $cfg->wwwRoot;?>/src/images/header-gauchada.png"/>
 		</div>
 	  	<ul class="nav nav-pills pull-right">
-		  <li class="active"><a href="#">Inicio</a></li>
-		  <li><a href="./login/login.php">Iniciar Sesión</a></li>
-		  <li><a href="./registro/registro.php">Registrate</a></li>
+	  	<?php 	
+	  	session_start();
+			if (isset($_SESSION['logged'])) {
+				if($_SESSION['logged']== true){ ?>
+					<li class="active"><a href="#">Inicio</a></li>
+					<li><a href="<?php echo $cfg->wwwRoot;?>/src/login/logout.php">Cerrar Sesión</a></li>
+					<?php } }
+		    else { ?>
+		  			<li class="active"><a href="#">Inicio</a></li>
+		  			<li><a href="./login/login.php">Iniciar Sesión</a></li>
+		  			<li><a href="./registro/registro.php">Registrate</a></li>
+		  	<?php }?>
 		</ul>
 		<div class="jumbotron">
 			<div class="panel panel-default index" style="text-align:center;">
@@ -30,7 +39,11 @@
 					<p> Sabemos que hay muchas personas que necesitan ayuda y hay muchas otras personas dispuestas a ayudar. </p>
 					<p> ¿Necesitás un favor?¿Querés ayudar a alguien? </p>
 					<p> Te ayudamos! Contactate con personas como vos desde UNA GAUCHADA! </p>
-			  		<small class="pull-right"> Tenés que iniciar sesión <span class="glyphicon glyphicon-arrow-up"></span></small>
+			  		<?php 
+			  		if (!isset($_SESSION['logged'])) {
+						if($_SESSION['logged']== false){ ?>
+			  		<small class="pull-right"> Para ver el contenido tenés que iniciar sesión <span class="glyphicon glyphicon-arrow-up"></span></small>
+			  		<?php } }?>
 				</div>        
 			</div>
 		</div>
