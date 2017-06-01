@@ -16,8 +16,8 @@
 	</head>
 	<body>
 		<!-- Contenedor principal, requerido por Bootstrap -->
-		<div class="container">
-			<div id=header>
+		<div class="container-fluid">
+			<div id="header">
 				<img class="img-responsive" src="../images/header-gauchada.png"/>
 			</div>
 			<?php 	

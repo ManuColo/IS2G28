@@ -12,7 +12,7 @@ use function Composer\Autoload\includeFile;
   <body>
 	<!-- Contenedor principal, requerido por Bootstrap -->	
 	<div class="container">
-		<div id=header>
+		<div id="header">
 			<img class="img-responsive" src="<?php echo $cfg->wwwRoot;?>/src/images/header-gauchada.png"/>
 		</div>
 	  	<?php 	
