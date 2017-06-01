@@ -27,15 +27,36 @@ if ($_SESSION['logged']) {
 					<div class="panel-heading">
 	          			<h1 class="panel-title">Una Gauchada</h1>
 					</div>
-					<div id="logo">
-						<img src="<?php echo $cfg->wwwRoot;?>/src/images/logo-gauchada.png"/>
-					</div>
 					<div class="panel-body">
-						<?php
-							foreach ($favors as $favor) { ?>
-								<p><?php echo $favor->getTitle();?></p>
-							<?php }
-						?>
+						<div class="table-responsive">
+							<table class="table table-hover favorList">
+								<tr>
+									<th>Imagen</th>
+									<th>T&iacute;tulo</th>
+									<th>Ciudad</th>
+									<th>Fecha l&iacute;mite</th>
+								</tr>
+							<?php
+								foreach ($favors as $favor) { ?>
+								 <tr>
+									<td>
+										<a href="show.php?id=<?php echo  $favor->getId();?>">
+											<?php 
+											if ($favor->getPhoto()) {?>
+												<img alt="<?php echo $favor->getTitle();?>" src="<?php echo $favor->getPhoto();?>">
+											<?php } else {?>
+												<img alt="<?php echo $favor->getTitle();?>" src="<?php echo $cfg->wwwRoot;?>/src/images/logo-gauchada.png"/>
+											<?php }
+											?>
+										</a>
+									</td>
+									<td><a href="show.php?id=<?php echo  $favor->getId();?>"><?php echo $favor->getTitle();?></a></td>
+									<td><?php echo $favor->getCity();?></td>
+									<td><?php echo $favor->getDeadline()->format("d/m/Y");?></td>
+								</tr>
+								<?php }; ?>
+							</table>
+						</div>
 					</div>        
 				</div>
 			</div>
