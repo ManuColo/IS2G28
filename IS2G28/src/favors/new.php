@@ -81,7 +81,7 @@ if ($_SESSION['logged']) { ?>
               <div class="form-group">
                 <div class="col-sm-9 col-sm-offset-3">                                  
                   <input type="submit" class="btn btn-primary" value="Guardar">
-                  <input type="button" class="btn btn-default" value="Cancelar">
+                  <input type="button" class="btn btn-default" value="Cancelar" onClick="goBack();">
                 </div>
               </div>              
           </form>
