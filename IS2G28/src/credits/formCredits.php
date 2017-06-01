@@ -12,7 +12,10 @@ if ($_SESSION['logged']) { ?>
       <div class="container">   
 		<div id=header>
 			<img class="img-responsive" src="../images/header-gauchada.png"/>
-		</div> 
+		</div>
+		<?php 	
+		include('../common/menu.php');	
+	  	?> 
       	<div class="panel panel-default login">
         	<div class="panel-heading">
           	  <!-- Encabezado del formulario -->

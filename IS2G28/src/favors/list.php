@@ -25,6 +25,9 @@ if ($_SESSION['logged']) {
 				<!-- Titulo de la seccion -->
 					<div class="panel-heading">
 	          			<h1 class="panel-title">Una Gauchada</h1>
+	          			<p>
+	          				<a class="btn btn-default" href="new.php">Nueva Gauchada</a>
+	          			</p>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
