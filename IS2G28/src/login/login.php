@@ -16,13 +16,13 @@
 	</head>
 	<body>
 		<!-- Contenedor principal, requerido por Bootstrap -->
-		<div class="container-fluid">
+		<div class="container">
 			<div id="header">
 				<img class="img-responsive" src="../images/header-gauchada.png"/>
 			</div>
 			<?php 	
 		  	session_start();
-			include('common/menu.php');	
+			include('../common/menu.php');	
 		  	?>    
 			<div class="panel panel-default login">
 				<div class="panel-heading">
