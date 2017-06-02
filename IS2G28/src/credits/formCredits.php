@@ -23,7 +23,7 @@ if ($_SESSION['logged']) { ?>
 			</div>
         <div class="panel-body">
         <!-- Formulario de solicitud de crédito -->
-          <form class="form-horizontal" method="post" action="#">
+          <form class="form-horizontal" method="post" action="reqCredits.php">
 			<!-- Tarjeta -->
 			<div class="form-group">
 			  <label for="card" class="col-sm-2 control-label">Tarjeta</label>
@@ -35,6 +35,13 @@ if ($_SESSION['logged']) { ?>
 					</select>
 			  	</div>
 			</div>
+			<!-- Titular de la tarjeta -->
+            <div class="form-group">
+			  <label for="titCard" class="col-sm-2 control-label">Titular</label>
+              	<div class="col-sm-10">
+					<input type="text" class="form-control" id="titCard" name="titCard" placeholder="Titular de la tarjeta" required />
+                </div>
+            </div>
             <!-- Número -->
             <div class="form-group">
 			  <label for="numCard" class="col-sm-2 control-label">Número</label>
@@ -69,9 +76,9 @@ if ($_SESSION['logged']) { ?>
             </div>
             <!-- Cantidad de créditos -->
             <div class="form-group">
-			  <label for="cantCredSol" class="col-sm-2 control-label">Cantidad</label>
+			  <label for="cantCredReq" class="col-sm-2 control-label">Cantidad</label>
 				<div class="col-sm-10">
-					<select class="selectpicker" id="cantCredSol" name="cantCredSol" required >
+					<select class="selectpicker" id="cantCredReq" name="cantCredReq" required >
 						<option id="0"> </option>
   						<option id="1">1</option>
 					</select>
