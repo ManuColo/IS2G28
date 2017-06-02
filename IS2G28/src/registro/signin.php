@@ -25,7 +25,8 @@ if (isset($_POST['name'])&&
 			$user->setMail($mail);
 			$user->setPhone($tel);
 			$user->setSalt($user->generateSalt());
-			$user->setPass($user->encryptPassword($cla,$user->getSalt())); 
+			$user->setPass($user->encryptPassword($cla,$user->getSalt()));
+			$user->setCantCredits(1);
 			$entityManager-> persist($user);
 			$entityManager-> flush();
 			//$_SESSION['error']= "Inicia Sesion para continuar";
