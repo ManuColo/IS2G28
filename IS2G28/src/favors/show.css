@@ -1,0 +1,39 @@
+/* 
+    Created on : 02/06/2017, 01:41:48
+    Author     : juan
+*/
+
+.panel.favor {
+  margin-top: 20px;
+}
+
+.media.favor {
+  border: 1px solid #FF902F;
+  padding: 15px;
+  border-radius: 15px;
+  background-color: #F8F0F0;
+}
+
+.media.favor .media-body {  
+  padding: 0px 5px;
+}
+
+.favor .favor-title {
+  border-bottom: 1px solid #E0E0E0;
+  padding-bottom: 5px;
+  color: #555;
+}
+
+.favor .favor-description {
+  color: #999;
+  font-style: italic;
+}
+
+.favor .favor-photo {
+  width: 150px; 
+  height: 120px;
+}
+
+.favor .favor-properties {
+  font-size: 15px;
+}
