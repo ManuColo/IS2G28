@@ -21,13 +21,14 @@ if ($_SESSION['logged']) {
 			include('../common/menu.php');	
 		  	?>
 			<div class="jumbotron">
-				<div class="panel panel-default index" style="text-align:center;">
+				<div class="panel panel-default index">
 				<!-- Titulo de la seccion -->
 					<div class="panel-heading">
-	          			<h1 class="panel-title">Una Gauchada</h1>
-	          			<p>
-	          				<a class="btn btn-default" href="new.php">Nueva Gauchada</a>
-	          			</p>
+            <a class="btn btn-primary pull-right" href="new.php">
+              <span class="glyphicon glyphicon-plus-sign"></span> Nueva Gauchada
+            </a>
+            <h3 class="panel-title">Listado de gauchadas</h3>
+            	          			
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
@@ -45,9 +46,9 @@ if ($_SESSION['logged']) {
 										<a href="show.php?id=<?php echo  $favor->getId();?>">
 											<?php 
 											if ($favor->getPhoto()) {?>
-												<img alt="<?php echo $favor->getTitle();?>" src="<?php echo $favor->getPhoto();?>">
+                      <img alt="<?php echo $favor->getTitle();?>" src="../uploads/<?php echo $favor->getPhoto() ?>" class="img-circle">
 											<?php } else {?>
-												<img alt="<?php echo $favor->getTitle();?>" src="<?php echo $cfg->wwwRoot;?>/src/images/logo-gauchada.png"/>
+												<img alt="<?php echo $favor->getTitle();?>" src="<?php echo $cfg->wwwRoot;?>/src/images/logo-gauchada.png" class="img-circle"/>
 											<?php }
 											?>
 										</a>
