@@ -6,6 +6,30 @@ if ($_SESSION['logged']) { ?>
   <head>
 	<title>Una Gauchada - Obtener créditos</title>
 	<?php require '../common/common_headers.php' ;?>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#formCredits').on('submit', function() {
+				var owner = $('#titCard').val();
+				if (hasNumbers(owner)) {
+					$("<div class='alert alert-danger'></div>").html("Campo incorrecto").appendTo(".cardOwner");
+					$(".alert").delay(3000).fadeOut('slow');
+					return false;
+				}
+				var cardNumber = $('#numCard').val();
+				if (isNaN(cardNumber) || (cardNumber.length != 16)) {
+					$("<div class='alert alert-danger'></div>").html("Campo incorrecto").appendTo(".cardNumber");
+					$(".alert").delay(3000).fadeOut('slow');
+					return false;
+				}
+				var securityCode = $('#codCard').val();
+				if (isNaN(securityCode) || (securityCode.length != 3)) {
+					$("<div class='alert alert-danger'></div>").html("Campo incorrecto").appendTo(".securityCode");
+					$(".alert").delay(3000).fadeOut('slow');
+					return false;
+				}
+			});
+		});
+	</script>
   </head>
 	<body>
       <!-- Contenedor principal, requerido por Bootstrap -->
@@ -23,7 +47,7 @@ if ($_SESSION['logged']) { ?>
 			</div>
         <div class="panel-body">
         <!-- Formulario de solicitud de crédito -->
-          <form class="form-horizontal" method="post" action="reqCredits.php">
+          <form class="form-horizontal" id="formCredits" method="post" action="reqCredits.php">
 			<!-- Tarjeta -->
 			<div class="form-group">
 			  <label for="card" class="col-sm-2 control-label">Tarjeta</label>
@@ -36,17 +60,17 @@ if ($_SESSION['logged']) { ?>
 			  	</div>
 			</div>
 			<!-- Titular de la tarjeta -->
-            <div class="form-group">
+            <div class="form-group cardOwner">
 			  <label for="titCard" class="col-sm-2 control-label">Titular</label>
               	<div class="col-sm-10">
 					<input type="text" class="form-control" id="titCard" name="titCard" placeholder="Titular de la tarjeta" required />
                 </div>
             </div>
             <!-- Número -->
-            <div class="form-group">
+            <div class="form-group cardNumber">
 			  <label for="numCard" class="col-sm-2 control-label">Número</label>
               	<div class="col-sm-10">
-					<input type="text" class="form-control" id="numCard" name="numCard" placeholder="Sólo números" required />
+					<input type="text" class="form-control" id="numCard" name="numCard" placeholder="Sólo números" size="16" required />
                 </div>
             </div>
             <!-- Fecha de Emisión -->
@@ -68,10 +92,10 @@ if ($_SESSION['logged']) { ?>
                 </div>
             </div>
             <!-- Código de seguridad -->
-            <div class="form-group">
+            <div class="form-group securityCode">
 			  <label for="codCard" class="col-sm-2 control-label">Código</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="codCard" name="codCard" placeholder="Tres dígitos" required />
+					<input type="text" class="form-control" id="codCard" name="codCard" placeholder="Tres dígitos" size="3" required />
                 </div>
             </div>
             <!-- Cantidad de créditos -->
@@ -79,8 +103,7 @@ if ($_SESSION['logged']) { ?>
 			  <label for="cantCredReq" class="col-sm-2 control-label">Cantidad</label>
 				<div class="col-sm-10">
 					<select class="selectpicker" id="cantCredReq" name="cantCredReq" required >
-						<option id="0"> </option>
-  						<option id="1">1</option>
+  						<option id="1" selected>1</option>
 					</select>
                 </div>
             </div>

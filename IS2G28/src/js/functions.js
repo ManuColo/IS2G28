@@ -7,6 +7,11 @@ function isEmail(email) {
 	return regex.test(email);
 }
 
+function hasNumbers(aString) {
+	var regex = /\d+/g;
+	return aString.match(regex);
+}
+
 ﻿function validarN(campo){
 	if (validarCampoVac(campo)){
 		elemento = document.getElementById(campo).value; //Busca el valor que contiene el campo con el id recibido por parametro
