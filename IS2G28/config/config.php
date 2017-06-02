@@ -13,6 +13,10 @@ $cfg->dataRoot = substr(__DIR__, 0, -6);
 
 // Ubicación Base de archivos por URL
 $cfg->wwwRoot = 'http://localhost/IS2G28';
+//$cfg->wwwRoot = 'http://una-gauchada.localhost/';
+
+// Directorio que contiene archivos subidos por usuarios
+$cfg->uploadDir = $cfg->dataRoot.'src/uploads/';
 
 // Agregado de carpeta base en include path
 $includePath = substr(__DIR__,0,-7);
