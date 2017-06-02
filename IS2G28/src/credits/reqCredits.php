@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../../config/doctrine_config.php';
 if (isset($_POST['card'])&&
 		($_POST['titCard'])&&
@@ -19,18 +20,21 @@ if (isset($_POST['card'])&&
 				header("location:./buyFail.php");
 			} else {
 				//Datos para enviar al servidor externo
-				//$card=$_POST['card'];
-				//$tit=$_POST['titCard'];
-				//$num=$_POST['numCard'];
-				//$emision=$_POST['cardE'];
-				//$venc=$_POST['cardV'];
-				//$cod=$_POST['codCard'];
+				$card=$_POST['card'];
+				$tit=$_POST['titCard'];
+				$num=$_POST['numCard'];
+				$emision=$_POST['cardE'];
+				$venc=$_POST['cardV'];
+				$cod=$_POST['codCard'];
+				$idUs= $_SESSION['userId'];
 				$cantCred=$_POST['cantCredReq'];
-				$cred=new Credit();
-				$cred->setOperationDate(new \DateTime());
-				$cred->setCantidad($cantCred);
-				$cred->setUserId('11');
-				$entityManager-> persist($cred);
+				$credit=new Credit();
+				$credit->setOperationDate('06/07');
+				$credit->setCantidad($cantCred);
+				$credit->setUserId($idUs);
+				var_dump($credit);
+				die();
+				$entityManager-> persist($credit);
 				$entityManager-> flush();
 				header("location:./buyComplete.php");
 				
