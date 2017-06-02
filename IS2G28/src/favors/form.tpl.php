@@ -69,7 +69,8 @@
               <div class="form-group <?php echo isset($errors['deadline'])?'has-error':'' ?>">
                   <label for="favor_deadline" class="col-sm-3 control-label">Fecha l&iacute;mite</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="favor_deadline" name="favor[deadline]" value="<?php echo $favor->getDeadline()?>"
+                    <input type="text" class="form-control" id="favor_deadline" name="favor[deadline]" 
+                           value="<?php echo (is_string($favor->getDeadline()))?$favor->getDeadline():$favor->getDeadline()->format('d/m/Y')?>"
                            data-provide="datepicker" data-date-format="dd/mm/yyyy" 
                            data-date-autoclose="true" placeholder="Hasta cuando se puede realizar el favor? (dd/mm/yyyy)" >
                     <!-- Contenedor del mensaje de error -->

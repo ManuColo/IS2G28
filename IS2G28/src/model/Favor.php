@@ -2,7 +2,7 @@
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 
 /**
@@ -145,6 +145,12 @@ class Favor
     $metadata->addPropertyConstraint('deadline', new Assert\Date(array(
         'message' => 'Fecha limite invalida.'
     )));
+    $metadata->addConstraint(new Assert\Callback('validateDeadlineSinceToday', array(
+        'groups' => array('Strict')
+    )));
+
+    $metadata->setGroupSequence(array('Favor', 'Strict'));
+
     //$metadata->addPropertyConstraint('deadline', new Assert\GreaterThanOrEqual(new DateTime("today")));
   }
   
@@ -155,5 +161,24 @@ class Favor
   public function getCantCredits(){
   	return $this->cantCredits;
   }
+  
+  public function validateDeadlineSinceToday(ExecutionContextInterface $context)
+  {
+    $today = new DateTime('today');    
+    try {
+      $deadline = new DateTime($this->deadline);      
+    } catch (Exception $ex) {
+      return;      
+    }
+    
+    
+    if ($deadline < $today) {
+      $context->buildViolation('La fecha limite no puede ser previa a la fecha actual.')
+        ->atPath('deadline')
+        ->addViolation();
+    }
+        
+  }
+  
   
 }

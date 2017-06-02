@@ -59,7 +59,7 @@ $(document).ready(function() {
     var favorDescription = cleanInput($('#favor_description').val());      
     var favorCity = cleanInput($('#favor_city').val());
     var favorDeadline = cleanInput($('#favor_deadline').val());
-    var favorPhoto = $('#favor_photo').val();                        
+    //var favorPhoto = $('#favor_photo').val();                        
 
     // Validar datos introducidos en los campos del formulario
     if (favorTitle === '') {

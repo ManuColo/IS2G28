@@ -6,6 +6,19 @@ use Symfony\Component\Validator\Validation;
 
 // Debugging
 // ===============================================================================
+/*
+var_dump($_FILES['favor_photo']);
+echo "<br>";
+var_dump(isset($_FILES['favor_photo']));
+echo "<br>";
+var_dump(is_null($_FILES['favor_photo']));
+echo "<br>";
+var_dump(($_FILES['favor_photo']['name']));
+echo "<br>";
+echo ($_FILES['favor_photo']['name'])?'Existe archivo': 'No existe archivo';
+die;
+ * 
+ */
 
 // ===============================================================================
 
@@ -31,19 +44,22 @@ if (count($violations) > 0) {
   $errorsString = (string) $violations;
   echo $errorsString;
 }
-* 
 */
+
 
 
 // Comprobar que no hay errores de validacion 
 if (count($violations) === 0) {
-  // Mover el archivo correspondiente a la foto del favor al directorio de uploads
-  $photoFileName = time() . basename($_FILES['favor_photo']['name']);
-  $targetFile = $cfg->uploadDir . $photoFileName;
-  move_uploaded_file($favor->getPhoto(), $targetFile);    
-  // Actualizar el objeto que modela el favor
-  $favor->setPhoto($photoFileName);
-  $favor->setDeadline(new DateTime($favor->getDeadline()));
+  // Comprobar que se haya subido una foto asociada al favor
+  if ($favor->getPhoto()) {
+    // Mover el archivo correspondiente a la foto del favor al directorio de uploads
+    $photoFileName = time() . basename($_FILES['favor_photo']['name']);
+    $targetFile = $cfg->uploadDir . $photoFileName;
+    move_uploaded_file($favor->getPhoto(), $targetFile);    
+    // Actualizar el objeto que modela el favor
+    $favor->setPhoto($photoFileName);    
+  }
+   $favor->setDeadline(new DateTime($favor->getDeadline()));       
   // Persistir objeto Favor en la base de datos
   $entityManager->persist($favor);
   $entityManager->flush();
@@ -52,6 +68,8 @@ if (count($violations) === 0) {
   header("location:list.php");  
 }
 
+// Poner la fecha en el formato de visualizacion original "dd/mm/yyyy"
+$favor->setDeadline($favorData['deadline']);
 // Mostar formulario con errores de validacion
 include 'form.tpl.php';
 
@@ -77,7 +95,7 @@ function getRequestDataClean($requestData, $requestFiles)
   $favorData['title'] = cleanInput($requestData['title']);
   $favorData['description'] = cleanInput($requestData['description']);
   $favorData['city'] = cleanInput($requestData['city']);
-  $favorData['deadline'] = cleanStringDate(cleanInput($requestData['deadline']));  
+  $favorData['deadline'] = cleanInput($requestData['deadline']);  
   // Cargar path del archivo temporal, correspondiente a la foto, enviado en la peticion
   $favorData['photo'] = $requestFiles['favor_photo']['tmp_name'];  
   
@@ -99,7 +117,7 @@ function createFavor($favorData)
   $favor->setPhoto($favorData['photo']);
   $favor->setCity($favorData['city']);
   // Convertir fecha limite desde un string en formato "dd/mm/yyyy" a un objeto DateTime  
-  $favor->setDeadline($favorData['deadline']);
+  $favor->setDeadline(parseStringDate($favorData['deadline']));
   
   return $favor;
 }
@@ -118,7 +136,7 @@ function cleanInput($data) {
  * @param string $strDate
  * @return string
  */
-function cleanStringDate($strDate)
+function parseStringDate($strDate)
 {
   $result = '';
   // Obtener en un arreglo los componentes de la fecha (dia, mes, anio)
