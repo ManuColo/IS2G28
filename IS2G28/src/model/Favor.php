@@ -1,5 +1,9 @@
 <?php
 
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 /**
  * Description of Favor
@@ -51,6 +55,11 @@ class Favor
    */
   private $cantApplications;
   
+  public function __construct() {
+    $this->cantApplications = 0;
+  }
+
+
   public function getId()
   {
     return $this->id;
@@ -104,6 +113,39 @@ class Favor
   public function setDeadline($deadline)
   {
     $this->deadline = $deadline;
+  }
+  
+  /**
+   * Configura las reglas de validacion que se aplican sobre un objeto Favor
+   * 
+   * @param ClassMetadata $metadata
+   */
+  public static function loadValidatorMetadata(ClassMetadata $metadata)
+  {
+    $metadata->addPropertyConstraint('title', new Assert\NotBlank(array(
+        'message' => 'Titulo requerido.'
+    )));    
+    $metadata->addPropertyConstraint('description', new Assert\NotBlank(array(
+        'message' => 'Descripcion requerida.'
+    )));
+    
+    $metadata->addPropertyConstraint('photo', new Assert\Image(array(
+        'maxSize' => '1024k',
+        'mimeTypesMessage' => 'El archivo no es una imagen valida.',
+        'maxSizeMessage' => 'La imagen es demasiado grande. El tamaño maximo permitido es {{ limit }} {{ suffix }}.'
+    )));
+    
+    $metadata->addPropertyConstraint('city', new Assert\NotBlank(array(
+        'message' => 'Ciudad requerida.'
+    )));
+    
+    $metadata->addPropertyConstraint('deadline', new Assert\NotBlank(array(
+      'message' => 'Fecha limite requerida'
+    )));
+    $metadata->addPropertyConstraint('deadline', new Assert\Date(array(
+        'message' => 'Fecha limite invalida.'
+    )));
+    //$metadata->addPropertyConstraint('deadline', new Assert\GreaterThanOrEqual(new DateTime("today")));
   }
   
   public function setCantApplications($cant){

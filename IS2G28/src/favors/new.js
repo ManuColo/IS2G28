@@ -67,10 +67,12 @@ $(document).ready(function() {
     }        
     if (favorDescription === '') {
       errors['favor_description'] = 'Descripcion requerida';          
-    }        
+    }       
+    /*
     if (favorPhoto === '') {
       errors['favor_photo'] = 'Foto requerida';          
-    }        
+    } 
+    */
     if (favorCity === '') {
       errors['favor_city'] = 'Ciudad requerida';          
     }        
@@ -113,4 +115,3 @@ $(document).ready(function() {
   }
   
 });
-
