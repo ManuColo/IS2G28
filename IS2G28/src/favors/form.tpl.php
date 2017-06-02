@@ -8,11 +8,16 @@
   </head>
   <body>
     <!-- Contenedor principal, requerido por Bootstrap -->
-    <div class="container-fluid">    
+    <div class="container-fluid">
+      <div id=header>
+        <img class="img-responsive" src="<?php echo $cfg->wwwRoot;?>/src/images/header-gauchada.png"/>
+      </div>
+      <?php include('../common/menu.php'); ?>
+      
       <div class="panel panel-default favor-new">
         <div class="panel-heading">
           <!-- Titulo de la seccion -->
-          <h3 class="panel-title">Nuevo favor</h3>
+          <h3 class="panel-title">Nueva gauchada</h3>
         </div>
         <div class="panel-body">
           <!-- Formulario de alta de favor -->

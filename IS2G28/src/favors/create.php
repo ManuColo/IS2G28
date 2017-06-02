@@ -1,77 +1,62 @@
 <?php
-require_once __DIR__.'/../../config/doctrine_config.php';
-
 use Symfony\Component\Validator\Validation;
 
+session_start();
+if ($_SESSION['logged']) {
+  require_once __DIR__.'/../../config/doctrine_config.php';  
 
-// Debugging
-// ===============================================================================
-/*
-var_dump($_FILES['favor_photo']);
-echo "<br>";
-var_dump(isset($_FILES['favor_photo']));
-echo "<br>";
-var_dump(is_null($_FILES['favor_photo']));
-echo "<br>";
-var_dump(($_FILES['favor_photo']['name']));
-echo "<br>";
-echo ($_FILES['favor_photo']['name'])?'Existe archivo': 'No existe archivo';
-die;
- * 
- */
+  // Recuperar datos de la peticion
+  $favorData = getRequestDataClean($_POST['favor'], $_FILES);
+  $favor = createFavor($favorData);
 
-// ===============================================================================
-
-
-// Recuperar datos de la peticion
-$favorData = getRequestDataClean($_POST['favor'], $_FILES);
-$favor = createFavor($favorData);
-
-// Validar datos del nuevo favor
-$validator = Validation::createValidatorBuilder()
-  ->addMethodMapping('loadValidatorMetadata')
-  ->getValidator()
-;
-$violations = $validator->validate($favor);
-$errors = array();
-foreach ($violations as $violation) {
-  $errors[$violation->getPropertyPath()] = $violation->getMessage();  
-}
-
-/*
-// Imprimir errores de validacion
-if (count($violations) > 0) {
-  $errorsString = (string) $violations;
-  echo $errorsString;
-}
-*/
-
-
-
-// Comprobar que no hay errores de validacion 
-if (count($violations) === 0) {
-  // Comprobar que se haya subido una foto asociada al favor
-  if ($favor->getPhoto()) {
-    // Mover el archivo correspondiente a la foto del favor al directorio de uploads
-    $photoFileName = time() . basename($_FILES['favor_photo']['name']);
-    $targetFile = $cfg->uploadDir . $photoFileName;
-    move_uploaded_file($favor->getPhoto(), $targetFile);    
-    // Actualizar el objeto que modela el favor
-    $favor->setPhoto($photoFileName);    
+  // Validar datos del nuevo favor
+  $validator = Validation::createValidatorBuilder()
+    ->addMethodMapping('loadValidatorMetadata')
+    ->getValidator()
+  ;
+  $violations = $validator->validate($favor);
+  $errors = array();
+  foreach ($violations as $violation) {
+    $errors[$violation->getPropertyPath()] = $violation->getMessage();  
   }
-   $favor->setDeadline(new DateTime($favor->getDeadline()));       
-  // Persistir objeto Favor en la base de datos
-  $entityManager->persist($favor);
-  $entityManager->flush();
-  
-  // Redirigir al visitante al listado de favores
-  header("location:list.php");  
-}
 
-// Poner la fecha en el formato de visualizacion original "dd/mm/yyyy"
-$favor->setDeadline($favorData['deadline']);
-// Mostar formulario con errores de validacion
-include 'form.tpl.php';
+  /*
+  // Imprimir errores de validacion
+  if (count($violations) > 0) {
+    $errorsString = (string) $violations;
+    echo $errorsString;
+  }
+  */
+
+
+
+  // Comprobar que no hay errores de validacion 
+  if (count($violations) === 0) {
+    // Comprobar que se haya subido una foto asociada al favor
+    if ($favor->getPhoto()) {
+      // Mover el archivo correspondiente a la foto del favor al directorio de uploads
+      $photoFileName = time() . basename($_FILES['favor_photo']['name']);
+      $targetFile = $cfg->uploadDir . $photoFileName;
+      move_uploaded_file($favor->getPhoto(), $targetFile);    
+      // Actualizar el objeto que modela el favor
+      $favor->setPhoto($photoFileName);    
+    }
+     $favor->setDeadline(new DateTime($favor->getDeadline()));       
+    // Persistir objeto Favor en la base de datos
+    $entityManager->persist($favor);
+    $entityManager->flush();
+
+    // Redirigir al visitante al listado de favores
+    header("location:list.php");  
+  }
+
+  // Poner la fecha en el formato de visualizacion original "dd/mm/yyyy"
+  $favor->setDeadline($favorData['deadline']);
+  // Mostar formulario con errores de validacion
+  include 'form.tpl.php';
+} else {
+  header("location:../login/login.php");
+}
 
 
 
