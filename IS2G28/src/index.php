@@ -29,13 +29,17 @@ use function Composer\Autoload\includeFile;
 					<img src="<?php echo $cfg->wwwRoot;?>/src/images/logo-gauchada.png"/>
 				</div>
 				<div class="panel-body">
-					<p> Sabemos que hay muchas personas que necesitan ayuda y hay muchas otras personas dispuestas a ayudar. </p>
-					<p> ¿Necesitás un favor?¿Querés ayudar a alguien? </p>
-					<p> Te ayudamos! Contactate con personas como vos desde UNA GAUCHADA! </p>
+					<p> Sabemos que hay muchas personas que necesitan ayuda. </p>
+					<p> Tambi&eacute;n hay muchas personas dispuestas a ayudar. </p>
+					<p> ¿Necesit&aacute;s un favor?¿Quer&eacute;s hacerle un favor a alguien? </p>
+					<p> Te ayudamos! Contactate con personas como vos desde UNA GAUCHADA </p>
+					<p> Y lleg&aacute; a ser ""Dios""! </p>
 			  		<?php 
+			  		//Mensaje que verá sólo usuario sin iniciar sesión
 			  		if (!isset($_SESSION['logged'])) {
 						if($_SESSION['logged']== false){ ?>
-			  		<small class="pull-right"> Para ver el contenido tenés que iniciar sesión <span class="glyphicon glyphicon-arrow-up"></span></small>
+					<br>
+			  		<small class="pull-right"> Para ver el contenido ten&eacute;s que iniciar sesi&oacute;n <span class="glyphicon glyphicon-arrow-up"></span></small>
 			  		<?php } }?>
 				</div>        
 			</div>
