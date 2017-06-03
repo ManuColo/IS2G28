@@ -1,6 +1,6 @@
-<?php
-use function Composer\Autoload\includeFile;
-?>
+<?php 
+session_start();
+if ($_SESSION['logged']) { ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,8 +16,7 @@ use function Composer\Autoload\includeFile;
 			<img class="img-responsive" src="<?php echo $cfg->wwwRoot;?>/src/images/header-gauchada.png"/>
 		</div>
 	  	<?php 	
-	  	session_start();
-		include('common/menu.php');	
+		include('../common/menu.php');	
 	  	?>
 		<div class="jumbotron">
 			<div class="panel panel-default index" style="text-align:center;">
@@ -26,10 +25,15 @@ use function Composer\Autoload\includeFile;
 					<img src="<?php echo $cfg->wwwRoot;?>/src/images/logo-gauchada.png"/>
 				</div>
 				<div class="panel-body">
-					<p> Operación realizada con éxito! </p>
+					<p> Operaci&oacute;n realizada con &eacute;xito! </p>
 				</div>        
 			</div>
 		</div>
     </div>
   </body>    
 </html>
+<?php 
+} else {
+	header("location:../login/login.php");
+}
+?>

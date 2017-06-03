@@ -4,26 +4,38 @@ if ($_SESSION['logged']) { ?>
 <!DOCTYPE html>
 <html>
   <head>
-	<title>Una Gauchada - Obtener créditos</title>
+	<title>Una Gauchada - Obtener cr&eacute;ditos</title>
 	<?php require '../common/common_headers.php' ;?>
-	<script type="text/javascript">
+	<script src="moment.min.js"></script>
+	<script type="text/javascript">		
+		//Validaciones en cliente
 		$(document).ready(function() {
 			$('#formCredits').on('submit', function() {
 				var owner = $('#titCard').val();
 				if (hasNumbers(owner)) {
-					$("<div class='alert alert-danger'></div>").html("Campo incorrecto").appendTo(".cardOwner");
+					$("<div class='alert alert-danger'></div>").html("Debe ser el titular que figura en la tarjeta").appendTo(".cardOwner");
 					$(".alert").delay(3000).fadeOut('slow');
 					return false;
 				}
 				var cardNumber = $('#numCard').val();
 				if (isNaN(cardNumber) || (cardNumber.length != 16)) {
-					$("<div class='alert alert-danger'></div>").html("Campo incorrecto").appendTo(".cardNumber");
+					$("<div class='alert alert-danger'></div>").html("Deben ser los diecis&eacute;is d&iacute;gitos del frente").appendTo(".cardNumber");
 					$(".alert").delay(3000).fadeOut('slow');
 					return false;
 				}
 				var securityCode = $('#codCard').val();
 				if (isNaN(securityCode) || (securityCode.length != 3)) {
-					$("<div class='alert alert-danger'></div>").html("Campo incorrecto").appendTo(".securityCode");
+					$("<div class='alert alert-danger'></div>").html("Deben ser los tres d&iacute;gitos del dorso").appendTo(".securityCode");
+					$(".alert").delay(3000).fadeOut('slow');
+					return false;
+				}
+				var em = $('#cardE').val();
+				var ven = $('#cardV').val();
+				//var today = moment().format('MM YY');
+				if (em > ven) {
+					$("<div class='alert alert-danger'></div>").html("Revis&aacute; las fechas").appendTo(".cardE");
+					$(".alert").delay(3000).fadeOut('slow');
+					$("<div class='alert alert-danger'></div>").html("Revis&aacute; las fechas").appendTo(".cardV");
 					$(".alert").delay(3000).fadeOut('slow');
 					return false;
 				}
@@ -43,7 +55,7 @@ if ($_SESSION['logged']) { ?>
       	<div class="panel panel-default login">
         	<div class="panel-heading">
           	  <!-- Encabezado del formulario -->
-          	  <h3 class="panel-title">Obtener créditos<img src="../images/logo-gauchada.png"/></h3>
+          	  <h3 class="panel-title">Obtener cr&eacute;ditos<img src="../images/logo-gauchada.png"/></h3>
 			</div>
         <div class="panel-body">
         <!-- Formulario de solicitud de crédito -->
@@ -53,9 +65,9 @@ if ($_SESSION['logged']) { ?>
 			  <label for="card" class="col-sm-2 control-label">Tarjeta</label>
 				<div class="col-sm-10">
 					<select class="selectpicker" id="card" name="card" required >
-						<option id="0"> </option>
-						<option id="vd">VISA</option>
-						<option id="vc">MASTERCARD</option>
+						<option id="0" selected="true" disabled="disabled"> Seleccion&aacute; </option>
+						<option id="V">VISA</option>
+						<option id="M">MASTERCARD</option>
 					</select>
 			  	</div>
 			</div>
@@ -68,14 +80,14 @@ if ($_SESSION['logged']) { ?>
             </div>
             <!-- Número -->
             <div class="form-group cardNumber">
-			  <label for="numCard" class="col-sm-2 control-label">Número</label>
+			  <label for="numCard" class="col-sm-2 control-label">N&uacute;mero</label>
               	<div class="col-sm-10">
 					<input type="text" class="form-control" id="numCard" name="numCard" placeholder="Sólo números" size="16" required />
                 </div>
             </div>
             <!-- Fecha de Emisión -->
-            <div class="form-group">
-			  <label for="cardE" class="col-sm-2 control-label">Emisión</label>
+            <div class="form-group cardE">
+			  <label for="cardE" class="col-sm-2 control-label">Emisi&oacute;n</label>
               	<div class="col-sm-10">
 					<input type="date" class="form-control" id="cardE" name="cardE" 
 							data-provide="datepicker" data-date-format="mm/yy" 
@@ -83,7 +95,7 @@ if ($_SESSION['logged']) { ?>
                 </div>
             </div>
             <!-- Fecha de Vencimiento -->
-            <div class="form-group">
+            <div class="form-group cardV">
 			  <label for="cardV" class="col-sm-2 control-label">Vencim.</label>
               	<div class="col-sm-10">
 					<input type="date" class="form-control" id="cardV" name="cardV" 
@@ -93,7 +105,7 @@ if ($_SESSION['logged']) { ?>
             </div>
             <!-- Código de seguridad -->
             <div class="form-group securityCode">
-			  <label for="codCard" class="col-sm-2 control-label">Código</label>
+			  <label for="codCard" class="col-sm-2 control-label">C&oacute;digo</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="codCard" name="codCard" placeholder="Tres dígitos" size="3" required />
                 </div>

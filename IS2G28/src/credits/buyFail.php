@@ -1,6 +1,6 @@
 <?php
-use function Composer\Autoload\includeFile;
-?>
+session_start();
+if ($_SESSION['logged']) { ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,8 +16,7 @@ use function Composer\Autoload\includeFile;
 			<img class="img-responsive" src="<?php echo $cfg->wwwRoot;?>/src/images/header-gauchada.png"/>
 		</div>
 	  	<?php 	
-	  	session_start();
-		include('common/menu.php');	
+		include('../common/menu.php');	
 	  	?>
 		<div class="jumbotron">
 			<div class="panel panel-default index" style="text-align:center;">
@@ -26,11 +25,16 @@ use function Composer\Autoload\includeFile;
 					<img src="<?php echo $cfg->wwwRoot;?>/src/images/logo-gauchada.png"/>
 				</div>
 				<div class="panel-body">
-					<p> La operación no se pudo realizar! </p>
+					<p> Problema con el servidor externo :| </p>
+					<p> La operaci&oacute;n no se pudo realizar! </p>
 				</div>        
 			</div>
 		</div>
     </div>
   </body>    
 </html>
-
+<?php 
+} else {
+	header("location:../login/login.php");
+}
+?>
