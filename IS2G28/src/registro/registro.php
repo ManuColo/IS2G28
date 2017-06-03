@@ -3,6 +3,37 @@
   <head>
 	<title>Una Gauchada - Registro de usuarios</title>
 	<?php require '../common/common_headers.php' ;?>
+	<script type="text/javascript">
+			//Validaciones en cliente
+			$(document).ready(function() {
+				$('#reg-form').on('submit', function() {
+					var nom = $('#name').val();
+					if (hasNumbers(nom)) {
+						$("<div class='alert alert-danger'></div>").html("Debes ingresar un nombre v&aacute;lido").appendTo(".name");
+						$(".alert").delay(3000).fadeOut('slow');
+						return false;
+					}
+					var ape = $('#lastname').val();
+					if (hasNumbers(ape)) {
+						$("<div class='alert alert-danger'></div>").html("Debes ingresar un apellido v&aacute;lido").appendTo(".lastname");
+						$(".alert").delay(3000).fadeOut('slow');
+						return false;
+					}
+					var mail = $('#mail').val();
+					if (!isEmail(mail)) {
+						$("<div class='alert alert-danger'></div>").html("Debes ingresar un email v&aacute;lido").appendTo(".mail");
+						$(".alert").delay(3000).fadeOut('slow');
+						return false;
+					}
+					var tel = $('#phone').val();
+					if (isNaN(tel)) {
+						$("<div class='alert alert-danger'></div>").html("Debes ingresar s&oacute;lo n&oacute;meros").appendTo(".phone");
+						$(".alert").delay(3000).fadeOut('slow');
+						return false;
+					}
+				});
+			});
+		</script>   
   </head>
 	<body>
       <!-- Contenedor principal, requerido por Bootstrap -->
@@ -21,33 +52,33 @@
 			</div>
         <div class="panel-body">
         <!-- Formulario de alta de usuario -->
-          <form class="form-horizontal" method="post" action="signin.php">
+          <form class="form-horizontal" method="post" action="signin.php" id="reg-form">
 			<!-- Nombre del usuario -->
-			<div class="form-group">
+			<div class="form-group name">
 			  <label for="name" class="col-sm-2 control-label">Nombre</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="name" name="name" required />
 			  	</div>
 			</div>
             <!-- Apellido del usuario -->
-            <div class="form-group">
+            <div class="form-group lastname">
 			  <label for="lastname" class="col-sm-2 control-label">Apellido</label>
 				<div class="col-sm-10">
                     <input type="text" class="form-control" id="lastname" name="lastname" required />
                 </div>
             </div>
             <!-- Email del usuario -->
-            <div class="form-group">
+            <div class="form-group mail">
 			  <label for="mail" class="col-sm-2 control-label">E-mail</label>
               	<div class="col-sm-10">
 					<input type="email" class="form-control" id="mail" name="mail" required />
                 </div>
             </div>
             <!-- Teléfono del usuario -->
-            <div class="form-group">
-			  <label for="phone" class="col-sm-2 control-label">Teléfono</label>
+            <div class="form-group phone">
+			  <label for="phone" class="col-sm-2 control-label">Tel&eacute;fono</label>
 				<div class="col-sm-10">
-					<input type="tel" class="form-control" id="phone" name="phone" required />
+					<input type="tel" class="form-control" id="phone" name="phone" placeholder="S&oacute;lo n&uacute;meros" required />
                 </div>
             </div>
             <!-- Contraseña del usuario -->
