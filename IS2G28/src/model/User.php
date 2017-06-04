@@ -1,5 +1,8 @@
 <?php
 
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Description of User
  *
@@ -55,8 +58,21 @@ Class User {
 	 * @var integer
 	 */
 	private $cantCredits;
-	
-		public function setId($id){
+  
+  /**
+   * Favores publicados por el usuario.
+   * 
+   * @var Collection Coleccion de favores publicados(Favor[])
+   * @OneToMany(targetEntity="Favor", mappedBy="owner")
+   */
+  private $myFavors;
+  
+  public function __construct() 
+  {
+    $this->myFavors = new ArrayCollection();
+  }
+
+  public function setId($id){
 		$this->id = $id;
 	}
 	
@@ -87,8 +103,17 @@ Class User {
 	public function setCantCredits($cant){
 		$this->cantCredits = $cant;
 	}
-	
-	public function getId(){
+  
+  /**
+   * Agrega el favor dado a la coleccion de favores pedidos por el usuario.
+   * 
+   * @param Favor $favor
+   */
+  public function addMyFavor(Favor $favor) {
+    $this->myFavors[] = $favor;    
+  }
+
+  public function getId(){
 		return $this->id;
 	}
 	
@@ -119,8 +144,18 @@ Class User {
 	public function getCantApplications(){
 		return $this->cantApplications;
 	}
-	
-	public function encryptPassword($password,$salt=''){
+  
+  /**
+   * Retonar la coleccion de favores pedidos por el usuario.
+   * 
+   * @return Colecction Coleccion de favores (Favor[])
+   */
+  public function getMyFavors() {
+    return $this->myFavors;
+  }
+
+
+  public function encryptPassword($password,$salt=''){
 		return hash("sha256",$salt . $password);
 	}
 	

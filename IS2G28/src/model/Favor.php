@@ -50,6 +50,15 @@ class Favor
   protected $deadline;
   
   /**
+   * Dueño o propietario del favor.
+   * 
+   * @var User Usuario propietario del favor
+   * @ManyToOne(targetEntity="User", inversedBy="myFavors")
+   * @JoinColumn(name="owner_user_id", referencedColumnName="id", nullable=false)
+   */
+  private $owner; 
+
+  /**
    * @Column(type="integer")
    * @var integer
    */
@@ -115,6 +124,18 @@ class Favor
     $this->deadline = $deadline;
   }
   
+  public function getOwner()
+  {
+    return $this->owner;
+  }
+  
+  public function setOwner(User $owner)
+  {
+    $owner->addMyFavor($this); // Para mantener consistente la relacion bidireccional
+    $this->owner = $owner;
+  }
+
+
   /**
    * Configura las reglas de validacion que se aplican sobre un objeto Favor
    * 

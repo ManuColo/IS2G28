@@ -28,8 +28,6 @@ if ($_SESSION['logged']) {
   }
   */
 
-
-
   // Comprobar que no hay errores de validacion 
   if (count($violations) === 0) {
     // Comprobar que se haya subido una foto asociada al favor
@@ -40,8 +38,13 @@ if ($_SESSION['logged']) {
       move_uploaded_file($favor->getPhoto(), $targetFile);    
       // Actualizar el objeto que modela el favor
       $favor->setPhoto($photoFileName);    
-    }
-     $favor->setDeadline(new DateTime($favor->getDeadline()));       
+    }    
+    // Setear datos faltantes del favor
+    $favor->setDeadline(new DateTime($favor->getDeadline()));       
+    // Obtener el usuario logueado y setearlo como dueno del favor
+    $user = $entityManager->getRepository('User')->find($_SESSION['userId']);
+    $favor->setOwner($user);
+    
     // Persistir objeto Favor en la base de datos
     $entityManager->persist($favor);
     $entityManager->flush();
