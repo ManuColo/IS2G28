@@ -105,7 +105,7 @@ if ($_SESSION['logged']) { ?>
             </div>
             <script type="text/javascript">
             $(".dateSelector").datepicker( {
-    		    format: "mm-yyyy",
+    		    format: "mm/yy",
     		    startView: "months", 
     		    minViewMode: "months"
     		});
