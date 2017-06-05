@@ -33,7 +33,7 @@
 					<!-- Formulario de alta de login -->
 					<form class="form-horizontal" method="post" action="access.php" id="login-form">
 						<?php 
-						if (isset($_GET)&& ($_GET['message']=='loginFail')) { ?>
+						if (isset($_GET['message'])&& ($_GET['message']=='loginFail')) { ?>
 							<div class="alert alert-danger">Usuario o Clave Incorrectos</div>
 						<?php }
 						?>
