@@ -89,7 +89,7 @@ if ($_SESSION['logged']) { ?>
             <div class="form-group cardE">
 			  <label for="cardE" class="col-sm-2 control-label">Emisi&oacute;n</label>
               	<div class="col-sm-10">
-					<input type="date" class="form-control" id="cardE" name="cardE" 
+					<input type="date" class="form-control dateSelector" id="cardE" name="cardE" 
 							data-provide="datepicker" data-date-format="mm/yy" 
                            	data-date-autoclose="true" placeholder="Fecha de emisión mm/yy" required />
                 </div>
@@ -98,11 +98,18 @@ if ($_SESSION['logged']) { ?>
             <div class="form-group cardV">
 			  <label for="cardV" class="col-sm-2 control-label">Vencim.</label>
               	<div class="col-sm-10">
-					<input type="date" class="form-control" id="cardV" name="cardV" 
+					<input type="date" class="form-control dateSelector" id="cardV" name="cardV" 
 							data-provide="datepicker" data-date-format="mm/yy" 
                            	data-date-autoclose="true" placeholder="Fecha de vencimiento mm/yy" required />
                 </div>
             </div>
+            <script type="text/javascript">
+            $(".dateSelector").datepicker( {
+    		    format: "mm-yyyy",
+    		    startView: "months", 
+    		    minViewMode: "months"
+    		});
+            </script>
             <!-- Código de seguridad -->
             <div class="form-group securityCode">
 			  <label for="codCard" class="col-sm-2 control-label">C&oacute;digo</label>
