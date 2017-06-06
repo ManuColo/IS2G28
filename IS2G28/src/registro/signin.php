@@ -1,30 +1,32 @@
 <?php
 require '../../config/doctrine_config.php';
+//Limpio los valores recibidos
+$params = array_map("cleanInput",$_POST);
 //Verifico la llegada de los datos completos
-if (isset($_POST['name'])&&
-	($_POST['lastname'])&&
-	($_POST['mail'])&&
-	($_POST['phone'])&&
-	($_POST['password'])&&
-	($_POST['name']!=null)&& (trim($_POST['name']) != '')&&
-	($_POST['lastname']!=null)&& (trim($_POST['lastname']) != '')&&
-	($_POST['mail']!=null)&& (trim($_POST['mail']) != '')&&
-	($_POST['phone']!=null)&& (trim($_POST['phone']) != '')&&
-	($_POST['password']!=null)&&(trim($_POST['password']) != '')) {
+if (isset($params['name'])&&
+	($params['lastname'])&&
+	($params['mail'])&&
+	($params['phone'])&&
+	($params['password'])&&
+	($params['name']!=null)&&
+	($params['lastname']!=null)&& 
+	($params['mail']!=null)&& 
+	($params['phone']!=null)&& 
+	($params['password']!=null)) {
 		//Validaciones de campos en servidor
-		if (filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL) === FALSE &&
-		is_numeric($_POST['phone']) &&
-		!strpbrk($_POST['name'], '0123456789!"·$%&/()=|@#~½¬{[]}ºª?¿Ç\}_<>-̣+*`^') && 
-		!strpbrk($_POST['lastname'], '0123456789!"·$%&/()=|@#~½¬{[]}ºª?¿Ç\}_<>-̣+*`^')) {
+		if (!filter_var($params['mail'], FILTER_VALIDATE_EMAIL) === false &&
+		is_numeric($params['phone']) &&
+		!strpbrk($params['name'], '0123456789!"·$%&/()=|@#~½¬{[]}ºª?¿Ç\}_<>-̣+*`^') && 
+		!strpbrk($params['lastname'], '0123456789!"·$%&/()=|@#~½¬{[]}ºª?¿Ç\}_<>-̣+*`^')) {
 			//Verifico si el mail existe en la base de datos
 			$compare = $entityManager->getRepository('User')->findBy(array('mail'=>$_POST['mail']))[0];
 			if($compare == null){
 				//Asigno los valores recibidos a variables
-				$nom=$_POST['name'];
-				$ape=$_POST['lastname'];
-				$mail=$_POST['mail'];
-				$tel=$_POST['phone'];
-				$cla=$_POST['password']; 
+				$nom=$params['name'];
+				$ape=$params['lastname'];
+				$mail=$params['mail'];
+				$tel=$params['phone'];
+				$cla=$params['password']; 
 				//Instancio un nuevo objeto con los datos recibidos
 				$user=new User() ;
 				$user->setName ($nom);
@@ -56,5 +58,11 @@ if (isset($_POST['name'])&&
 		//Los campos no llegan completos desde el formulario
 		//$_SESSION['error']= "Información enviada incompleta";
 		header("location:registro.php?message=notComplete");
+}
+function cleanInput($data) {
+	$data = trim($data);
+	$data = stripslashes($data);
+	$data = htmlspecialchars($data);
+	return $data;
 }
 ?>

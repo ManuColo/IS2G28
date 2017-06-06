@@ -5,7 +5,7 @@
 	<?php require '../common/common_headers.php' ;?>
 	<script type="text/javascript">
 			//Validaciones en cliente
-			$(document).ready(function() {
+			/*$(document).ready(function() {
 				$('#reg-form').on('submit', function() {
 					var nom = $('#name').val();
 					if (hasNumbers(nom)) {
@@ -32,7 +32,7 @@
 						return false;
 					}
 				});
-			});
+			});*/
 		</script>   
   </head>
 	<body>
