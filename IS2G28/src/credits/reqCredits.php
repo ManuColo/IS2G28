@@ -1,41 +1,43 @@
 <?php
 session_start();
 require '../../config/doctrine_config.php';?>
-<script src="moment.min.js"></script>
 <?php
-if (isset($_POST['card'])&&
-	($_POST['titCard'])&&
-	($_POST['numCard'])&&
-	($_POST['cardE'])&&
-	($_POST['cardV'])&&
-	($_POST['codCard'])&&
-	($_POST['cantCredReq'])&&
-	($_POST['card']!=null)&& (trim($_POST['card']) != '')&&
-	($_POST['titCard']!=null)&& (trim($_POST['titCard']) != '')&&
-	($_POST['numCard']!=null)&& (trim($_POST['numCard']) != '')&&
-	($_POST['cardE']!=null)&& (trim($_POST['cardE']) != '')&&
-	($_POST['cardV']!=null)&& (trim($_POST['cardV']) != '')&&
-	($_POST['codCard']!=null)&& (trim($_POST['codCard']) != '')&&
-	($_POST['cantCredReq']!=null)&& (trim($_POST['cantCredReq']) != '')){
+//Limpio los valores recibidos
+$params = array_map("cleanInput",$_POST);
+//Verifico la llegada de los datos completos
+if (isset($params['card'])&&
+	($params['titCard'])&&
+	($params['numCard'])&&
+	($params['cardE'])&&
+	($params['cardV'])&&
+	($params['codCard'])&&
+	($params['cantCredReq'])&&	
+	($params['card']!=null)&&
+	($params['titCard']!=null)&&
+	($params['numCard']!=null)&&
+	($params['cardE']!=null)&&
+	($params['cardV']!=null)&&
+	($params['codCard']!=null)&&
+	($params['cantCredReq']!=null)){
 		//Validaciones de campos en servidor
-		if (!strpbrk($_POST['titCard'], '0123456789!"·$%&/()=|@#~½¬{[]}ºª?¿Ç\}_<>-̣+*`^') &&
-			is_numeric($_POST['numCard']) && strlen($_POST['numCard'])== 16 &&
-			is_numeric($_POST['codCard'])&& strlen($_POST['codCard'])== 3 &&
-			$_POST['cardE'] < $_POST['cardV']){
+		if (!strpbrk($params['titCard'], '0123456789!"·$%&/()=|@#~½¬{[]}ºª?¿Ç\}_<>-̣+*`^') &&
+		is_numeric($params['numCard']) && strlen($params['numCard'])== 16 &&
+		is_numeric($params['codCard'])&& strlen($params['codCard'])== 3 &&
+		$params['cardE'] < $params['cardV']){
 			//Codigo de Seguridad que genera falla en servidor externo			
-			if($_POST['codCard']== "111"){
+			if($params['codCard']== "111"){
 				header("location:./buyFail.php");
 			} else {
 				//Datos de tarjeta para enviar al servidor externo
-				$card=$_POST['card'];
-				$tit=$_POST['titCard'];
-				$num=$_POST['numCard'];
-				$emision=$_POST['cardE'];
-				$venc=$_POST['cardV'];
-				$cod=$_POST['codCard'];
+				$card=$params['card'];
+				$tit=$params['titCard'];
+				$num=$params['numCard'];
+				$emision=$params['cardE'];
+				$venc=$params['cardV'];
+				$cod=$params['codCard'];
 				//Datos para la bbdd
 				$today= date('Y/m/d');
-				$cantCred=$_POST['cantCredReq'];
+				$cantCred=$params['cantCredReq'];
 				$idUs= $_SESSION['userId'];
 				//Instancio nuevo objeto crédito
 				$credit=new Credit();
@@ -57,5 +59,11 @@ if (isset($_POST['card'])&&
 	//Los campos no llegan completos desde el formulario
 	//$_SESSION['error']= "Información enviada incompleta";
 	header("location:formCredits.php?message=notComplete");
+}
+function cleanInput($data) {
+	$data = trim($data);
+	$data = stripslashes($data);
+	$data = htmlspecialchars($data);
+	return $data;
 }
 ?>

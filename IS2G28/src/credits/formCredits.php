@@ -6,7 +6,6 @@ if ($_SESSION['logged']) { ?>
   <head>
 	<title>Una Gauchada - Obtener cr&eacute;ditos</title>
 	<?php require '../common/common_headers.php' ;?>
-	<script src="moment.min.js"></script>
 	<script type="text/javascript">		
 		//Validaciones en cliente
 		$(document).ready(function() {
