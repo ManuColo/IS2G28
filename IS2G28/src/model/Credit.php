@@ -26,9 +26,12 @@ Class Credit {
 	private $cantidad;
 	
 	/**
-	 * @Column(type="integer")
-	 * @var integer
-	 */
+	* Usuario que compra el credito.
+	* 
+	* @var User Usuario propietario del credito
+	* @ManyToOne(targetEntity="User", inversedBy="myCredits")
+	* @JoinColumn(name="userId", referencedColumnName="id", nullable=false)
+	*/
 	private $userId;
 	
 	public function setId($id){

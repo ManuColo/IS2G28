@@ -38,12 +38,12 @@ if (isset($params['card'])&&
 				//Datos para la bbdd
 				$today= new DateTime();
 				$cantCred=$params['cantCredReq'];
-				$idUs= $_SESSION['userId'];
+				$user= $entityManager->find(User,$_SESSION['userId']);
 				//Instancio nuevo objeto crédito
 				$credit=new Credit();
 				$credit->setOperationDate($today);
 				$credit->setCantidad($cantCred);
-				$credit->setUserId($idUs);
+				$credit->setUserId($user);
 				//Inserción en bbdd
 				$entityManager-> persist($credit);
 				$entityManager-> flush();

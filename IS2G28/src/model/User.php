@@ -65,11 +65,21 @@ Class User {
    * @var Collection Coleccion de favores publicados(Favor[])
    * @OneToMany(targetEntity="Favor", mappedBy="owner")
    */
+	
+  private $myCredits;
+  
+  /**
+   * Creditos comprados por el usuario.
+   *
+   * @var Collection Coleccion de creditos comprados(Credit[])
+   * @OneToMany(targetEntity="Credit", mappedBy="userId")
+   */
   private $myFavors;
   
   public function __construct() 
   {
     $this->myFavors = new ArrayCollection();
+    $this->myCredits = new ArrayCollection();
   }
 
   public function setId($id){
@@ -104,14 +114,23 @@ Class User {
 		$this->cantCredits = $cant;
 	}
   
-  /**
-   * Agrega el favor dado a la coleccion de favores pedidos por el usuario.
-   * 
-   * @param Favor $favor
-   */
-  public function addMyFavor(Favor $favor) {
-    $this->myFavors[] = $favor;    
-  }
+	/**
+	* Agrega el favor dado a la coleccion de favores pedidos por el usuario.
+	* 
+	* @param Favor $favor
+	*/
+	public function addMyFavor(Favor $favor) {
+		$this->myFavors[] = $favor;    
+	}
+  
+	/**
+	* Agrega el credito dado a la coleccion de creditos comprados por el usuario.
+	*
+	* @param Credit $credit
+	*/
+	public function addMyCredit(Credit $credit) {
+		$this->myCredits[] = $credit;
+	}
 
   public function getId(){
 		return $this->id;
@@ -145,17 +164,26 @@ Class User {
 		return $this->cantApplications;
 	}
   
-  /**
-   * Retonar la coleccion de favores pedidos por el usuario.
-   * 
-   * @return Colecction Coleccion de favores (Favor[])
-   */
-  public function getMyFavors() {
-    return $this->myFavors;
-  }
+	/**
+	* Retonar la coleccion de favores pedidos por el usuario.
+	* 
+	* @return Colecction Coleccion de favores (Favor[])
+	*/
+	public function getMyFavors() {
+		return $this->myFavors;
+	}
+
+	/**
+	 * Retonar la coleccion de creditos comprados por el usuario.
+	 *
+	 * @return Colecction Coleccion de creditos (Credit[])
+	 */
+	public function getMyCredits() {
+		return $this->myCredits;
+	}
 
 
-  public function encryptPassword($password,$salt=''){
+	public function encryptPassword($password,$salt=''){
 		return hash("sha256",$salt . $password);
 	}
 	
