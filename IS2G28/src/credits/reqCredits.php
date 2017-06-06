@@ -1,7 +1,7 @@
 <?php
 session_start();
-require '../../config/doctrine_config.php';?>
-<?php
+require '../../config/doctrine_config.php';
+if ($_SESSION['logged']) {
 //Limpio los valores recibidos
 $params = array_map("cleanInput",$_POST);
 //Verifico la llegada de los datos completos
@@ -59,6 +59,9 @@ if (isset($params['card'])&&
 	//Los campos no llegan completos desde el formulario
 	//$_SESSION['error']= "Información enviada incompleta";
 	header("location:formCredits.php?message=notComplete");
+}
+}else {
+	header("location:../login/login.php");
 }
 function cleanInput($data) {
 	$data = trim($data);
