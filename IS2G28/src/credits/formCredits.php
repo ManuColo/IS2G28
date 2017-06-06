@@ -31,7 +31,6 @@ if ($_SESSION['logged']) { ?>
 				}
 				var em = $('#cardE').val();
 				var ven = $('#cardV').val();
-				//var today = moment().format('MM YY');
 				if (em > ven) {
 					$("<div class='alert alert-danger'></div>").html("Revis&aacute; las fechas").appendTo(".cardE");
 					$(".alert").delay(3000).fadeOut('slow');

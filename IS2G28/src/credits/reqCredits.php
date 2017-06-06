@@ -34,19 +34,17 @@ if (isset($_POST['card'])&&
 				$venc=$_POST['cardV'];
 				$cod=$_POST['codCard'];
 				//Datos para la bbdd
-				
+				$today= date('Y/m/d');
 				$cantCred=$_POST['cantCredReq'];
 				$idUs= $_SESSION['userId'];
 				//Instancio nuevo objeto crédito
-				//$credit=new Credit();
-				//$credit->setOperationDate($today);
-				//$credit->setCantidad($cantCred);
-				//$credit->setUserId($idUs);
-				//var_dump($credit);
-				//die();
+				$credit=new Credit();
+				$credit->setOperationDate($today);
+				$credit->setCantidad($cantCred);
+				$credit->setUserId($idUs);
 				//Inserción en bbdd
-				//$entityManager-> persist($credit);
-				//$entityManager-> flush();
+				$entityManager-> persist($credit);
+				$entityManager-> flush();
 				header("location:./buyComplete.php");
 				
 			}
