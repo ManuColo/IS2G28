@@ -36,7 +36,7 @@ if (isset($params['card'])&&
 				$venc=$params['cardV'];
 				$cod=$params['codCard'];
 				//Datos para la bbdd
-				$today= date('Y/m/d');
+				$today= new DateTime();
 				$cantCred=$params['cantCredReq'];
 				$idUs= $_SESSION['userId'];
 				//Instancio nuevo objeto crédito
@@ -63,6 +63,7 @@ if (isset($params['card'])&&
 }else {
 	header("location:../login/login.php");
 }
+
 function cleanInput($data) {
 	$data = trim($data);
 	$data = stripslashes($data);
