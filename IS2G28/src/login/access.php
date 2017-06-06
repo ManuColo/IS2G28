@@ -1,5 +1,6 @@
 <?php
 require '../../config/doctrine_config.php';
+require '../common/lib.php';
 
 // Verifico que lleguen valores por post
 if (isset($_POST)&&($_POST['user']!=null)&&($_POST['password']!=null)) {
@@ -33,13 +34,4 @@ if (isset($_POST)&&($_POST['user']!=null)&&($_POST['password']!=null)) {
 		header("location:login.php?message=loginFail");
 		exit;
 	}
-}
-
-// Función para limpiar los parámetros
-
-function cleanInput($data) {
-	$data = trim($data);
-	$data = stripslashes($data);
-	$data = htmlspecialchars($data);
-	return $data;
 }
