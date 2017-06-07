@@ -50,3 +50,12 @@ body {
 nav {
 	height: 40px;
 }
+
+.panel-name-user{
+	font-family: sans-serif;
+	margin-top: 2%;
+	margin-left: 2%;
+	float:left;
+	font-weight: bold;
+	font-size: 15px;
+}

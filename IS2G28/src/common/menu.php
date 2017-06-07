@@ -11,6 +11,12 @@ $result = strpos($firstReduction, $string);
 $selected = substr($firstReduction, 0 , -($max - $result));
 ?>
 <nav>
+	<?php 
+		if (isset($_SESSION['logged'])) {?>
+			<div class="panel-name-user">
+				<p>Usuario: <?php echo $_SESSION['userName']; ?></p>
+			</div>	
+		<?php	}?>
 	<ul class="nav nav-pills pull-right">
 	<?php
 	if (isset($_SESSION['logged'])) {
