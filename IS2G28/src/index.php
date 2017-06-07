@@ -20,6 +20,13 @@ use function Composer\Autoload\includeFile;
 		include('common/menu.php');	
 	  	?>
 		<div class="jumbotron">
+		<?php 
+		if (isset($_SESSION['logged'])) {?>
+			<div class="panel-name-user">
+				<p>Usuario: <?php echo $_SESSION['userName']; ?></p>
+			</div>	
+		<?php	}?>
+			
 			<div class="panel panel-default index" style="text-align:center;">
 			<!-- Titulo de la seccion -->
 				<div class="panel-heading">
