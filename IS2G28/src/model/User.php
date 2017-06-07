@@ -78,6 +78,7 @@ Class User {
   
   public function __construct() 
   {
+  	$this->cantCredits = 1;
     $this->myFavors = new ArrayCollection();
     $this->myCredits = new ArrayCollection();
   }

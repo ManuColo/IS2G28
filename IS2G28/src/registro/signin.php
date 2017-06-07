@@ -35,12 +35,10 @@ if (isset($params['name'])&&
 				$user->setPhone($tel);
 				$user->setSalt($user->generateSalt());
 				$user->setPass($user->encryptPassword($cla,$user->getSalt()));
-				$user->setCantCredits(1);
 				//Inserción en bbdd
 				$entityManager-> persist($user);
 				$entityManager-> flush();
 				//Se informa la creación y se redirige al login
-				//$_SESSION['error']= "Inicia Sesion para continuar";
 				header("location:../login/login.php?message=userCreated");
 			} 
 			else {
