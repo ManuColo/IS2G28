@@ -1,4 +1,5 @@
-<?php 
+<?php
+require_once 'lib.php';
 $uri = "http://".$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'];
 $string = "/src/";
 $max = strlen($uri);
@@ -26,3 +27,4 @@ $selected = substr($firstReduction, 0 , -($max - $result));
 	<?php }?>
 	</ul>
 </nav>
+<?php showMessage()?>

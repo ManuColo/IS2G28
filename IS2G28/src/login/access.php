@@ -20,7 +20,7 @@ if (isset($_POST)&&($_POST['user']!=null)&&($_POST['password']!=null)) {
 				$_SESSION['loginTime']=time();
 				$_SESSION['userId']=$user->getId();
 				$_SESSION['userName']=$user->getName();
-				$_SESSION['message']='Bienvenido';
+				addMessage('success','Bienvenido');
 				header("location:../favors/list.php");
 				exit;
 			} else {
