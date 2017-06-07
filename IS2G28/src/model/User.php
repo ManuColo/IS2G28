@@ -160,8 +160,8 @@ Class User {
 		return $this->salt;
 	}
 		
-	public function getCantApplications(){
-		return $this->cantApplications;
+	public function getCantCredits(){
+		return $this->cantCredits;
 	}
   
 	/**
@@ -189,6 +189,22 @@ Class User {
 	
 	public function generateSalt(){
 		return '$2y$11$'.substr(md5(uniqid(rand(),true)), 0, 22);
+	}
+	
+	public function discountCredits($aCant=1){
+		if ($aCant > 1) {
+			$this->cantCredits-$aCant;
+		} else {
+			$this->cantCredits--;
+		}
+	}
+	
+	public function addCredits($aCant=1){
+		if ($aCant > 1) {
+			$this->cantCredits+$aCant;
+		} else {
+			$this->cantCredits++;
+		}
 	}
 	
 }

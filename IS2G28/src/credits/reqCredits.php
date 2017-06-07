@@ -1,6 +1,7 @@
 <?php
 session_start();
 require '../../config/doctrine_config.php';
+require '../common/lib.php';
 if ($_SESSION['logged']) {
 //Limpio los valores recibidos
 $params = array_map("cleanInput",$_POST);
@@ -24,7 +25,8 @@ if (isset($params['card'])&&
 		is_numeric($params['numCard']) && strlen($params['numCard'])== 16 &&
 		is_numeric($params['codCard'])&& strlen($params['codCard'])== 3 &&
 		$params['cardE'] < $params['cardV'] && 
-		$params['cardV'] <= date('m/y')) {
+		//$params['cardV'] <= date('m/y')
+		(strtotime($params['cardV'])>= strtotime(date('m/y')))) {
 			//Codigo de Seguridad que genera falla en servidor externo			
 			if($params['codCard']== "111"){
 				header("location:./buyFail.php");
@@ -45,8 +47,11 @@ if (isset($params['card'])&&
 				$credit->setOperationDate($today);
 				$credit->setCantidad($cantCred);
 				$credit->setUserId($user);
+				//Incremento la cantidad de créditos del usuario
+				$user->addCredits($cantCred);
 				//Inserción en bbdd
 				$entityManager-> persist($credit);
+				$entityManager-> persist($user);
 				$entityManager-> flush();
 				header("location:./buyComplete.php");
 				
@@ -63,12 +68,5 @@ if (isset($params['card'])&&
 }
 }else {
 	header("location:../login/login.php");
-}
-
-function cleanInput($data) {
-	$data = trim($data);
-	$data = stripslashes($data);
-	$data = htmlspecialchars($data);
-	return $data;
 }
 ?>
