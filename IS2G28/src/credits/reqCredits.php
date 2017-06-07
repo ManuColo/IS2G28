@@ -25,7 +25,6 @@ if (isset($params['card'])&&
 		is_numeric($params['numCard']) && strlen($params['numCard'])== 16 &&
 		is_numeric($params['codCard'])&& strlen($params['codCard'])== 3 &&
 		$params['cardE'] < $params['cardV'] && 
-		//$params['cardV'] <= date('m/y')
 		(strtotime($params['cardV'])>= strtotime(date('m/y')))) {
 			//Codigo de Seguridad que genera falla en servidor externo			
 			if($params['codCard']== "111"){
@@ -58,15 +57,18 @@ if (isset($params['card'])&&
 			}
 		} else {
 			//Uno o varios de los datos no pasaron las validaciones del servidor
-			header("location:formCredits.php?message=camposIncorrectos");
-			echo "Verific&aacute; los datos ingresados";
+			addMessage('success','Error en los campos ingresados');
+			header("location:formCredits.php");
+			exit();
 		}
 } else {
 	//Los campos no llegan completos desde el formulario
-	//$_SESSION['error']= "Información enviada incompleta";
-	header("location:formCredits.php?message=notComplete");
+	addMessage('success','Hay campos sin completar');
+	header("location:formCredits.php");
+	exit();
 }
 }else {
 	header("location:../login/login.php");
+	exit();
 }
 ?>

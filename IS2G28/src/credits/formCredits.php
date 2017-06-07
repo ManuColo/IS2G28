@@ -48,8 +48,7 @@ if ($_SESSION['logged']) { ?>
 			<img class="img-responsive" src="../images/header-gauchada.png"/>
 		</div>
 		<?php 	
-		include('../common/menu.php');	
-	  	?> 
+		include('../common/menu.php');?>
       	<div class="panel panel-default login">
         	<div class="panel-heading">
           	  <!-- Encabezado del formulario -->
@@ -142,5 +141,6 @@ if ($_SESSION['logged']) { ?>
 <?php 
 } else {
 	header("location:../login/login.php");
+	exit();
 }
 ?>
