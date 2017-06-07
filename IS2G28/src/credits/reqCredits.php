@@ -23,7 +23,8 @@ if (isset($params['card'])&&
 		if (!strpbrk($params['titCard'], '0123456789!"·$%&/()=|@#~½¬{[]}ºª?¿Ç\}_<>-̣+*`^') &&
 		is_numeric($params['numCard']) && strlen($params['numCard'])== 16 &&
 		is_numeric($params['codCard'])&& strlen($params['codCard'])== 3 &&
-		$params['cardE'] < $params['cardV']){
+		$params['cardE'] < $params['cardV'] && 
+		$params['cardV'] <= date('m/y')) {
 			//Codigo de Seguridad que genera falla en servidor externo			
 			if($params['codCard']== "111"){
 				header("location:./buyFail.php");
