@@ -53,6 +53,16 @@
         <div class="panel-body">
         <!-- Formulario de alta de usuario -->
           <form class="form-horizontal" method="post" action="signin.php" id="reg-form">
+			<?php 
+			if (isset($_GET['message'])) { 
+				if ($_GET['message']=='userExists') {?>
+					<div class="alert alert-danger">Ya existe un usuario registrado con ese email</div>
+				<?php } else if ($_GET['message']=='camposIncorrectos') { ?>
+							<div class="alert alert-danger">Error en los campos ingresados</div>
+						<?php } else if ($_GET['message']=='notComplete') { ?>
+							<div class="alert alert-danger">Falta completar campos</div>
+						<?php }
+			}?>
 			<!-- Nombre del usuario -->
 			<div class="form-group name">
 			  <label for="name" class="col-sm-2 control-label">Nombre</label>

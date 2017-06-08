@@ -43,19 +43,19 @@ if (isset($params['name'])&&
 			} 
 			else {
 				//El mail que intento ingresar ya existe en la bbdd
-				//$_SESSION['error']= "Tu e-mail ya existe en nuestra base de datos";
 				header("location:registro.php?message=userExists");
+				exit();
 			} 
 		} else {
 			//Uno o varios de los datos no pasaron las validaciones del servidor
 			header("location:registro.php?message=camposIncorrectos");
-			echo "Verific&aacute; los datos ingresados";
+			exit();
 		}
 			
 	} else {
 		//Los campos no llegan completos desde el formulario
-		//$_SESSION['error']= "Información enviada incompleta";
 		header("location:registro.php?message=notComplete");
+		exit();
 }
 function cleanInput($data) {
 	$data = trim($data);
