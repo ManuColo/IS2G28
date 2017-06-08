@@ -1,5 +1,6 @@
 <?php
 require_once 'lib.php';
+require_once '../../config/doctrine_config.php';
 $uri = "http://".$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'];
 $string = "/src/";
 $max = strlen($uri);
@@ -15,16 +16,19 @@ $selected = substr($firstReduction, 0 , -($max - $result));
 	 <div class="dropdown">
   		<button class="btn btn-link dropdown-toggle" 
   		type="button" data-toggle="dropdown">
-  		<p>Usuario: <?php echo $_SESSION['userName'];?>
+  		<p>Usuario: <?php 
+  		$user= $entityManager->find('User',$_SESSION['userId']);
+  		echo $user->getName();
+  		?>
   		<span class="caret"></span></p></button>
   			<ul class="dropdown-menu">
   				<li><a href="#">Cr&eacute;ditos &nbsp;
   					<span class="badge"> 
   					<?php
-  					if($_SESSION['userCantCredits']== 0){ 
+  					if($user->getCantCredits()== 0){ 
   						echo 0;
   					} else { 
-  						echo $_SESSION['userCantCredits'];}?> 
+  						echo $user->getCantCredits();}?> 
   					</span></a><br>
   				</li>
   			</ul>
