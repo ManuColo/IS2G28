@@ -58,21 +58,20 @@ Class User {
 	 * @var integer
 	 */
 	private $cantCredits;
-  
+    
+	/**
+   * Creditos comprados por el usuario.
+   *
+   * @var Collection Coleccion de creditos comprados(Credit[])
+   * @OneToMany(targetEntity="Credit", mappedBy="userId")
+   */
+  private $myCredits;
+    
   /**
    * Favores publicados por el usuario.
    * 
    * @var Collection Coleccion de favores publicados(Favor[])
    * @OneToMany(targetEntity="Favor", mappedBy="owner")
-   */
-	
-  private $myCredits;
-  
-  /**
-   * Creditos comprados por el usuario.
-   *
-   * @var Collection Coleccion de creditos comprados(Credit[])
-   * @OneToMany(targetEntity="Credit", mappedBy="userId")
    */
   private $myFavors;
   
