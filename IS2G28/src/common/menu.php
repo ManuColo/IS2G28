@@ -11,12 +11,25 @@ $result = strpos($firstReduction, $string);
 $selected = substr($firstReduction, 0 , -($max - $result));
 ?>
 <nav>
-	<?php 
-		if (isset($_SESSION['logged'])) {?>
-			<div class="panel-name-user">
-				<p>Usuario: <?php echo $_SESSION['userName']; ?></p>
-			</div>	
-		<?php	}?>
+	 <?php if ($_SESSION['logged']){?>
+	 <div class="dropdown">
+  		<button class="btn btn-link dropdown-toggle" 
+  		type="button" data-toggle="dropdown">
+  		<p>Usuario: <?php echo $_SESSION['userName'];?>
+  		<span class="caret"></span></p></button>
+  			<ul class="dropdown-menu">
+  				<li><a href="#">Cr&eacute;ditos &nbsp;
+  					<span class="badge"> 
+  					<?php
+  					if($_SESSION['userCantCredits']== 0){ 
+  						echo 0;
+  					} else { 
+  						echo $_SESSION['userCantCredits'];}?> 
+  					</span></a><br>
+  				</li>
+  			</ul>
+	</div> 
+	<?php }?>
 	<ul class="nav nav-pills pull-right">
 	<?php
 	if (isset($_SESSION['logged'])) {
