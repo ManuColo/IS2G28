@@ -27,6 +27,12 @@ if ($_SESSION['logged']) { ?>
 				<div class="panel-body">
 					<p> Problema con el servidor externo :| </p>
 					<p> La operaci&oacute;n no se pudo realizar! </p>
+					<!-- Botón de retorno -->
+					<div class="form-group">
+						<div class="col-sm-10 col-sm-offset-1">                                  
+							<a type="button" class="btn btn-primary" onClick="goBack();">Volver</a>
+						</div>
+					</div>
 				</div>        
 			</div>
 		</div>

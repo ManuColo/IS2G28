@@ -26,7 +26,13 @@ if ($_SESSION['logged']) { ?>
 				</div>
 				<div class="panel-body">
 					<p> Operaci&oacute;n realizada con &eacute;xito! </p>
-				</div>        
+					<!-- Botón de retorno -->
+					<div class="form-group">
+						<div class="col-sm-10 col-sm-offset-1">                                  
+							<a type="button" class="btn btn-primary" onClick="goBack();">Volver</a>
+						</div>
+					</div>
+				</div>         
 			</div>
 		</div>
     </div>
