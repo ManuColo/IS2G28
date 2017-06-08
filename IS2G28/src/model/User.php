@@ -81,6 +81,19 @@ Class User {
     $this->myFavors = new ArrayCollection();
     $this->myCredits = new ArrayCollection();
   }
+  
+  /**
+   * Retorna una representacion como string de una instancia de la clase.
+   * 
+   * Este metodo permite indicar como se debe comportar un objeto de la clase cuando se lo trata
+   * como un string, por ejemplo al hacer echo $user.
+   * 
+   * @return string Representacion textual del objeto
+   */
+  public function __toString() 
+  {
+    return $this->getName() . ' ' . $this->getLastname();
+  }
 
   public function setId($id){
 		$this->id = $id;
