@@ -1,5 +1,5 @@
 <?php
-
+require '../common/lib.php';
 // Recuperar sesion del usuario
 session_start();
 if ($_SESSION['logged']) {
@@ -12,11 +12,4 @@ if ($_SESSION['logged']) {
   include 'show.tpl.php';  
 } else {
   header("location:../login/login.php");
-}
-
-function cleanInput($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
 }
