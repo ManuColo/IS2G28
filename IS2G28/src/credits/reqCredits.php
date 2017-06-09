@@ -25,7 +25,8 @@ if (isset($params['card'])&&
 		is_numeric($params['numCard']) && strlen($params['numCard'])== 16 &&
 		is_numeric($params['codCard'])&& strlen($params['codCard'])== 3 &&
 		$params['cardE'] < $params['cardV'] && 
-		(strtotime($params['cardV'])>= strtotime(date('m/y')))) {
+		(strtotime($params['cardV'])>= strtotime(date('m/y'))) &&
+		(strtotime($params['cardE'])<= strtotime(date('m/y')))){
 			//Codigo de Seguridad que genera falla en servidor externo			
 			if($params['codCard']== "111"){
 				header("location:./buyFail.php");
