@@ -219,6 +219,15 @@ Class User {
 			$this->cantCredits++;
 		}
 	}
+  
+  /**
+   * Retorna true si el usuario tiene al menos 1 credito, false en caso contrario.
+   * 
+   * @return boolean
+   */
+  public function hasCredits() {
+    return $this->cantCredits > 0;    
+  }
 	
 }
 ?>

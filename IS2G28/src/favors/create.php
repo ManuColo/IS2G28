@@ -3,7 +3,8 @@ use Symfony\Component\Validator\Validation;
 
 session_start();
 if ($_SESSION['logged']) {
-  require_once __DIR__.'/../../config/doctrine_config.php';  
+  require_once __DIR__.'/../../config/doctrine_config.php';
+  require_once __DIR__.'/../common/lib.php';
 
   // Recuperar datos de la peticion
   $favorData = getRequestDataClean($_POST['favor'], $_FILES);
@@ -27,9 +28,12 @@ if ($_SESSION['logged']) {
     echo $errorsString;
   }
   */
+  
+  // Obtener el usuario logueado en el sistema
+  $user = $entityManager->getRepository('User')->find($_SESSION['userId']);
 
-  // Comprobar que no hay errores de validacion 
-  if (count($violations) === 0) {
+  // Comprobar que no hay errores de validacion y que el usuario tenga suficientes creditos
+  if ((count($violations) === 0) && $user->hasCredits()) {
     // Comprobar que se haya subido una foto asociada al favor
     if ($favor->getPhoto()) {
       // Mover el archivo correspondiente a la foto del favor al directorio de uploads
@@ -44,6 +48,8 @@ if ($_SESSION['logged']) {
     // Obtener el usuario logueado y setearlo como dueno del favor
     $user = $entityManager->getRepository('User')->find($_SESSION['userId']);
     $favor->setOwner($user);
+    // Decrementar cantidad de creditos del propietario del favor
+    $favor->getOwner()->discountCredits(1);
     
     // Persistir objeto Favor en la base de datos
     $entityManager->persist($favor);
@@ -52,7 +58,7 @@ if ($_SESSION['logged']) {
     // Redirigir al visitante al listado de favores
     header("location:list.php");  
   }
-
+    
   // Poner la fecha en el formato de visualizacion original "dd/mm/yyyy"
   $favor->setDeadline($favorData['deadline']);
   // Mostar formulario con errores de validacion
@@ -110,12 +116,15 @@ function createFavor($favorData)
   return $favor;
 }
 
+/*
 function cleanInput($data) {
   $data = trim($data);
   $data = stripslashes($data);
   $data = htmlspecialchars($data);
   return $data;
 }
+ * 
+ */
 
 /**
  * Convierte un string que representa una fecha en formato "dd/mm/yyyy" a una representacion

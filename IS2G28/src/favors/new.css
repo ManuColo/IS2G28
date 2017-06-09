@@ -21,4 +21,7 @@
   font-variant: small-caps;
 }
 
-
+.favor-new .alert-danger a {
+  color: #A94442;
+  font-weight: bold;
+}

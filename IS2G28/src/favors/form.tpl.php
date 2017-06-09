@@ -22,6 +22,14 @@
         <div class="panel-body">
           <!-- Formulario de alta de favor -->
           <form id="favor-form" class="form-horizontal" action="create.php" method="post" enctype="multipart/form-data" >
+              <!-- Mensajes de error generales -->
+              <?php if (!$user->hasCredits()): ?>
+                <div class="alert alert-danger text-center">
+                  No tiene suficientes creditos. 
+                  <a href="../credits/formCredits.php">Compre creditos</a> para publicar un nuevo favor.
+                </div>
+              <?php endif; ?>
+              
               <!-- Titulo del favor -->
               <div class="form-group <?php echo isset($errors['title'])?'has-error':'' ?>">
                   <label for="favor_title" class="col-sm-3 control-label">T&iacute;tulo</label>
@@ -88,7 +96,7 @@
               <!-- Botones del formulario -->
               <div class="form-group">
                 <div class="col-sm-9 col-sm-offset-3">                                  
-                  <input type="submit" class="btn btn-primary" value="Guardar">
+                  <input type="submit" id="submit-favor" class="btn btn-primary" value="Guardar" <?php echo $user->hasCredits()?'':'disabled' ?>>
                   <a class="btn btn-default" href="list.php" role="button">Cancelar</a>
                 </div>
               </div>              
