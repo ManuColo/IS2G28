@@ -1,6 +1,7 @@
 <?php
+require_once substr(__DIR__,0,-11).'/config/doctrine_config.php';
 require_once 'lib.php';
-require_once '../../config/doctrine_config.php';
+
 $uri = "http://".$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'];
 $string = "/src/";
 $max = strlen($uri);
