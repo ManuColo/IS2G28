@@ -57,13 +57,13 @@ if (isset($params['card'])&&
 			}
 		} else {
 			//Uno o varios de los datos no pasaron las validaciones del servidor
-			addMessage('success','Error en los campos ingresados');
+			addMessage('danger','Error en los campos ingresados');
 			header("location:formCredits.php");
 			exit();
 		}
 } else {
 	//Los campos no llegan completos desde el formulario
-	addMessage('success','Hay campos sin completar');
+	addMessage('danger','Hay campos sin completar');
 	header("location:formCredits.php");
 	exit();
 }
