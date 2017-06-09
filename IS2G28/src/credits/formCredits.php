@@ -79,7 +79,7 @@ if ($_SESSION['logged']) { ?>
             <div class="form-group cardNumber">
 			  <label for="numCard" class="col-sm-2 control-label">N&uacute;mero</label>
               	<div class="col-sm-10">
-					<input type="text" class="form-control" id="numCard" name="numCard" placeholder="Sólo números" size="16" required />
+					<input type="text" class="form-control" id="numCard" name="numCard" placeholder="N&uacute;meros del frente de la tarjeta" size="16" required />
                 </div>
             </div>
             <!-- Fecha de Emisión -->
@@ -111,7 +111,7 @@ if ($_SESSION['logged']) { ?>
             <div class="form-group securityCode">
 			  <label for="codCard" class="col-sm-2 control-label">C&oacute;digo</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="codCard" name="codCard" placeholder="Tres dígitos" size="3" required />
+					<input type="text" class="form-control" id="codCard" name="codCard" placeholder="Tres d&iacute;gitos del dorso de la tarjeta" size="3" required />
                 </div>
             </div>
             <!-- Cantidad de créditos -->
