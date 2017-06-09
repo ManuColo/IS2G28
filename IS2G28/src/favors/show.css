@@ -37,3 +37,7 @@
 .favor .favor-properties {
   font-size: 15px;
 }
+
+.favor .favor-properties li {
+  margin-bottom: 3px;
+}

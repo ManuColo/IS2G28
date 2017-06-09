@@ -15,8 +15,9 @@
       <div class="panel-heading">
         <h3 class="panel-title">Ver una gauchada</h3>        
       </div>
-      <div class="panel-body">
-        <div class="media favor">
+      <div class="panel-body">        
+        <div class="media favor">          
+          <?php if ($favor): ?>
           <div class="media-left">
             <a href="#">
               <?php if ($favor->getPhoto()): ?>
@@ -48,6 +49,12 @@
               </li>
               <li>
                 <span class="label label-warning">
+                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                  <?php echo $favor->getOwner() ?>
+                </span>            
+              </li>
+              <li>
+                <span class="label label-warning">
                   <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
                   0 comentarios
                 </span>            
@@ -57,11 +64,16 @@
                   <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
                   0 postulaciones
                 </span>            
-              </li>
+              </li>              
             </ul>
           </div>
-        </div>
-      </div>
+          <?php else: ?>
+            <p>No existe la gauchada especificada.</p>
+          <?php endif; ?>
+        </div><!-- End .media.favor -->
+        <br>
+        <a class="btn btn-default pull-right" href="list.php">Volver al listado</a>
+      </div><!-- End .panel-body -->
       
     </div>
     
