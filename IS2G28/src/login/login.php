@@ -8,6 +8,8 @@
 				$('#login-form').on('submit', function() {
 					var user = $('#user').val();
 					if (!isEmail(user)) {
+						$("<div class='alert alert-danger'></div>").html("Debe ingresar un email").appendTo(".user");
+						$(".alert").delay(3000).fadeOut('slow');
 						return false;
 					}
 				});
@@ -42,7 +44,7 @@
 						}
 						?>
 						<!-- Usuario -->
-						<div class="form-group">
+						<div class="form-group user">
 							<label for="user" class="col-sm-2 control-label">Usuario</label>
 							<div class="col-sm-10">
 	                    		<input type="email" class="form-control" id="user" name="user" required/>
