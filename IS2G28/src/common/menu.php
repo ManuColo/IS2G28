@@ -13,7 +13,7 @@ $result = strpos($firstReduction, $string);
 $selected = substr($firstReduction, 0 , -($max - $result));
 ?>
 <nav>
-	 <?php if (isset ($_SESSION['logged'])){?>
+	 <?php if (isset ($_SESSION['logged']) && $_SESSION['logged']){?>
 	 <div class="dropdown">
   		<button class="btn btn-link dropdown-toggle" 
   		type="button" data-toggle="dropdown">
