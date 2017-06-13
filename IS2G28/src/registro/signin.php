@@ -43,18 +43,21 @@ if (isset($params['name'])&&
 			} 
 			else {
 				//El mail que intento ingresar ya existe en la bbdd
-				header("location:registro.php?message=userExists");
+				//header("location:registro.php?message=userExists");
+				include 'registro.php';
 				exit();
 			} 
 		} else {
 			//Uno o varios de los datos no pasaron las validaciones del servidor
-			header("location:registro.php?message=camposIncorrectos");
+			//header("location:registro.php?message=camposIncorrectos");
+			include 'registro.php';
 			exit();
 		}
 			
 	} else {
 		//Los campos no llegan completos desde el formulario
-		header("location:registro.php?message=notComplete");
+		//header("location:registro.php?message=notComplete");
+		include 'registro.php';
 		exit();
 }
 function cleanInput($data) {

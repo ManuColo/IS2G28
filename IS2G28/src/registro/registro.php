@@ -41,8 +41,7 @@
 		<div id=header>
 			<img class="img-responsive" src="../images/header-gauchada.png"/>
 		</div>
-		<?php 	
-		session_start();
+		<?php 
 		include('../common/menu.php');	
 		?> 
       	<div class="panel panel-default login">
@@ -67,28 +66,28 @@
 			<div class="form-group name">
 			  <label for="name" class="col-sm-2 control-label">Nombre</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="name" name="name" required />
+					<input type="text" class="form-control" id="name" name="name" <?php if (isset($_POST['name'])){?>value="<?php echo $_POST['name']; ?>"<?php }?> required />
 			  	</div>
 			</div>
             <!-- Apellido del usuario -->
             <div class="form-group lastname">
 			  <label for="lastname" class="col-sm-2 control-label">Apellido</label>
 				<div class="col-sm-10">
-                    <input type="text" class="form-control" id="lastname" name="lastname" required />
+                    <input type="text" class="form-control" id="lastname" name="lastname" <?php if (isset($_POST['lastname'])){?>value="<?php echo $_POST['lastname']; ?>"<?php }?> required />
                 </div>
             </div>
             <!-- Email del usuario -->
             <div class="form-group mail">
 			  <label for="mail" class="col-sm-2 control-label">E-mail</label>
               	<div class="col-sm-10">
-					<input type="email" class="form-control" id="mail" name="mail" required />
+					<input type="email" class="form-control" id="mail" name="mail" <?php if (isset($_POST['mail'])){?>value="<?php echo $_POST['mail']; ?>"<?php }?> required />
                 </div>
             </div>
             <!-- Teléfono del usuario -->
             <div class="form-group phone">
 			  <label for="phone" class="col-sm-2 control-label">Tel&eacute;fono</label>
 				<div class="col-sm-10">
-					<input type="tel" class="form-control" id="phone" name="phone" placeholder="S&oacute;lo n&uacute;meros" required />
+					<input type="tel" class="form-control" id="phone" name="phone" placeholder="S&oacute;lo n&uacute;meros" <?php if (isset($_POST['phone'])){?>value="<?php echo $_POST['phone']; ?>"<?php }?> required />
                 </div>
             </div>
             <!-- Contraseña del usuario -->
