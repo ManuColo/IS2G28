@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../../config/doctrine_config.php';
 require '../common/lib.php';
 
@@ -46,17 +47,20 @@ if (isset($params['name'])&&
 			else {
 				//El mail que intento ingresar ya existe en la bbdd
 				//header("location:registro.php?message=userExists");
+				$_SESSION['errorA']= "El e-mail ya existe en nuestra base de datos";
 				include 'registro.php';
 			} 
 		} else {
 			//Uno o varios de los datos no pasaron las validaciones del servidor
 			//header("location:registro.php?message=camposIncorrectos");
+			$_SESSION['errorB']= "Error en los campos ingresados";
 			include 'registro.php';
 		}
 			
 	} else {
 		//Los campos no llegan completos desde el formulario
 		//header("location:registro.php?message=notComplete");
+		$_SESSION['errorC']= "Falta completar campos";
 		include 'registro.php';
 }
 ?>

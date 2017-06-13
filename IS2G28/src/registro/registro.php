@@ -42,6 +42,7 @@
 			<img class="img-responsive" src="../images/header-gauchada.png"/>
 		</div>
 		<?php 
+		session_start();
 		include('../common/menu.php');	
 		?> 
       	<div class="panel panel-default login">
@@ -53,14 +54,17 @@
         <!-- Formulario de alta de usuario -->
           <form class="form-horizontal" method="post" action="signin.php" id="reg-form">
 			<?php 
-			if (isset($_GET['message'])) { 
-				if ($_GET['message']=='userExists') {?>
-					<div class="alert alert-danger">Ya existe un usuario registrado con ese email</div>
-				<?php } else if ($_GET['message']=='camposIncorrectos') { ?>
-							<div class="alert alert-danger">Error en los campos ingresados</div>
-						<?php } else if ($_GET['message']=='notComplete') { ?>
-							<div class="alert alert-danger">Falta completar campos</div>
-						<?php }
+			if (isset($_SESSION['errorA']) || isset($_SESSION['errorB']) || isset($_SESSION['errorC'])) { 
+				if($_SESSION['errorA']!= null){?>
+					<div class="alert alert-danger"> <?php echo $_SESSION['errorA']?></div>
+					<?php $_SESSION['errorA']= null;
+				} else if ($_SESSION['errorB']!= null) { ?>
+					<div class="alert alert-danger"> <?php echo $_SESSION['errorB']?></div>
+					<?php $_SESSION['errorB']= null;
+					} else if ($_SESSION['errorC']!= null){ ?>
+						<div class="alert alert-danger"><?php echo $_SESSION['errorC']?></div>
+						<?php $_SESSION['errorC']= null;
+					}
 			}?>
 			<!-- Nombre del usuario -->
 			<div class="form-group name">
