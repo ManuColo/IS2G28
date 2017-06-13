@@ -1,5 +1,7 @@
 <?php
 require '../../config/doctrine_config.php';
+require '../common/lib.php';
+
 //Limpio los valores recibidos
 $params = array_map("cleanInput",$_POST);
 //Verifico la llegada de los datos completos
@@ -45,25 +47,16 @@ if (isset($params['name'])&&
 				//El mail que intento ingresar ya existe en la bbdd
 				//header("location:registro.php?message=userExists");
 				include 'registro.php';
-				exit();
 			} 
 		} else {
 			//Uno o varios de los datos no pasaron las validaciones del servidor
 			//header("location:registro.php?message=camposIncorrectos");
 			include 'registro.php';
-			exit();
 		}
 			
 	} else {
 		//Los campos no llegan completos desde el formulario
 		//header("location:registro.php?message=notComplete");
 		include 'registro.php';
-		exit();
-}
-function cleanInput($data) {
-	$data = trim($data);
-	$data = stripslashes($data);
-	$data = htmlspecialchars($data);
-	return $data;
 }
 ?>
