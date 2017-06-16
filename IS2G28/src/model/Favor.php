@@ -3,6 +3,7 @@
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 
 /**
@@ -56,7 +57,15 @@ class Favor
    * @ManyToOne(targetEntity="User", inversedBy="myFavors")
    * @JoinColumn(name="owner_user_id", referencedColumnName="id", nullable=false)
    */
-  private $owner; 
+  private $owner;
+  
+  /**
+   * Postulaciones al favor.
+   *
+   * @var Collection Coleccion de postulacione(Postulation[])
+   * @oneToMany(targetEntity="Postulation", mappedBy="favorId")
+   */
+  private $myPostulations;
 
   /**
    * @Column(type="integer")
@@ -66,8 +75,8 @@ class Favor
   
   public function __construct() {
     $this->cantApplications = 0;
+    $this->myPostulations = new ArrayCollection();
   }
-
 
   public function getId()
   {
@@ -134,7 +143,24 @@ class Favor
     $owner->addMyFavor($this); // Para mantener consistente la relacion bidireccional
     $this->owner = $owner;
   }
+  
+  /**
+   * Agrega la postulación a la coleccion de postulaciones del usuario.
+   *
+   * @param Postulation $postulation
+   */
+  public function addMyPostulation(Postulation $postulation) {
+  	$this->myPostulations[] = $postulation;
+  }
 
+  /**
+   * Retonar la coleccion de postulaciones del usuario.
+   *
+   * @return Colection Coleccion de postulaciones (Postulation[])
+   */
+  public function getMyPostulations() {
+  	return $this->myPostulations;
+  }
 
   /**
    * Configura las reglas de validacion que se aplican sobre un objeto Favor
