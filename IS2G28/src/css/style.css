@@ -77,3 +77,9 @@ nav {
 .dropdown-toggle p{
 	padding-left: 1px;
 }
+
+.mailF {
+	margin-top:5px;
+	font-weight: bold;
+	font-size: 15px;
+}

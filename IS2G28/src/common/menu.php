@@ -32,6 +32,8 @@ $selected = substr($firstReduction, 0 , -($max - $result));
   						echo $user->getCantCredits();}?> 
   					</span></a><br>
   				</li>
+  				<li class="divider"></li>
+  				<li><a href="../registro/editRegForm.php">Editar Perfil</a></li>
   			</ul>
 	</div> 
 	<?php }?>
