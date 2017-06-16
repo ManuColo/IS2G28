@@ -20,7 +20,7 @@ Class Postulation {
 	* @ManyToOne(targetEntity="User", inversedBy="myPostulations")
 	* @JoinColumn(name="userId", referencedColumnName="id", nullable=false)
 	*/
-	private $userId;
+	private $user;
 	
 	/**
 	* Favor al que se refiere la postulación.
@@ -29,7 +29,7 @@ Class Postulation {
 	* @ManyToOne(targetEntity="Favor", inversedBy="myPostulations")
 	* @JoinColumn(name="favorId", referencedColumnName="id", nullable=false)
 	*/
-	private $favorId;
+	private $favor;
 	
 	/**
 	 * @Column(type="string",nullable=true)
@@ -41,12 +41,14 @@ Class Postulation {
 		$this->id = $id;
 	}
 	
-	public function setUserId($userId){
-		$this->userId = $userId;
+	public function setUser(User $user){
+		$user->addPostulation($this);
+		$this->user = $user;
 	}
 	
-	public function setFavorId($favorId){
-		$this->favorId = $favorId;
+	public function setFavor($favor){
+		$favor->addPostulation($this);
+		$this->favor = $favor;
 	}
 	
 	public function setComment($aComment){
@@ -57,12 +59,12 @@ Class Postulation {
 		return $this->id;
 	}
 	
-	public function getUserId(){
-		return $this->userId;
+	public function getUser(){
+		return $this->user;
 	}
 	
-	public function getFavorId(){
-		return $this->favorId;
+	public function getFavor(){
+		return $this->favor;
 	}
 	
 	public function getComment(){
