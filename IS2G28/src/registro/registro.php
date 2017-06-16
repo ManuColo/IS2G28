@@ -53,19 +53,6 @@
         <div class="panel-body">
         <!-- Formulario de alta de usuario -->
           <form class="form-horizontal" method="post" action="signin.php" id="reg-form">
-			<?php 
-			if (isset($_SESSION['errorA']) || isset($_SESSION['errorB']) || isset($_SESSION['errorC'])) { 
-				if($_SESSION['errorA']!= null){?>
-					<div class="alert alert-danger"> <?php echo $_SESSION['errorA']?></div>
-					<?php $_SESSION['errorA']= null;
-				} else if ($_SESSION['errorB']!= null) { ?>
-					<div class="alert alert-danger"> <?php echo $_SESSION['errorB']?></div>
-					<?php $_SESSION['errorB']= null;
-					} else if ($_SESSION['errorC']!= null){ ?>
-						<div class="alert alert-danger"><?php echo $_SESSION['errorC']?></div>
-						<?php $_SESSION['errorC']= null;
-					}
-			}?>
 			<!-- Nombre del usuario -->
 			<div class="form-group name">
 			  <label for="name" class="col-sm-2 control-label">Nombre</label>

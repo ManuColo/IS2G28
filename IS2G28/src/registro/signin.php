@@ -46,21 +46,18 @@ if (isset($params['name'])&&
 			} 
 			else {
 				//El mail que intento ingresar ya existe en la bbdd
-				//header("location:registro.php?message=userExists");
-				$_SESSION['errorA']= "El e-mail ya existe en nuestra base de datos";
+				addMessage('danger','El e-mail ingresado ya est&aacute; registrado');
 				include 'registro.php';
 			} 
 		} else {
 			//Uno o varios de los datos no pasaron las validaciones del servidor
-			//header("location:registro.php?message=camposIncorrectos");
-			$_SESSION['errorB']= "Error en los campos ingresados";
+			addMessage('danger','Error en los campos ingresados');
 			include 'registro.php';
 		}
 			
 	} else {
 		//Los campos no llegan completos desde el formulario
-		//header("location:registro.php?message=notComplete");
-		$_SESSION['errorC']= "Falta completar campos";
+		addMessage('danger','Falta completar campos');
 		include 'registro.php';
 }
 ?>
