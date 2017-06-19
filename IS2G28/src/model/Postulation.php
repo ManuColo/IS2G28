@@ -37,6 +37,18 @@ Class Postulation {
 	 */
 	private $comment;
 	
+	/**
+	 * @Column(type="string")
+	 * @var string
+	 */
+	private $status;
+	
+	/**
+	 * @Column(type="date")
+	 * @var DateTime
+	 */
+	private $date;
+	
 	public function setId($id){
 		$this->id = $id;
 	}
@@ -55,6 +67,14 @@ Class Postulation {
 		$this->comment = $aComment;
 	}
 	
+	public function setStatus($aStatus){
+		$this->status = $aStatus;
+	}
+	
+	public function setDate($aDate){
+		$this->date = $aDate;
+	}
+	
 	public function getId(){
 		return $this->id;
 	}
@@ -71,8 +91,17 @@ Class Postulation {
 		return $this->comment;
 	}
 	
+	public function getStatus(){
+		return $this->status;
+	}
+	
+	public function getDate(){
+		return $this->date;
+	}
+	
 	public function __construct()
 	{
 		$this->comment = null;
+		$this->status = 'pending';
 	}
 }
