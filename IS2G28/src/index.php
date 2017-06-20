@@ -33,13 +33,12 @@ use function Composer\Autoload\includeFile;
 					<p> ¿Necesit&aacute;s un favor?¿Quer&eacute;s hacerle un favor a alguien? </p>
 					<p> Te ayudamos! Contactate con personas como vos desde UNA GAUCHADA </p>
 					<p> Y lleg&aacute; a ser ""Dios""! </p>
-			  		<?php 
-			  		//Mensaje que verá sólo usuario sin iniciar sesión
-			  		if (!isset($_SESSION['logged'])) {
-						if($_SESSION['logged']== false){ ?>
+			  		
+			  		
+			  		<?php if (!isset($_SESSION['logged'])): //Mensaje que verá sólo usuario sin iniciar sesión ?>
 					<br>
 			  		<small class="pull-right"> Para ver el contenido ten&eacute;s que iniciar sesi&oacute;n <span class="glyphicon glyphicon-arrow-up"></span></small>
-			  		<?php } }?>
+			  		<?php endif; ?>
 				</div>        
 			</div>
 		</div>
