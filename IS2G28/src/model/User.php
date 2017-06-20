@@ -75,11 +75,20 @@ Class User {
    */
   private $myFavors;
   
+  /**
+   * Postulaciones del usuario.
+   *
+   * @var Collection Coleccion de postulacione(Postulation[])
+   * @oneToMany(targetEntity="Postulation", mappedBy="userId")
+   */
+  private $myPostulations;
+  
   public function __construct() 
   {
   	$this->cantCredits = 1;
     $this->myFavors = new ArrayCollection();
     $this->myCredits = new ArrayCollection();
+    $this->myPostulations = new ArrayCollection();
   }
   
   /**
@@ -144,6 +153,15 @@ Class User {
 	public function addMyCredit(Credit $credit) {
 		$this->myCredits[] = $credit;
 	}
+	
+	/**
+	 * Agrega la postulación a la coleccion de postulaciones del usuario.
+	 *
+	 * @param Postulation $postulation
+	 */
+	public function addMyPostulation(Postulation $postulation) {
+		$this->myPostulations[] = $postulation;
+	}
 
   public function getId(){
 		return $this->id;
@@ -189,12 +207,20 @@ Class User {
 	/**
 	 * Retonar la coleccion de creditos comprados por el usuario.
 	 *
-	 * @return Colecction Coleccion de creditos (Credit[])
+	 * @return Colection Coleccion de creditos (Credit[])
 	 */
 	public function getMyCredits() {
 		return $this->myCredits;
 	}
 
+	/**
+	 * Retonar la coleccion de postulaciones del usuario.
+	 *
+	 * @return Colection Coleccion de postulaciones (Postulation[])
+	 */
+	public function getMyPostulations() {
+		return $this->myPostulations;
+	}
 
 	public function encryptPassword($password,$salt=''){
 		return hash("sha256",$salt . $password);

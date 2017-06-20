@@ -47,7 +47,7 @@
 						<div class="form-group user">
 							<label for="user" class="col-sm-2 control-label">Usuario</label>
 							<div class="col-sm-10">
-	                    		<input type="email" class="form-control" id="user" name="user" required/>
+	                    		<input type="email" class="form-control" id="user" name="user" placeholder="Tu email" required/>
 							</div>
 						</div>
 						<!-- Clave -->

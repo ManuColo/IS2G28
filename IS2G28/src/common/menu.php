@@ -32,6 +32,8 @@ $selected = substr($firstReduction, 0 , -($max - $result));
   						echo $user->getCantCredits();}?> 
   					</span></a><br>
   				</li>
+  				<li class="divider"></li>
+  				<li><a href="../registro/editRegForm.php">Editar Perfil</a></li>
   			</ul>
 	</div> 
 	<?php }?>
@@ -39,16 +41,21 @@ $selected = substr($firstReduction, 0 , -($max - $result));
 	<?php
 	if (isset($_SESSION['logged'])) {
 		if($_SESSION['logged']== true){ ?>
-			<li <?php if ($selected == '') { ?>class="active"<?php } ?>><a href="<?php echo $cfg->wwwRoot;?>/src">Inicio</a></li>
-			<li <?php if ($selected == 'favors') { ?>class="active"<?php } ?>><a href="<?php echo $cfg->wwwRoot;?>/src/favors/list.php">Gauchadas</a></li>
-			<li <?php if ($selected == 'credits') { ?>class="active"<?php } ?>><a href="<?php echo $cfg->wwwRoot;?>/src/credits/formCredits.php">Cr&eacute;ditos</a></li>
+			<li <?php if ($selected == '') { ?>class="active"<?php $referer = $selected.'index.php'; } ?>><a href="<?php echo $cfg->wwwRoot;?>/src">Inicio</a></li>
+			<li <?php if ($selected == 'favors') { ?>class="active"<?php $referer = $selected.'/list.php'; } ?>><a href="<?php echo $cfg->wwwRoot;?>/src/favors/list.php">Gauchadas</a></li>
+			<li <?php if ($selected == 'credits') { ?>class="active"<?php $referer = $selected.'/formCredits.php'; } ?>><a href="<?php echo $cfg->wwwRoot;?>/src/credits/formCredits.php">Cr&eacute;ditos</a></li>
 			<li><a href="<?php echo $cfg->wwwRoot;?>/src/login/logout.php">Cerrar Sesi&oacute;n</a></li>
 		<?php } 
 	} else { ?>
-		<li <?php if ($selected == '') { ?>class="active"<?php } ?>><a href="<?php echo $cfg->wwwRoot;?>/src">Inicio</a></li>
-		<li <?php if ($selected == 'login') { ?>class="active"<?php } ?>><a href="<?php echo $cfg->wwwRoot;?>/src/login/login.php">Iniciar Sesi&oacute;n</a></li>
-		<li <?php if ($selected == 'registro') { ?>class="active"<?php } ?>><a href="<?php echo $cfg->wwwRoot;?>/src/registro/registro.php">Registrate</a></li>
+		<li <?php if ($selected == '') { ?>class="active"<?php $referer = 'index.php'; } ?>><a href="<?php echo $cfg->wwwRoot;?>/src">Inicio</a></li>
+		<li <?php if ($selected == 'login') { ?>class="active"<?php $referer = $selected.'/login.php'; } ?>><a href="<?php echo $cfg->wwwRoot;?>/src/login/login.php">Iniciar Sesi&oacute;n</a></li>
+		<li <?php if ($selected == 'registro') { ?>class="active"<?php $referer = $selected.'/registro.php'; } ?>><a href="<?php echo $cfg->wwwRoot;?>/src/registro/registro.php">Registrate</a></li>
 	<?php }?>
 	</ul>
 </nav>
-<?php showMessage()?>
+<?php
+if (isset($_SESSION)) {
+	$_SESSION['referer'] = $referer;
+}
+showMessage()
+?>

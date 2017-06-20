@@ -57,7 +57,7 @@
               <!-- Foto del favor -->
               <div class="form-group <?php echo isset($errors['photo'])?'has-error':'' ?>">
                   <label for="favor_photo" class="col-sm-3 control-label">Foto</label>
-                  <div class="col-sm-9">
+                  <div class="col-sm-9"> El tamaño m&aacute;ximo de la imagen es 1024 kB
                     <input type="file" id="favor_photo" name="favor_photo">
                     <!-- Contenedor del mensaje de error -->
                     <span class="error help-block <?php echo isset($errors['photo'])?'shown':'hidden' ?>">

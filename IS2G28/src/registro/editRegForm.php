@@ -19,12 +19,6 @@
 						$(".alert").delay(3000).fadeOut('slow');
 						return false;
 					}
-					var mail = $('#mail').val();
-					if (!isEmail(mail)) {
-						$("<div class='alert alert-danger'></div>").html("Debes ingresar un email v&aacute;lido").appendTo(".mail");
-						$(".alert").delay(3000).fadeOut('slow');
-						return false;
-					}
 					var tel = $('#phone').val();
 					if (isNaN(tel)) {
 						$("<div class='alert alert-danger'></div>").html("Debes ingresar s&oacute;lo n&oacute;meros").appendTo(".phone");
@@ -44,48 +38,49 @@
 		<?php 
 		session_start();
 		include('../common/menu.php');	
+		$user= $entityManager->find('User',$_SESSION['userId']);
 		?> 
       	<div class="panel panel-default login">
         	<div class="panel-heading">
           	  <!-- Encabezado del formulario -->
-          	  <h3 class="panel-title">Registro de usuarios<img src="../images/logo-gauchada.png"/></h3>
+          	  <h3 class="panel-title">Edici&oacute;n de usuario<img src="../images/logo-gauchada.png"/></h3>
 			</div>
         <div class="panel-body">
-        <!-- Formulario de alta de usuario -->
-          <form class="form-horizontal" method="post" action="signin.php" id="reg-form">
+        <!-- Formulario de edición de usuario -->
+          <form class="form-horizontal" method="post" action="editReg.php" id="reg-form">
 			<!-- Nombre del usuario -->
 			<div class="form-group name">
 			  <label for="name" class="col-sm-2 control-label">Nombre</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="name" name="name" <?php if (isset($_POST['name'])){?>value="<?php echo $_POST['name']; ?>"<?php }?> required />
+					<input type="text" class="form-control" id="name" name="name" value="<?php echo $user->getName();?>" required />
 			  	</div>
 			</div>
             <!-- Apellido del usuario -->
             <div class="form-group lastname">
 			  <label for="lastname" class="col-sm-2 control-label">Apellido</label>
 				<div class="col-sm-10">
-                    <input type="text" class="form-control" id="lastname" name="lastname" <?php if (isset($_POST['lastname'])){?>value="<?php echo $_POST['lastname']; ?>"<?php }?> required />
+                    <input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo $user->getLastname();?>" required />
                 </div>
             </div>
             <!-- Email del usuario -->
             <div class="form-group mail">
 			  <label for="mail" class="col-sm-2 control-label">E-mail</label>
               	<div class="col-sm-10">
-					<input type="email" class="form-control" id="mail" name="mail" <?php if (isset($_POST['mail'])){?>value="<?php echo $_POST['mail']; ?>"<?php }?> required />
+					<p class="mailF" id="mailF"> <?php echo $user->getMail(); ?> </p>
                 </div>
             </div>
             <!-- Teléfono del usuario -->
             <div class="form-group phone">
 			  <label for="phone" class="col-sm-2 control-label">Tel&eacute;fono</label>
 				<div class="col-sm-10">
-					<input type="tel" class="form-control" id="phone" name="phone" placeholder="S&oacute;lo n&uacute;meros" <?php if (isset($_POST['phone'])){?>value="<?php echo $_POST['phone']; ?>"<?php }?> required />
+					<input type="tel" class="form-control" id="phone" name="phone" placeholder="S&oacute;lo n&uacute;meros" value="<?php echo $user->getPhone();?>" required />
                 </div>
             </div>
             <!-- Contraseña del usuario -->
             <div class="form-group">
 			  <label for="password" class="col-sm-2 control-label">Clave</label>
 				<div class="col-sm-10">
-					<input type="password" class="form-control" id="password" name="password" required />
+					<input type="password" class="form-control" id="password" name="password" placeholder="Ingres&aacute; tu clave" required />
                 </div>
             </div>
              

@@ -2,7 +2,17 @@
 session_start();
 if ($_SESSION['logged']) {
 	require '../../config/doctrine_config.php';
-	$favors = $entityManager->getRepository("Favor")->findBy(array(),array('deadline'=>'ASC')); ?>
+	$today = new DateTime();
+	$qb = $entityManager->createQueryBuilder();
+	$qb->select('f')
+		->from('Favor', 'f')
+		->where('f.deadline >= :today')
+		->orderBy('f.deadline','ASC')
+		->setParameter('today', $today);
+	$query = $qb->getQuery();
+	$query->execute();
+	$favors = $query->getResult();
+?>
 	<!DOCTYPE html>
 		<html>
 		<head>
