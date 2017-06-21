@@ -83,3 +83,25 @@ nav {
 	font-weight: bold;
 	font-size: 15px;
 }
+
+.favorSearch {
+	margin: 0;
+}
+
+#searchTitle {
+	width: 160px;
+}
+
+#searchCity {
+	width: 130px;
+}
+
+#searchDeadline {
+	width: 95px;
+}
+
+.favorSearch img {
+  height: 30px;
+  width: 30px;
+  
+}
