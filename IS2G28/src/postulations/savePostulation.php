@@ -23,5 +23,4 @@ if($_SESSION['logged']){
 } else {
 	header("location:../login/login.php");
 	exit();
-}
-?>
+}?>
