@@ -10,15 +10,15 @@ if ($_SESSION['logged']) {
 	->setParameter('today', $today);
 	if ($_POST['title'] != ''){
 		$qb->andWhere(
-			$qb->expr()->like('f.title',':title')
-		)
-		->setParameter('title', $_POST['title']);
+				$qb->expr()->like('f.title',':title')
+			)
+		->setParameter('title', '%'.$_POST['title'].'%');
 	}
 	if ($_POST['city'] != ''){
 		$qb->andWhere(
 				$qb->expr()->like('f.city',':city')
-				)
-		->setParameter('city', $_POST['city']);
+			)
+			->setParameter('city', '%'.$_POST['city'].'%');
 	}
 	if ($_POST['deadline'] != ''){
 		$deadline = DateTime::createFromFormat('d/m/Y',$_POST['deadline']);
@@ -29,7 +29,7 @@ if ($_SESSION['logged']) {
 		$qb->andWhere(
 				$qb->expr()->like('f.owner',':owner')
 				)
-		->setParameter('owner', $_POST['owner']);
+				->setParameter('owner', '%'.$_POST['owner'].'%');
 	}
 	$qb->orderBy('f.deadline','ASC');
 	$query = $qb->getQuery();
