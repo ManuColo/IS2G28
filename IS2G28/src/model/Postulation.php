@@ -59,7 +59,7 @@ Class Postulation {
 	}
 	
 	public function setFavor($favor){
-		//$favor->addMyPostulation($this);
+		$favor->addMyPostulation($this);
 		$this->favor = $favor;
 	}
 	

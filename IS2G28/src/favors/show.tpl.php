@@ -66,8 +66,7 @@
                 </span>            
               </li> 
               <li>
-              	<?php $idFavor= $_GET['id'];?>
-              	<a role="button" href="../postulations/savePostulation.php"	class="btn btn-warning btn-block; glyphicon glyphicon-ok"> 
+              	<a role="button" href="../postulations/savePostulation.php?id=<?php echo $favor->getId();?>"	class="btn btn-warning btn-block; glyphicon glyphicon-ok"> 
               		<strong>Postularme</strong> 
               	</a>
 			  </li>          

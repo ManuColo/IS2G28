@@ -6,7 +6,7 @@ if($_SESSION['logged']){
 	//Asigno los valores recibidos a variables
 	$today= new DateTime();
 	$user= $entityManager->getRepository('User')->findBy(array('id'=>$_SESSION['userId']))[0];
-	$favor=$_GET['id'];
+	$favor= $entityManager->getRepository('Favor')->findBy(array('id'=>$_GET['id']))[0];
 	//Instancio un nuevo objeto con los datos recibidos
 	$postulation=new Postulation();
 	$postulation->setDate($today);
