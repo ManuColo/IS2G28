@@ -28,7 +28,7 @@ if ($_SESSION['logged']) {
 					$user->setLastname($ape);
 					$user->setPhone($tel);
 					//Actualización en bbdd
-					$flush= $entityManager-> flush();
+					$entityManager-> flush();
 					addMessage('success','Usuario modificado');
 					header("location:editRegForm.php");
 				} else {
@@ -45,4 +45,5 @@ if ($_SESSION['logged']) {
 } else {
 	header("location:../login/login.php");
 	exit();
-}?>
+}
+?>
