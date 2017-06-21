@@ -64,7 +64,13 @@
                   <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
                   0 postulaciones
                 </span>            
-              </li>              
+              </li> 
+              <li>
+              	<?php $idFavor= $_GET['id'];?>
+              	<a role="button" href="../postulations/savePostulation.php"	class="btn btn-warning btn-block; glyphicon glyphicon-ok"> 
+              		<strong>Postularme</strong> 
+              	</a>
+			  </li>          
             </ul>
           </div>
           <?php else: ?>
