@@ -1,5 +1,4 @@
 <?php
-var_dump($_POST);
 session_start();
 if ($_SESSION['logged']) {
 	require '../../config/doctrine_config.php';
@@ -8,11 +7,31 @@ if ($_SESSION['logged']) {
 	$qb->select('f')
 	->from('Favor', 'f')
 	->where('f.deadline >= :today')
-	->orderBy('f.deadline','ASC')
 	->setParameter('today', $today);
-	if ($_POST){
-		
+	if ($_POST['title'] != ''){
+		$qb->andWhere(
+			$qb->expr()->like('f.title',':title')
+		)
+		->setParameter('title', $_POST['title']);
 	}
+	if ($_POST['city'] != ''){
+		$qb->andWhere(
+				$qb->expr()->like('f.city',':city')
+				)
+		->setParameter('city', $_POST['city']);
+	}
+	if ($_POST['deadline'] != ''){
+		$deadline = DateTime::createFromFormat('d/m/Y',$_POST['deadline']);
+		$qb->andWhere('f.deadline <= :deadline')
+		->setParameter('deadline', $deadline);
+	}
+	if ($_POST['owner'] != ''){
+		$qb->andWhere(
+				$qb->expr()->like('f.owner',':owner')
+				)
+		->setParameter('owner', $_POST['owner']);
+	}
+	$qb->orderBy('f.deadline','ASC');
 	$query = $qb->getQuery();
 	$query->execute();
 	$favors = $query->getResult();
@@ -46,6 +65,6 @@ if ($_SESSION['logged']) {
 	</table>
 	<?php } else { ?>
 	<p style="font-size: 16px;">No hay favores publicados que cumplan con el criterio.</p>
-	<?php }?>
+	<?php }
 	exit;
 }
