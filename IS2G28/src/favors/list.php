@@ -18,7 +18,7 @@ if ($_SESSION['logged']) {
 		<head>
 		<title>Una Gauchada - Listado</title>
 		<?php require '../common/common_headers.php' ; ?>
-		<script type="text/javascript" src="search.js"></script>
+		<script type="text/javascript" src="../js/search.js"></script>
 	  </head>
 	  <body>
 		<!-- Contenedor principal, requerido por Bootstrap -->	
@@ -44,7 +44,7 @@ if ($_SESSION['logged']) {
               	<table class="table table-hover favorSearch">
 	              	<tr>
 						<td>
-							<img class="img-responsive" id="submitBuscar" src="<?php echo $cfg->wwwRoot;?>/src/images/search.jpg"/>
+							<p>Buscar</p>
 						</td>
 	                    <td>
 	                    	<input type="text" class="search searchControl" id="searchTitle" name="searchTitle" 
@@ -61,8 +61,7 @@ if ($_SESSION['logged']) {
 								data-date-autoclose="true" placeholder="Fecha L&iacute;mite">
 						</td>
 						<td>
-							<input type="text" class="search searchControl" id="searchOwner" name="searchOwner" 
-	                        	placeholder="Due&ntilde;o" value="<?php // echo $favor->getTitle() ?>">
+							<img class="img-responsive" id="submitBuscar" src="<?php echo $cfg->wwwRoot;?>/src/images/search.jpg"/>
 	                    </td>
 					</tr>
 		        </table>

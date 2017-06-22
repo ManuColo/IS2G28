@@ -25,12 +25,12 @@ if ($_SESSION['logged']) {
 		$qb->andWhere('f.deadline <= :deadline')
 		->setParameter('deadline', $deadline);
 	}
-	if ($_POST['owner'] != ''){
+	/* if ($_POST['owner'] != ''){
 		$qb->andWhere(
 				$qb->expr()->like('f.owner',':owner')
 				)
 				->setParameter('owner', '%'.$_POST['owner'].'%');
-	}
+	} */
 	$qb->orderBy('f.deadline','ASC');
 	$query = $qb->getQuery();
 	$query->execute();
