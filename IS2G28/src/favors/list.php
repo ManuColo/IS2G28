@@ -18,6 +18,7 @@ if ($_SESSION['logged']) {
 		<head>
 		<title>Una Gauchada - Listado</title>
 		<?php require '../common/common_headers.php' ; ?>
+		<script type="text/javascript" src="../js/search.js"></script>
 	  </head>
 	  <body>
 		<!-- Contenedor principal, requerido por Bootstrap -->	
@@ -40,6 +41,30 @@ if ($_SESSION['logged']) {
 					<div class="panel-body">
             <?php if(count($favors) > 0): ?>
               <div class="table-responsive">
+              	<table class="table table-hover favorSearch">
+	              	<tr>
+						<td>
+							<p>Buscar</p>
+						</td>
+	                    <td>
+	                    	<input type="text" class="search searchControl" id="searchTitle" name="searchTitle" 
+	                        	placeholder="T&iacute;tulo" value="<?php // echo $favor->getTitle() ?>">
+						</td>
+	                    <td>
+	                    	<input type="text" class="search searchControl" id="searchCity" name="searchCity" 
+	                        	placeholder="Ciudad" value="<?php // echo $favor->getTitle() ?>">
+						</td>
+						<td>
+							<input type="text" class="search" id="searchDeadline" name="searchDeadline" 
+	                        	 value="<?php // echo $favor->getTitle() ?>"
+								data-provide="datepicker" data-date-format="dd/mm/yyyy" 
+								data-date-autoclose="true" placeholder="Fecha L&iacute;mite">
+						</td>
+						<td>
+							<img class="img-responsive" id="submitBuscar" src="<?php echo $cfg->wwwRoot;?>/src/images/search.jpg"/>
+	                    </td>
+					</tr>
+		        </table>
                 <table class="table table-hover favorList">
                   <tr>
                     <th>Imagen</th>
