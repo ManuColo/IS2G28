@@ -65,10 +65,9 @@
                   0 postulaciones
                 </span>            
               </li> 
-              <li>
-              	<a role="button" href="../postulations/savePostulation.php?id=<?php echo $favor->getId();?>"	class="btn btn-warning btn-block; glyphicon glyphicon-ok"> 
-              		<strong>Postularme</strong> 
-              	</a>
+              <li><?php 
+              	include '../postulations/commentPostulation.php';
+              	?>
 			  </li>          
             </ul>
           </div>

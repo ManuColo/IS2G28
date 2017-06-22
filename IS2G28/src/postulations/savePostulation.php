@@ -7,12 +7,13 @@ if($_SESSION['logged']){
 	$today= new DateTime();
 	$user= $entityManager->getRepository('User')->findBy(array('id'=>$_SESSION['userId']))[0];
 	$favor= $entityManager->getRepository('Favor')->findBy(array('id'=>$_GET['id']))[0];
+	$comment=$_POST['comment'];
 	//Instancio un nuevo objeto con los datos recibidos
 	$postulation=new Postulation();
 	$postulation->setDate($today);
 	$postulation->setUser($user);
 	$postulation->setFavor($favor);
-	//$postulation->addMyPostulation($postulation);
+	$postulation->setComment($comment);
 	//Inserción en bbdd
 	$entityManager-> persist($postulation);
 	$entityManager-> flush();
