@@ -44,7 +44,7 @@ if ($_SESSION['logged']) {
               	<table class="table table-hover favorSearch">
 	              	<tr>
 						<td>
-							<p>Buscar</p>
+							<span class="badge btn btn-warning" id="submitBuscar">Buscar:</span>
 						</td>
 	                    <td>
 	                    	<input type="text" class="search searchControl" id="searchTitle" name="searchTitle" 
