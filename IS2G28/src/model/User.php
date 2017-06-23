@@ -60,6 +60,12 @@ Class User {
 	private $cantCredits;
     
 	/**
+	 * @Column(type="integer",nullable=true)
+	 * @var integer
+	 */
+	private $reputation;
+	
+	/**
    * Creditos comprados por el usuario.
    *
    * @var Collection Coleccion de creditos comprados(Credit[])
@@ -135,6 +141,10 @@ Class User {
 	public function setCantCredits($cant){
 		$this->cantCredits = $cant;
 	}
+	
+	public function setReputation($cant){
+		$this->reputation = $cant;
+	}
   
 	/**
 	* Agrega el favor dado a la coleccion de favores pedidos por el usuario.
@@ -193,6 +203,10 @@ Class User {
 		
 	public function getCantCredits(){
 		return $this->cantCredits;
+	}
+	
+	public function getReputation(){
+		return $this->reputation;
 	}
   
 	/**
@@ -253,6 +267,14 @@ Class User {
    */
   public function hasCredits() {
     return $this->cantCredits > 0;    
+  }
+  
+  public function printReputation(){
+  	if ($this->reputation) {
+  		return $this->reputation;
+  	} else {
+  		return 0;
+  	}
   }
 	
 }

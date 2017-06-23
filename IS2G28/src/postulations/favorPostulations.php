@@ -9,6 +9,15 @@
 					<th>
 						Usuario
 					</th>
+					<th>
+						Comentario
+					</th>
+					<th>
+						Reputaci&oacute;n
+					</th>
+					<th>
+						Elegir
+					</th>
 				</tr>
 				<?php foreach ($favor->getMyPostulations() as $postulation) { ?>
 				<tr>
@@ -16,6 +25,14 @@
 						<?php $userPost = $postulation->getUser();
 						echo $userPost->getName().' '.$userPost->getLastname();
 						?>
+					</td>
+					<td>
+						<?php echo $postulation->getComment(); ?>
+					</td>
+					<td>
+						<?php echo $userPost->printReputation(); ?>
+					</td>
+					<td>
 					</td>
 				</tr>
 				<?php } ?>
