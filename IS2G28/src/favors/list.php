@@ -4,10 +4,13 @@ if ($_SESSION['logged']) {
 	require '../../config/doctrine_config.php';
 	$today = new DateTime();
 	$qb = $entityManager->createQueryBuilder();
-	$qb->select('f')
+	$qb->select('f, count(p) as HIDDEN cont')
 		->from('Favor', 'f')
+		->leftJoin('f.myPostulations', 'p')
 		->where('f.deadline >= :today')
-		->orderBy('f.deadline','ASC')
+		->groupBy('f.id')
+		->orderBy('cont','ASC')
+		->addOrderBy('f.deadline','ASC')
 		->setParameter('today', $today);
 	$query = $qb->getQuery();
 	$query->execute();
@@ -59,6 +62,10 @@ if ($_SESSION['logged']) {
 	                        	 value="<?php // echo $favor->getTitle() ?>"
 								data-provide="datepicker" data-date-format="dd/mm/yyyy" 
 								data-date-autoclose="true" placeholder="Fecha L&iacute;mite">
+						</td>
+						<td>
+	                    	<input type="text" class="search searchControl" id="searchOwner" name="searchOwner" 
+	                        	placeholder="Due&ntilde;o" value="<?php // echo $favor->getOwner() ?>">
 						</td>
 						<td>
 							<img class="img-responsive" id="submitBuscar" src="<?php echo $cfg->wwwRoot;?>/src/images/search.jpg"/>

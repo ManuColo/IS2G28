@@ -4,8 +4,10 @@ if ($_SESSION['logged']) {
 	require '../../config/doctrine_config.php';
 	$today = new DateTime();
 	$qb = $entityManager->createQueryBuilder();
-	$qb->select('f')
+	$qb->select('f, count(p) as HIDDEN cont')
 	->from('Favor', 'f')
+	->leftJoin('f.myPostulations', 'p')
+	->join('f.owner','u')
 	->where('f.deadline >= :today')
 	->setParameter('today', $today);
 	if ($_POST['title'] != ''){
@@ -25,13 +27,19 @@ if ($_SESSION['logged']) {
 		$qb->andWhere('f.deadline <= :deadline')
 		->setParameter('deadline', $deadline);
 	}
-	/* if ($_POST['owner'] != ''){
+	if ($_POST['owner'] != ''){
 		$qb->andWhere(
-				$qb->expr()->like('f.owner',':owner')
-				)
-				->setParameter('owner', '%'.$_POST['owner'].'%');
-	} */
-	$qb->orderBy('f.deadline','ASC');
+			$qb->expr()->orX(
+					$qb->expr()->like('u.name',':owner'),
+				$qb->expr()->like('u.lastname',':owner')
+			)
+		)
+		->setParameter('owner', '%'.$_POST['owner'].'%');
+	}
+	
+	$qb->groupBy('f.id')
+		->orderBy('cont','ASC')
+		->addOrderBy('f.deadline','ASC');
 	$query = $qb->getQuery();
 	$query->execute();
 	$favors = $query->getResult();
