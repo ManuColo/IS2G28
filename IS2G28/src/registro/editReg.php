@@ -19,30 +19,36 @@ if ($_SESSION['logged']) {
 			if (is_numeric($params['phone']) &&
 				!strpbrk($params['name'], '0123456789!"·$%&/()=|@#~½¬{[]}ºª?¿Ç\}_<>-̣+*`^') &&
 				!strpbrk($params['lastname'], '0123456789!"·$%&/()=|@#~½¬{[]}ºª?¿Ç\}_<>-̣+*`^')) {
-				//Asigno los valores recibidos a variables
-					$nom=$params['name'];
-					$ape=$params['lastname'];
-					$tel=$params['phone'];
-					//Instancio un nuevo objeto con los datos recibidos
-					$user->setName ($nom);
-					$user->setLastname($ape);
-					$user->setPhone($tel);
-					//Actualización en bbdd
-					$flush= $entityManager-> flush();
-					addMessage('success','Usuario modificado');
-					header("location:editRegForm.php");
+					if (($user->encryptPassword($params['password'],$user->getSalt())) == $user->getPass() ){
+					//Asigno los valores recibidos a variables
+						$nom=$params['name'];
+						$ape=$params['lastname'];
+						$tel=$params['phone'];
+						//Instancio un nuevo objeto con los datos recibidos
+						$user->setName ($nom);
+						$user->setLastname($ape);
+						$user->setPhone($tel);
+						//Actualización en bbdd
+						$entityManager-> flush();
+						addMessage('success','Usuario modificado');
+						header("location:editRegForm.php");
+					} else {
+						addMessage('danger', 'Clave incorrecta');
+						include 'editRegForm.php';
+					}
 				} else {
 				//Uno o varios de los datos no pasaron las validaciones del servidor
 				addMessage('danger','Error en los campos ingresados');
-				include 'registro.php';
+				include 'editRegForm.php';
 			}
 					
 		} else {
 			//Los campos no llegan completos desde el formulario
 			addMessage('danger','Falta completar campos');
-			include 'registro.php';
+			include 'editRegForm.php';
 		}
 } else {
 	header("location:../login/login.php");
 	exit();
-}?>
+}
+?>

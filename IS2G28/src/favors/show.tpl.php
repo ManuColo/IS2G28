@@ -64,7 +64,11 @@
                   <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
                   0 postulaciones
                 </span>            
-              </li>              
+              </li> 
+              <li><?php 
+              	include '../postulations/commentPostulation.php';
+              	?>
+			  </li>          
             </ul>
           </div>
           <?php else: ?>

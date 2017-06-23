@@ -54,12 +54,12 @@ Class Postulation {
 	}
 	
 	public function setUser(User $user){
-		$user->addPostulation($this);
+		//$user->addMyPostulation($this);
 		$this->user = $user;
 	}
 	
 	public function setFavor($favor){
-		$favor->addPostulation($this);
+		$favor->addMyPostulation($this);
 		$this->favor = $favor;
 	}
 	
