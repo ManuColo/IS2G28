@@ -16,13 +16,14 @@ $(function() {
 });
 
 function doSearch() {
-	var title = $('#searchTitle').val();
-	var city = $('#searchCity').val();
-	var deadline = $('#searchDeadline').val();
+	var title = $.trim($('#searchTitle').val());
+	var city = $.trim($('#searchCity').val());
+	var deadline = $.trim($('#searchDeadline').val());
+	var owner = $.trim($('#searchOwner').val());
 	if (searching)
 		search.abort();
 	search = $.ajax({
-		data: {title: title, city: city, deadline: deadline},
+		data: {title: title, city: city, deadline: deadline, owner: owner},
 		url: 'search.php',
 		type: 'post',
 		beforeSend: function() {

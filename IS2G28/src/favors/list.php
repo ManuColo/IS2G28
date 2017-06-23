@@ -61,6 +61,10 @@ if ($_SESSION['logged']) {
 								data-date-autoclose="true" placeholder="Fecha L&iacute;mite">
 						</td>
 						<td>
+	                    	<input type="text" class="search searchControl" id="searchOwner" name="searchOwner" 
+	                        	placeholder="Due&ntilde;o" value="<?php // echo $favor->getOwner() ?>">
+						</td>
+						<td>
 							<img class="img-responsive" id="submitBuscar" src="<?php echo $cfg->wwwRoot;?>/src/images/search.jpg"/>
 	                    </td>
 					</tr>

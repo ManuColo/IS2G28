@@ -6,6 +6,7 @@ if ($_SESSION['logged']) {
 	$qb = $entityManager->createQueryBuilder();
 	$qb->select('f')
 	->from('Favor', 'f')
+	->join('f.owner','u')
 	->where('f.deadline >= :today')
 	->setParameter('today', $today);
 	if ($_POST['title'] != ''){
@@ -25,12 +26,15 @@ if ($_SESSION['logged']) {
 		$qb->andWhere('f.deadline <= :deadline')
 		->setParameter('deadline', $deadline);
 	}
-	/* if ($_POST['owner'] != ''){
+	if ($_POST['owner'] != ''){
 		$qb->andWhere(
-				$qb->expr()->like('f.owner',':owner')
-				)
-				->setParameter('owner', '%'.$_POST['owner'].'%');
-	} */
+			$qb->expr()->orX(
+					$qb->expr()->like('u.name',':owner'),
+				$qb->expr()->like('u.lastname',':owner')
+			)
+		)
+		->setParameter('owner', '%'.$_POST['owner'].'%');
+	}
 	$qb->orderBy('f.deadline','ASC');
 	$query = $qb->getQuery();
 	$query->execute();
