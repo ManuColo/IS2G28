@@ -10,7 +10,7 @@
 						Usuario
 					</th>
 				</tr>
-			<?php foreach ($favor->getMyPostulations() as $postulation) { ?>
+				<?php foreach ($favor->getMyPostulations() as $postulation) { ?>
 				<tr>
 					<td>
 						<?php $userPost = $postulation->getUser();
@@ -18,7 +18,7 @@
 						?>
 					</td>
 				</tr>
-			<?php }?>
+				<?php } ?>
 			</table>
 			<div class="modal-footer">
            		<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
