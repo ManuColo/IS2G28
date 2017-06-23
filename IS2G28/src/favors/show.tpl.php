@@ -86,7 +86,9 @@
 			  </li>          
             </ul>
           </div>
-          <?php include '../postulations/favorPostulations.php'; ?>
+          <?php if ($owner->getId() == $me->getId()) {
+          			include '../postulations/favorPostulations.php'; 
+          		};?>
           <?php else: ?>
             <p>No existe la gauchada especificada.</p>
           <?php endif; ?>
