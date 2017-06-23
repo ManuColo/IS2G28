@@ -62,7 +62,17 @@
               <li>
                 <span class="label label-warning">
                   <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
-                  0 postulaciones
+                  <?php $cantPostulations = $favor->getMyPostulations()->count();
+                  if ($cantPostulations < 1 ) { ?>
+					0 postulaciones
+                  <?php } else {?>
+					<a role="button" data-toggle="modal" href="#ventanaPostulation">
+	                  	<?php echo $cantPostulations; 
+	                  	if ( $cantPostulations > 1 ) {?> postulaciones 
+                  		<?php } else { ?> postulaci&oacute;n 
+                  		<?php } ?>
+                  	</a>
+                  <?php } ?>
                 </span>            
               </li> 
               <li><?php 
