@@ -63,7 +63,7 @@ class Favor
    * Postulaciones al favor.
    *
    * @var Collection Coleccion de postulacione(Postulation[])
-   * @oneToMany(targetEntity="Postulation", mappedBy="favorId")
+   * @oneToMany(targetEntity="Postulation", mappedBy="favor")
    */
   private $myPostulations;
 
