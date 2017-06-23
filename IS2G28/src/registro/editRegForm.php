@@ -80,7 +80,7 @@
             <div class="form-group">
 			  <label for="password" class="col-sm-2 control-label">Clave</label>
 				<div class="col-sm-10">
-					<input type="password" class="form-control" id="password" name="password" placeholder="Ingres&aacute; tu clave" required />
+					<input type="password" class="form-control" id="password" name="password" placeholder="Ingres&aacute; tu clave para enviar los datos" required />
                 </div>
             </div>
              
