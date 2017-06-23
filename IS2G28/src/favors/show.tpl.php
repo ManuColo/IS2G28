@@ -66,7 +66,7 @@
                   if ($cantPostulations < 1 ) { ?>
 					0 postulaciones
                   <?php } else {?>
-					<a role="button" data-toggle="modal" href="#ventanaPostulation">
+					<a role="button" data-toggle="modal" href="#favorPostulationsWindow" class="text-white">
 	                  	<?php echo $cantPostulations; 
 	                  	if ( $cantPostulations > 1 ) {?> postulaciones 
                   		<?php } else { ?> postulaci&oacute;n 
@@ -81,6 +81,7 @@
 			  </li>          
             </ul>
           </div>
+          <?php include '../postulations/favorPostulations.php'; ?>
           <?php else: ?>
             <p>No existe la gauchada especificada.</p>
           <?php endif; ?>
