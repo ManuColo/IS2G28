@@ -64,12 +64,12 @@
                   <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
                   0 postulaciones
                 </span>            
-              </li> 
-              <li><?php 
+              </li>        
+            </ul>
+            <div><?php 
               	include '../postulations/commentPostulation.php';
               	?>
-			  </li>          
-            </ul>
+			</div> 
           </div>
           <?php else: ?>
             <p>No existe la gauchada especificada.</p>
