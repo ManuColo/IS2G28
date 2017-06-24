@@ -29,6 +29,8 @@
         <div class="panel-body">
           <!-- Formulario de alta de favor -->
           <form id="favor-form" class="form-horizontal" action="" method="post" enctype="multipart/form-data" >
+              <!-- Identificador del favor -->
+              <input type="hidden" id="favor_id" name="favor[id]" value="<?= $favorId ?>">
               <!-- Titulo del favor -->
               <div class="form-group <?php echo isset($errors['title'])?'has-error':'' ?>">
                   <label for="favor_title" class="col-sm-3 control-label">T&iacute;tulo</label>
