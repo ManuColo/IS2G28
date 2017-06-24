@@ -50,7 +50,7 @@
               <li>
                 <span class="label label-warning">
                   <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                  <?php echo $favor->getOwner() ?>
+                  <?php $owner = $favor->getOwner(); echo $owner ?>
                 </span>            
               </li>
               <li>
@@ -62,7 +62,22 @@
               <li>
                 <span class="label label-warning">
                   <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
-                  0 postulaciones
+                  <?php $cantPostulations = $favor->getMyPostulations()->count();
+                  if ($cantPostulations < 1 ) { ?>
+					0 postulaciones
+                  <?php } elseif ($owner->getId() == $me->getId()) {?>
+					<a role="button" data-toggle="modal" href="#favorPostulationsWindow" class="text-white">
+	                  	<?php echo $cantPostulations; 
+	                  	if ( $cantPostulations > 1 ) {?> postulaciones 
+                  		<?php } else { ?> postulaci&oacute;n 
+                  		<?php } ?>
+                  	</a>
+                  <?php } else { ?>
+	                  	<?php echo $cantPostulations; 
+	                  	if ( $cantPostulations > 1 ) {?> postulaciones 
+                  		<?php } else { ?> postulaci&oacute;n 
+                  		<?php } ?>
+                  <?php } ?>
                 </span>            
               </li>        
             </ul>
@@ -71,6 +86,9 @@
               	?>
 			</div> 
           </div>
+          <?php if ($owner->getId() == $me->getId()) {
+          			include '../postulations/favorPostulations.php'; 
+          		};?>
           <?php else: ?>
             <p>No existe la gauchada especificada.</p>
           <?php endif; ?>

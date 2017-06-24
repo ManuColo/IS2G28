@@ -103,13 +103,15 @@ nav {
 .favorSearch img {
   height: 30px;
   width: 30px;
-  
+}
+
+.text-white, .text-white:hover, .text-white:active, .text-white:focus {
+	color: #FFF;
 }
 
 .modal-header h3 {
 	font-weight: bold;
 	text-align: center;
-	
 }
 
 #btnMod {
