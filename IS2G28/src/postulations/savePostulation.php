@@ -19,7 +19,7 @@ if($_SESSION['logged']){
 	$entityManager-> flush();
 	//Se informa la creación y se redirige al listado de favores
 	addMessage('success','Te postulaste al favor');
-	header("location:../favors/list.php?message=postComplete");
+	header("location:../favors/list.php");
 	exit();
 } else {
 	header("location:../login/login.php");

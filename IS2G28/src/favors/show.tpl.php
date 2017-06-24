@@ -79,12 +79,12 @@
                   		<?php } ?>
                   <?php } ?>
                 </span>            
-              </li> 
-              <li><?php 
+              </li>        
+            </ul>
+            <div><?php 
               	include '../postulations/commentPostulation.php';
               	?>
-			  </li>          
-            </ul>
+			</div> 
           </div>
           <?php if ($owner->getId() == $me->getId()) {
           			include '../postulations/favorPostulations.php'; 
