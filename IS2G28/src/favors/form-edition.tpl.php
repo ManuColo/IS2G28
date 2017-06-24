@@ -3,7 +3,15 @@
   <head>
     <title>Una Gauchada - Edici&oacute;n de favor</title>
     <?php require '../common/common_headers.php'; ?>    
-    <link type="text/css" rel="stylesheet" href="new.css">    
+    <link type="text/css" rel="stylesheet" href="new.css">
+    <style type="text/css">
+      img.favor-photo {
+        width: 50px;
+        height: 50px;
+        float: left;
+        margin-right: 10px;
+      }
+    </style>
   </head>
   <body>
     <!-- Contenedor principal, requerido por Bootstrap -->
@@ -48,8 +56,12 @@
               <!-- Foto del favor -->
               <div class="form-group <?php echo isset($errors['photo'])?'has-error':'' ?>">
                   <label for="favor_photo" class="col-sm-3 control-label">Foto</label>
-                  <div class="col-sm-9"> El tamaño m&aacute;ximo de la imagen es 1024 kB
+                  <div class="col-sm-9">
+                    <?php if ($favor->getPhoto()): ?>
+                      <img src="../uploads/<?php echo $favor->getPhoto() ?>" alt="Foto del favor" class="img-circle favor-photo">                    
+                    <?php endif; ?>
                     <input type="file" id="favor_photo" name="favor_photo">
+                    El tamaño m&aacute;ximo de la imagen es 1024 kB
                     <!-- Contenedor del mensaje de error -->
                     <span class="error help-block <?php echo isset($errors['photo'])?'shown':'hidden' ?>">
                       <?php echo isset($errors['photo'])?$errors['photo']:'' ?>
