@@ -29,7 +29,7 @@
         </div>
         <div class="panel-body">
           <!-- Formulario de alta de favor -->
-          <form id="favor-form" class="form-horizontal" action="" method="post" enctype="multipart/form-data" >
+          <form id="favor-form" class="form-horizontal" action="update.php" method="post" enctype="multipart/form-data" >
               <!-- Identificador del favor -->
               <input type="hidden" id="favor_id" name="favor[id]" value="<?= $favorId ?>">
               <!-- Titulo del favor -->
