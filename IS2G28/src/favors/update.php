@@ -72,8 +72,34 @@ if (count($violations) > 0) {
 }
 */
 
+// Comprobar que no haya errores de validación. De ser así, persistir los cambios en la base de datos
 if (count($violations) === 0) {
-  die('Persistir el favor actualizado en la base de datos.');
+  // Actualizar datos del favor
+  $favor->setTitle($updatedFavor->getTitle());
+  $favor->setDescription($updatedFavor->getDescription());
+  $favor->setCity($updatedFavor->getCity());
+  $favor->setDeadline(new DateTime($updatedFavor->getDeadline()));
+   
+  // Comprobar si se actualizó la foto del favor
+  if ($updatedFavor->getPhoto()) {
+    // Mover el archivo correspondiente a la foto del favor al directorio de uploads
+    $photoFileName = time() . basename($_FILES['favor_photo']['name']);
+    $targetFile = $cfg->uploadDir . $photoFileName;
+    move_uploaded_file($updatedFavor->getPhoto(), $targetFile);    
+    // Actualizar foto asociada al favor actualizado
+    $updatedFavor->setPhoto($photoFileName);  
+    // Comprobar si el favor tenía una foto asociada
+    // De ser así, eliminar la foto del directorio de uploads
+    if ($favor->getPhoto()) {
+      unlink($cfg->uploadDir . $favor->getPhoto());
+    }        
+    $favor->setPhoto($updatedFavor->getPhoto());    
+  }  
+  // Persistir objeto Favor en la base de datos
+  $entityManager->persist($favor);
+  $entityManager->flush();
+  // Redirigir al visitante al listado de favores
+  header("location:show.php?id=" . $favor->getId());    
 }
 
 
