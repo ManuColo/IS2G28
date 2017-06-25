@@ -12,6 +12,7 @@
         margin-right: 10px;
       }
     </style>
+    <script type="text/javascript" src="new.js"></script>
   </head>
   <body>
     <!-- Contenedor principal, requerido por Bootstrap -->
