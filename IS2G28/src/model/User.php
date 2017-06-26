@@ -54,6 +54,12 @@ Class User {
 	private $salt;
 	
 	/**
+	 * @Column(type="string")
+	 * @var string
+	 */
+	private $photo;
+	
+	/**
 	 * @Column(type="integer")
 	 * @var integer
 	 */
@@ -138,6 +144,10 @@ Class User {
 		$this->salt = $salt;
 	}
 	
+	public function setPhoto($photo){
+		$this->photo = $photo;
+	}
+	
 	public function setCantCredits($cant){
 		$this->cantCredits = $cant;
 	}
@@ -199,6 +209,10 @@ Class User {
 	
 	public function getSalt(){
 		return $this->salt;
+	}
+	
+	public function getPhoto(){
+		return $this->photo;
 	}
 		
 	public function getCantCredits(){
@@ -276,6 +290,14 @@ Class User {
   		return 0;
   	}
   }
-	
+  
+  public static function loadValidatorMetadata(ClassMetadata $metadata){
+  	$metadata->addPropertyConstraint('photo', new Assert\Image(array(
+  			'maxSize' => '1024k',
+  			'mimeTypesMessage' => 'El archivo no es una imagen valida.',
+  			'maxSizeMessage' => 'La imagen es demasiado grande. El tamaño maximo permitido es {{ limit }} {{ suffix }}.'
+  	)));
+  	$metadata->setGroupSequence(array('User', 'Strict'));
+  }
 }
 ?>
