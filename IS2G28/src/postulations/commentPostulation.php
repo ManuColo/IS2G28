@@ -11,7 +11,7 @@
    			<form method="post" action="../postulations/savePostulation.php?id=<?php echo $favor->getId();?>">
   			<div class="modal-body">
 				<div class="form-group">
-                	<textarea class="form-control" id="comment" name="comment" placeholder="Antes de postularte, pod&eacute;s dej&aacute;r un comentario"></textarea>
+                	<textarea class="form-control" id="comment" name="comment" placeholder="Antes de postularte, pod&eacute;s dejar un comentario"></textarea>
                 </div>		
            	</div>
            	<div class="modal-footer">
