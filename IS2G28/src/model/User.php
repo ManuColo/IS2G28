@@ -95,8 +95,8 @@ Class User {
    */
   private $myPostulations;
   
-  public function __construct() 
-  {
+  public function __construct() {
+  	$this->photo = '';
   	$this->cantCredits = 1;
     $this->myFavors = new ArrayCollection();
     $this->myCredits = new ArrayCollection();
