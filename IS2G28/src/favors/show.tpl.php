@@ -65,7 +65,7 @@
                   <?php $cantPostulations = $favor->getMyPostulations()->count();
                   if ($cantPostulations < 1 ) { ?>
 					0 postulaciones
-                  <?php } elseif ($owner->getId() == $me->getId()) {?>
+                  <?php } elseif ($owner->getId() == $_SESSION['userId']) {?>
 					<a role="button" data-toggle="modal" href="#favorPostulationsWindow" class="text-white">
 	                  	<?php echo $cantPostulations; 
 	                  	if ( $cantPostulations > 1 ) {?> postulaciones 
@@ -81,12 +81,12 @@
                 </span>            
               </li>        
             </ul>
-            <div><?php 
-              	include '../postulations/commentPostulation.php';
+            <div><?php if ($owner->getId() != $_SESSION['userId']){
+              	include '../postulations/commentPostulation.php';}
               	?>
 			</div> 
           </div>
-          <?php if ($owner->getId() == $me->getId()) {
+          <?php if ($owner->getId() == $_SESSION['userId']) {
           			include '../postulations/favorPostulations.php'; 
           		};?>
           <?php else: ?>

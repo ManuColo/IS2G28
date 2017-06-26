@@ -9,7 +9,6 @@ if ($_SESSION['logged']) {
   // Buscar via Doctrine el favor a visualizar
   $favor = $entityManager->getRepository('Favor')->find($favorId);
   // Incluir template que visualiza un favor
-  $me = $entityManager->getRepository('User')->find($_SESSION['userId']);
   include 'show.tpl.php';  
 } else {
   header("location:../login/login.php");
