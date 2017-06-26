@@ -9,7 +9,9 @@ if ($_SESSION['logged']) {
 	->leftJoin('f.myPostulations', 'p')
 	->join('f.owner','u')
 	->where('f.deadline >= :today')
-	->setParameter('today', $today);
+	->andWhere('f.unpublished != :unpublished')
+	->setParameter('today', $today)
+	->setParameter('unpublished', 1);
 	if ($_POST['title'] != ''){
 		$qb->andWhere(
 				$qb->expr()->like('f.title',':title')

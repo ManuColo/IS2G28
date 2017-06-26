@@ -8,10 +8,12 @@ if ($_SESSION['logged']) {
 		->from('Favor', 'f')
 		->leftJoin('f.myPostulations', 'p')
 		->where('f.deadline >= :today')
+		->andWhere('f.unpublished != :unpublished')
 		->groupBy('f.id')
 		->orderBy('cont','ASC')
 		->addOrderBy('f.deadline','ASC')
-		->setParameter('today', $today);
+		->setParameter('today', $today)
+		->setParameter('unpublished', 1);
 	$query = $qb->getQuery();
 	$query->execute();
 	$favors = $query->getResult();

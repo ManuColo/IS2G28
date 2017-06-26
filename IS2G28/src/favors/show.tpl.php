@@ -32,7 +32,13 @@
             </a>
           </div>
           <div class="media-body">
-            <h4 class="media-heading favor-title"><?php echo $favor->getTitle() ?></h4>
+            <h4 class="media-heading favor-title">
+            	<?php echo $favor->getTitle();
+            	$owner = $favor->getOwner();
+            	if ($owner->getId() == $_SESSION['userId']) {?>
+            		<button class="btn btn-danger btn-xs pull-right">Despublicar</button>
+            	<?php } ?>
+            </h4>
             <p class="favor-description"><?php echo $favor->getDescription() ?></p>      
             <ul class="list-inline favor-properties">
               <li>
@@ -50,7 +56,7 @@
               <li>
                 <span class="label label-warning">
                   <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                  <?php $owner = $favor->getOwner(); echo $owner ?>
+                  <?php echo $owner ?>
                 </span>            
               </li>
               <li>
