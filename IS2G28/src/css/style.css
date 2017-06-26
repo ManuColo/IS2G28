@@ -109,6 +109,10 @@ nav {
 	color: #FFF;
 }
 
+.text-black, .text-black:hover, .text-black:active, .text-black:focus {
+	color: #000;
+}
+
 .modal-header h3 {
 	font-weight: bold;
 	text-align: center;
@@ -118,6 +122,33 @@ nav {
 	font-weight: bold;
 	font-size: 15px;
 	text-align: center;
+	font-family: arial;
 	font-variant: small-caps;
 	float:right;
+}
+
+.imgCharger {
+	margin-top: 20px;
+	margin-left: 5px;
+	padding: 10px 0;
+}
+
+.imgCharger p {
+	font-weight:bold;
+}
+
+.imgUs{
+	margin-right:20px;
+}
+.imgUs img {
+	margin-top:30px;
+	width:125px;
+}
+
+.labelImg {
+	padding-left:5px;
+}
+
+.usPh{
+	margin-top:-15px;
 }

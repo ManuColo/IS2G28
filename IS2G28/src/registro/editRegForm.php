@@ -47,8 +47,33 @@
 			</div>
         <div class="panel-body">
         <!-- Formulario de edición de usuario -->
-          <form class="form-horizontal" method="post" action="editReg.php" id="reg-form">
-			<!-- Nombre del usuario -->
+          <form class="form-horizontal" method="post" action="editReg.php" id="reg-form" enctype="multipart/form-data">
+          	<!-- Foto del usuario -->
+            <div class="form-group usPh <?php echo isset($errors['photo'])?'has-error':'' ?>">
+            	<div class="imgUs">
+            	<label for="userPhoto" class="col-sm-4 labelImg">
+            	<?php if ($user->getPhoto()){ ?>
+           		<img class="media-object img-rounded favor-photo" 
+           		src="../uploads/<?php echo $user->getPhoto() ?>" 
+                alt="<?php echo $user->getPhoto() ?>">
+              	<?php } else{ ?>
+                	<img class="media-object img-rounded user-photo" 
+                   	src="../images/profile.jpeg" 
+                   	alt="Imagen de favor">
+              		<?php }?>
+                  </label>
+              	</div>
+              	<div class="col-sm-8 imgCharger">
+              		<p>Pod&eacute;s seleccionar una imagen de perfil</p> 
+              		<span><small>El tamaño m&aacute;ximo de la imagen es 1MB</small></span>
+              		<input type="file" id="userPhoto" name="userPhoto">
+                	<!-- Contenedor del mensaje de error -->
+                	<span class="error help-block <?php echo isset($errors['photo'])?'shown':'hidden' ?>">
+                	<?php echo isset($errors['photo'])?$errors['photo']:'' ?>
+                	</span>                    
+             	</div>
+            </div>
+            <!-- Nombre del usuario -->
 			<div class="form-group name">
 			  <label for="name" class="col-sm-2 control-label">Nombre</label>
 				<div class="col-sm-10">

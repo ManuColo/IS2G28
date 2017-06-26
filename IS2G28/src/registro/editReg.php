@@ -20,7 +20,16 @@ if ($_SESSION['logged']) {
 				!strpbrk($params['name'], '0123456789!"·$%&/()=|@#~½¬{[]}ºª?¿Ç\}_<>-̣+*`^') &&
 				!strpbrk($params['lastname'], '0123456789!"·$%&/()=|@#~½¬{[]}ºª?¿Ç\}_<>-̣+*`^')) {
 					if (($user->encryptPassword($params['password'],$user->getSalt())) == $user->getPass() ){
-					//Asigno los valores recibidos a variables
+						if (isset ($_FILES['userPhoto'])) {
+							// Mover el archivo correspondiente a la foto del favor al directorio de uploads
+							$photoFileName = time() . basename($_FILES['userPhoto']['name']);
+							$tmpName= $_FILES['userPhoto']['tmp_name'];
+							$targetFile = $cfg->uploadDir . $photoFileName;
+							move_uploaded_file($tmpName, $targetFile);
+							// Actualizar el objeto que modela el favor
+							$user->setPhoto($photoFileName);
+						}					
+						//Asigno los valores recibidos a variables
 						$nom=$params['name'];
 						$ape=$params['lastname'];
 						$tel=$params['phone'];
@@ -46,7 +55,7 @@ if ($_SESSION['logged']) {
 			//Los campos no llegan completos desde el formulario
 			addMessage('danger','Falta completar campos');
 			include 'editRegForm.php';
-		}
+		}				
 } else {
 	header("location:../login/login.php");
 	exit();
