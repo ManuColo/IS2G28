@@ -1,5 +1,5 @@
-<a role="button" id="btnMod" class="btn btn-warning btn-block; glyphicon glyphicon-ok" data-toggle="modal" href="#ventanaCP"> 
-   <strong>Postularme</strong> 
+<a role="button" id="btnMod" class="btn btn-warning" data-toggle="modal" href="#ventanaCP"> 
+   <strong>Quiero postularme</strong> 
 </a>
 <div class="modal fade" id="ventanaCP" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true" data-backdrop="static"> 
 	<div class="modal-dialog" role="document"> 
