@@ -2,7 +2,7 @@
 	<div class="modal-dialog" role="document"> 
     	<div class="modal-content"> 
         	<div class="modal-header">
-            	<h2 class="modal-title">Listado de Postulaciones</h2>
+            	<h2 class="modal-title">Postulantes a <?php echo $favor->getTitle();?></h2>
    			</div>
 			<table class="table table-hover favorSearch">
 				<tr>
