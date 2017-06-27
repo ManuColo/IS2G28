@@ -6,15 +6,24 @@ if ($_SESSION['logged']) {
 	$favorId = cleanInput($_GET['id']);
 	$user = $entityManager->getRepository('User')->find($_SESSION['userId']);
 	$favor = $entityManager->getRepository('Favor')->find($favorId);
-	if ($favor->getOwner()=== $user) {
-		$favor->setUnpublished(True);
-		$entityManager->persist($favor);
-		$entityManager->flush();
-		addMessage('success','La gauchada ya no será visible');
-		header("location:list.php");
+	if (!$favor->getUnpublished()) {
+		if ($favor->getOwner()=== $user) {
+			$favor->setUnpublished(True);
+			if ($favor->getMyPostulations()->count() === 0) {
+				$user->addCredits();
+				$entityManager->persist($user);
+			}
+			$entityManager->persist($favor);
+			$entityManager->flush();
+			addMessage('success','La gauchada ya no será visible');
+			header("location:list.php");
+		} else {
+			addMessage('danger','No pod&eacute;s despublicar una gauchada que no es tuya');
+			header("location:show.php?id=".$favorId);
+		}
 	} else {
-		addMessage('danger','No pod&eacute;s despublicar una gauchada que no es tuya');
-		header("location:show.php?id=".$favorId);
+		addMessage('danger','No pod&eacute;s despublicar una gauchada que no est&aacute; publicada');
+		header("location:list.php");
 	}
 } else {
 	header("location:../login/login.php?message=accessDenied");

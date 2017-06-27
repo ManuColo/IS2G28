@@ -36,7 +36,7 @@
             <h4 class="media-heading favor-title">
             	<?php echo $favor->getTitle();
             	$owner = $favor->getOwner();
-            	if ($owner === $user) {?>
+            	if (($owner === $user) && !$favor->getUnpublished()) {?>
             		<button class="btn btn-danger btn-xs pull-right" id="unpublish">Despublicar</button>
             	<?php } ?>
             </h4>
