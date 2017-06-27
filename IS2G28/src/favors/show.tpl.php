@@ -34,11 +34,17 @@
           </div>
           <div class="media-body">
             <h4 class="media-heading favor-title">
-            	<?php echo $favor->getTitle();
-            	$owner = $favor->getOwner();
-            	if (($owner === $user) && !$favor->getUnpublished()) {?>
-            		<button class="btn btn-danger btn-xs pull-right" id="unpublish">Despublicar</button>
-            	<?php } ?>
+            <?php if (!$favor->getUnpublished()) {
+	            echo $favor->getTitle();
+	            $owner = $favor->getOwner();
+	            if ($owner === $user) {
+	            	?>
+	            	<button class="btn btn-danger btn-xs pull-right" id="unpublish">Despublicar</button>
+	            <?php }
+				} else { ?>
+					<del><?php echo $favor->getTitle();?></del>
+	            	<span class="text text-danger">Gauchada despublicada</span>
+            <?php }?>
             </h4>
             <p class="favor-description"><?php echo $favor->getDescription() ?></p>      
             <ul class="list-inline favor-properties">
