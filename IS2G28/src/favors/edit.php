@@ -17,7 +17,10 @@ $favorId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT, array(
 
 // Comprobar que el ID del favor sea válido
 if (!$favorId) {
-  die('ID de favor inválido.');
+  // Setear mensaje de error y redirigir al usuario al listado de favores  
+  addMessage('danger', 'ID de favor inválido.');
+  header("location:list.php");
+  exit();
 }
 
 // Buscar favor con el id dado como parámetro de la petición
@@ -25,7 +28,10 @@ $favor = $entityManager->getRepository('Favor')->find($favorId);
 
 // Comprobar que exista el favor dado
 if (!$favor) {
-  die('No existe el favor con el ID dado.');
+  // Setear mensaje de error y redirigir al usuario al listado de favores
+  addMessage('danger', 'No existe el favor con el ID dado.');  
+  header("location:list.php");
+  exit();  
 }
 
 // Obtener el usuario logueado en el sistema
@@ -33,12 +39,18 @@ $user = $entityManager->getRepository('User')->find($_SESSION['userId']);
 
 // Comprobar que el favor sea propiedad del usuario 
 if ($favor->getOwner() !== $user) {
-  die('No puede editar un favor que no le pertenece.');
+  // Setear mensaje de error y redirigir al usuario a la vista del favor
+  addMessage('danger', 'No puede editar un favor que no le pertenece.');        
+  header("location:show.php?id=".$favor->getId());  
+  exit();  
 }
 
 // Comprobar que el favor no tenga postulantes
 if (count($favor->getMyPostulations()) > 0) {
-  die('No puede editar un favor que tiene postulantes.');
+  // Setear mensaje de error y redirigir al usuario a la vista del favor
+  addMessage('danger', 'No puede editar un favor que tiene postulantes.');  
+  header("location:show.php?id=".$favor->getId());
+  exit();  
 }
 
 // Incluir formulario de edición de un favor
