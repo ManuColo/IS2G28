@@ -2,7 +2,8 @@
 <html>
 <head>
   <title>Una Gauchada - Vista de un favor</title>
-  <?php require '../common/common_headers.php'; ?> 
+  <?php require '../common/common_headers.php'; ?>
+  <script type="text/javascript" src="../js/show.js"></script> 
   <link type="text/css" rel="stylesheet" href="show.css">
 </head>
 <body>
@@ -35,8 +36,8 @@
             <h4 class="media-heading favor-title">
             	<?php echo $favor->getTitle();
             	$owner = $favor->getOwner();
-            	if ($owner->getId() == $_SESSION['userId']) {?>
-            		<button class="btn btn-danger btn-xs pull-right">Despublicar</button>
+            	if ($owner === $user) {?>
+            		<button class="btn btn-danger btn-xs pull-right" id="unpublish">Despublicar</button>
             	<?php } ?>
             </h4>
             <p class="favor-description"><?php echo $favor->getDescription() ?></p>      
@@ -71,7 +72,7 @@
                   <?php $cantPostulations = $favor->getMyPostulations()->count();
                   if ($cantPostulations < 1 ) { ?>
 					0 postulaciones
-                  <?php } elseif ($owner->getId() == $_SESSION['userId']) {?>
+                  <?php } elseif ($owner === $user) {?>
 					<a role="button" data-toggle="modal" href="#favorPostulationsWindow" class="text-white">
 	                  	<?php echo $cantPostulations; 
 	                  	if ( $cantPostulations > 1 ) {?> postulaciones 
@@ -87,12 +88,12 @@
                 </span>            
               </li>        
             </ul>
-            <div><?php if ($owner->getId() != $_SESSION['userId']){
+            <div><?php if ($owner === $user){
               	include '../postulations/commentPostulation.php';}
               	?>
 			</div> 
           </div>
-          <?php if ($owner->getId() == $_SESSION['userId']) {
+          <?php if ($owner === $user) {
           			include '../postulations/favorPostulations.php'; 
           		};?>
           <?php else: ?>

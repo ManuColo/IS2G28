@@ -11,7 +11,7 @@ if ($_SESSION['logged']) {
 	->where('f.deadline >= :today')
 	->andWhere('f.unpublished != :unpublished')
 	->setParameter('today', $today)
-	->setParameter('unpublished', 1);
+	->setParameter('unpublished', True);
 	if ($_POST['title'] != ''){
 		$qb->andWhere(
 				$qb->expr()->like('f.title',':title')

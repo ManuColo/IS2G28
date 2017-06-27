@@ -13,7 +13,7 @@ if ($_SESSION['logged']) {
 		->orderBy('cont','ASC')
 		->addOrderBy('f.deadline','ASC')
 		->setParameter('today', $today)
-		->setParameter('unpublished', 1);
+		->setParameter('unpublished', True);
 	$query = $qb->getQuery();
 	$query->execute();
 	$favors = $query->getResult();

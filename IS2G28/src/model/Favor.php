@@ -81,7 +81,7 @@ class Favor
   
   public function __construct() {
     $this->cantApplications = 0;
-    $this->unpublished = 0;
+    $this->unpublished = False;
     $this->myPostulations = new ArrayCollection();
   }
 
