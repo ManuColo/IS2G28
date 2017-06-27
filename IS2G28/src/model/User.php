@@ -91,7 +91,7 @@ Class User {
    * Postulaciones del usuario.
    *
    * @var Collection Coleccion de postulacione(Postulation[])
-   * @oneToMany(targetEntity="Postulation", mappedBy="userId")
+   * @oneToMany(targetEntity="Postulation", mappedBy="user")
    */
   private $myPostulations;
   
