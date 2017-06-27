@@ -12,10 +12,12 @@ if ($_SESSION['logged']) {
 			if ($favor->getMyPostulations()->count() === 0) {
 				$user->addCredits();
 				$entityManager->persist($user);
+				addMessage('success','La gauchada ya no será visible');
+			} else {
+				addMessage('info','La gauchada ya no será visible, se ha notificado a los postulantes');
 			}
 			$entityManager->persist($favor);
 			$entityManager->flush();
-			addMessage('success','La gauchada ya no será visible');
 			header("location:list.php");
 		} else {
 			addMessage('danger','No pod&eacute;s despublicar una gauchada que no es tuya');
