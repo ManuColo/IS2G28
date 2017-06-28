@@ -37,7 +37,7 @@ class Question
    * 
    * @var Favor 
    * @ManyToOne(targetEntity="Favor", inversedBy="questions")
-   * @JoinColumn(name="favor_id", referencedColumnName="id")
+   * @JoinColumn(name="favor_id", referencedColumnName="id", nullable=false)
    */
   private $favor;
   
@@ -46,7 +46,7 @@ class Question
    * 
    * @var User 
    * @ManyToOne(targetEntity="User")
-   * @JoinColumn(name="user_id", referencedColumnName="id")
+   * @JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
    */
   private $author;
   

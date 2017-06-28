@@ -39,7 +39,7 @@ class Answer
    * 
    * @var Question
    * @OneToOne(targetEntity="Question", inversedBy="answer")
-   * @JoinColumn(name="question_id", referencedColumnName="id")
+   * @JoinColumn(name="question_id", referencedColumnName="id", nullable=false)
    */
   private $question;
 
