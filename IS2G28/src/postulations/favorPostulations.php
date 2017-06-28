@@ -19,7 +19,7 @@
 						Elegir
 					</th>
 				</tr>
-				<?php foreach ($favor->getMyPostulations() as $postulation) { ?>
+				<?php foreach ($postulations as $postulation) { ?>
 				<tr>
 					<td>
 						<?php $userPost = $postulation->getUser();
