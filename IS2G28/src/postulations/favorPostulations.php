@@ -16,10 +16,10 @@
 						Reputaci&oacute;n
 					</th>
 					<th>
-						Elegir
+						Estado
 					</th>
 				</tr>
-				<?php foreach ($postulations as $postulation) { ?>
+				<?php foreach ($favor->getMyPostulations() as $postulation) { ?>
 				<tr>
 					<td>
 						<?php $userPost = $postulation->getUser();
@@ -33,6 +33,11 @@
 						<?php echo $userPost->printReputation(); ?>
 					</td>
 					<td>
+						<?php if ($favor->getResolved()){ ?>
+						<?php echo $postulation->getStatus();?>
+						<?php } else {?>
+						<button class="btn btn-success btn-sm choose" id="<?php echo $postulation->getUser()->getId(); ?>">Seleccionar</button>
+						<?php }?>
 					</td>
 				</tr>
 				<?php } ?>

@@ -6,14 +6,20 @@ if ($_SESSION['logged']) {
 	$favorId = cleanInput($_GET['id']);
 	$user = $entityManager->getRepository('User')->find($_SESSION['userId']);
 	$favor = $entityManager->getRepository('Favor')->find($favorId);
+	$postulations = $favor->getMyPostulations();
 	if (!$favor->getUnpublished()) {
 		if ($favor->getOwner()=== $user) {
 			$favor->setUnpublished(True);
-			if ($favor->getMyPostulations()->count() === 0) {
+			if ($postulations->count() === 0) {
 				$user->addCredits();
 				$entityManager->persist($user);
 				addMessage('success','La gauchada ya no será visible');
 			} else {
+				foreach ($postulations as $postulation) {
+					if ($postulation->getStatus() === 'Pendiente'){
+						$postulation->reject();
+					}
+				}
 				addMessage('info','La gauchada ya no será visible, se ha notificado a los postulantes');
 			}
 			$entityManager->persist($favor);

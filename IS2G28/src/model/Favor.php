@@ -57,6 +57,12 @@ class Favor
   private $unpublished;
   
   /**
+   * @Column(type="boolean", nullable=true)
+   * @var Boolean
+   */
+  private $resolved;
+  
+  /**
    * Dueño o propietario del favor.
    * 
    * @var User Usuario propietario del favor
@@ -148,6 +154,16 @@ class Favor
   public function setUnpublished($aBool)
   {
   	$this->unpublished = $aBool;
+  }
+  
+  public function getResolved()
+  {
+  	return $this->resolved;
+  }
+  
+  public function setResolved($aBool)
+  {
+  	$this->resolved = $aBool;
   }
   
   public function getOwner()
