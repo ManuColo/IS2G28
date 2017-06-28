@@ -66,6 +66,14 @@ class Favor
    * @oneToMany(targetEntity="Postulation", mappedBy="favor")
    */
   private $myPostulations;
+  
+  /**
+   * Preguntas publicadas en el favor.
+   *
+   * @var Collection Colección de preguntas (Question[])
+   * @OneToMany(targetEntity="Question", mappedBy="favor")
+   */
+  private $questions;
 
   /**
    * @Column(type="integer")
@@ -76,6 +84,7 @@ class Favor
   public function __construct() {
     $this->cantApplications = 0;
     $this->myPostulations = new ArrayCollection();
+    $this->questions = new ArrayCollection();
   }
 
   public function getId()
@@ -228,4 +237,58 @@ class Favor
   }
   
   
+
+    /**
+     * Get cantApplications
+     *
+     * @return integer
+     */
+    public function getCantApplications()
+    {
+        return $this->cantApplications;
+    }
+
+    /**
+     * Remove myPostulation
+     *
+     * @param \Postulation $myPostulation
+     */
+    public function removeMyPostulation(\Postulation $myPostulation)
+    {
+        $this->myPostulations->removeElement($myPostulation);
+    }
+
+    /**
+     * Add question
+     *
+     * @param \Question $question
+     *
+     * @return Favor
+     */
+    public function addQuestion(\Question $question)
+    {
+        $this->questions[] = $question;
+
+        return $this;
+    }
+
+    /**
+     * Remove question
+     *
+     * @param \Question $question
+     */
+    public function removeQuestion(\Question $question)
+    {
+        $this->questions->removeElement($question);
+    }
+
+    /**
+     * Get questions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
 }
