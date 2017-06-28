@@ -53,9 +53,10 @@ class Question
   /**
    * Respuesta de la pregunta
    * 
-   * @var type 
+   * @var Answer
+   * @OneToOne(targetEntity="Answer", mappedBy="question") 
    */
- // private $answer;
+  private $answer;
   
 
   /**
@@ -162,5 +163,29 @@ class Question
   public function getAuthor()
   {
       return $this->author;
+  }
+
+  /**
+   * Set answer
+   *
+   * @param \Answer $answer
+   *
+   * @return Question
+   */
+  public function setAnswer(\Answer $answer = null)
+  {
+    $this->answer = $answer;
+
+    return $this;
+  }
+
+  /**
+   * Get answer
+   *
+   * @return \Answer
+   */
+  public function getAnswer()
+  {
+    return $this->answer;
   }
 }
