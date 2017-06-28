@@ -33,7 +33,7 @@ $selected = substr($firstReduction, 0 , -($max - $result));
   					</span></a><br>
   				</li>
   				<li class="divider"></li>
-  				<li><a href="../registro/editRegForm.php">Editar Perfil</a></li>
+  				<li><a href="../profile/private.php">Mi Perfil</a></li>
   			</ul>
 	</div> 
 	<?php }?>
