@@ -91,12 +91,12 @@ Class User {
    * Postulaciones del usuario.
    *
    * @var Collection Coleccion de postulacione(Postulation[])
-   * @oneToMany(targetEntity="Postulation", mappedBy="userId")
+   * @oneToMany(targetEntity="Postulation", mappedBy="user")
    */
   private $myPostulations;
   
-  public function __construct() 
-  {
+  public function __construct() {
+  	$this->photo = '';
   	$this->cantCredits = 1;
     $this->myFavors = new ArrayCollection();
     $this->myCredits = new ArrayCollection();

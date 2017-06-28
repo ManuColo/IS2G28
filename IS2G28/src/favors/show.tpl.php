@@ -75,7 +75,8 @@
               <li>
                 <span class="label label-warning">
                   <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
-                  <?php $cantPostulations = $favor->getMyPostulations()->count();
+                  <?php $postulations = $favor->getMyPostulations();
+                  $cantPostulations = $postulations->count();
                   if ($cantPostulations < 1 ) { ?>
 					0 postulaciones
                   <?php } elseif ($owner === $user) {?>
@@ -94,9 +95,16 @@
                 </span>            
               </li>        
             </ul>
-            <div><?php if ($owner === $user){
-              	include '../postulations/commentPostulation.php';}
-              	?>
+            <div><?php 
+            	$imPostulated = false; 
+            	foreach ($postulations as $postulation) {
+            		if ($postulation->getUser() === $user) {
+            			$imPostulated = True;
+            		}
+            	};
+            	if (($owner->getId() != $_SESSION['userId']) && !$imPostulated){
+              	include '../postulations/commentPostulation.php';
+            } ?>
 			</div> 
           </div>
           <?php if ($owner === $user) {
