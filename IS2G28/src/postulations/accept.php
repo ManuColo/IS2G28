@@ -22,7 +22,7 @@ if ($_SESSION['logged']) {
 		$favor->setResolved(True);
 		$entityManager->persist($favor);
 		$entityManager->flush();
-		addMessage('info','Se aceptó al candidato '.$candidate.' y se rechazó a los restantes. La gauchada ya no estará visible en el listado');
+		addMessage('info','Se aceptó al candidato '.$candidate.' y se rechazó a los restantes. Se enviaron los datos de contacto. La gauchada ya no estará visible en el listado');
 		header("location:../favors/list.php");
 	} else {
 		addMessage('danger','No pod&eacute;s aceptar postulantes en una gauchada que no es tuya');
