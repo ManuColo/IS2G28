@@ -103,11 +103,18 @@
             	foreach ($postulations as $postulation) {
             		if ($postulation->getUser() === $user) {
             			$imPostulated = True;
+            			$myPostulation = $postulation;
             		}
             	};
-            	if (($owner !== $user)&& !$imPostulated){
-              	include '../postulations/commentPostulation.php';
-            } ?>
+            	if ($owner !== $user) {
+            		if (!$imPostulated) {
+              			include '../postulations/commentPostulation.php';
+            		} else { ?>
+            			<span class="text bg-info pull-right">
+            				Mi postulación está: <?php echo $myPostulation->getStatus();?>
+            			</span>
+            		<?php }
+            	} ?>
 			</div> 
           </div>
           <?php if ($owner === $user) {
