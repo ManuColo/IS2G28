@@ -16,7 +16,7 @@
 						Reputaci&oacute;n
 					</th>
 					<th>
-						Estado
+						<p class="text-center">Estado</p>
 					</th>
 				</tr>
 				<?php foreach ($favor->getMyPostulations() as $postulation) { ?>
@@ -34,7 +34,7 @@
 					</td>
 					<td>
 						<?php if ($favor->getResolved()){ ?>
-						<?php echo $postulation->getStatus();?>
+						<p class="text text-primary text-center bg-info"><?php echo $postulation->getStatus();?></p>
 						<?php } else {?>
 						<button class="btn btn-success btn-sm choose" id="<?php echo $postulation->getUser()->getId(); ?>">Seleccionar</button>
 						<?php }?>
