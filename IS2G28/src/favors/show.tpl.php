@@ -142,7 +142,22 @@
                   <?php endif; ?>
               </div>                         
               <?php endforeach; ?>
-            <?php endif; ?>                                                
+            <?php endif; ?>
+            
+            <!-- Panel que incluye formulario de nueva pregunta -->
+            <div class="ask-question clearfix">
+              <form>
+                <input type="hidden" id="question_favor_id" name="question[favor_id]" value="<?= $favor->getId()?>">                
+                <div class="form-group">
+                  <label class="sr-only">Pregunta</label>
+                  <textarea id="question_content" name="question[content]" 
+                      class="form-control" rows="3" placeholder="Escriba una pregunta ...">                    
+                  </textarea>
+                </div>
+                <button type="submit" class="btn btn-info pull-right">Preguntar</button>
+              </form>              
+            </div> <!-- End .ask-question -->
+                
           </div>
         </div>
         

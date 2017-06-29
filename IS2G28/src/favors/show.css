@@ -132,3 +132,12 @@
   margin-left: 38px;
   color: #444;
 }
+
+/* Estilos del panel que incluye el formulario de nueva pregunta */
+.ask-question {
+  background-color: #F8F0F0;
+  padding: 10px;  
+  margin-top: 15px;
+  border: 1px solid #DDD;
+  border-radius: 5px;
+}
