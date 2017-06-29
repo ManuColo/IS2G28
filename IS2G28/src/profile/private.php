@@ -52,7 +52,7 @@
 		</div>
 		<div class="margSupD">
 			<blockquote>
-				<div><p>Tu Reputaci&oacute;n: <?php echo $user->getReputation(); ?> </p></div>
+				<div><p>Tu Reputaci&oacute;n: <?php echo $user->printReputation(); ?> </p></div>
 				<div><p>Tus Cr&eacute;ditos: <?php echo $user->getCantCredits();?></p></div>
 			</blockquote>
 		</div>

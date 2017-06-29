@@ -43,7 +43,7 @@
 			<img class="logoMin" src="../images/logo-gauchada.png"/></h3>
 		</div>
 		<div class="margSupPub">
-			<div><h4>Reputaci&oacute;n del usuario: <?php echo $userView->getReputation(); ?> </h4></div>
+			<div><h4>Reputaci&oacute;n del usuario: <?php echo $userView->printReputation(); ?> </h4></div>
 		</div>
 		<table class="table table-hover repList">
 			<tr class="titleTableRep">
