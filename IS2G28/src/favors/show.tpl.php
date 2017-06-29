@@ -93,6 +93,60 @@
             <p>No existe la gauchada especificada.</p>
           <?php endif; ?>
         </div><!-- End .media.favor -->
+                   
+        <!-- Panel de preguntas y respuestas de la gauchada -->
+        <div class="panel panel-default questions">
+          <div class="panel-heading">Preguntas sobre la gauchada</div>
+          <div class="panel-body">
+            <?php if (count($favor->getQuestions()) === 0): ?>
+              <p>No hay preguntas para esta gauchada.</p>
+            <?php else: ?>
+              <?php foreach ($favor->getQuestions() as $question): ?>
+                <!-- Contenedor de pregunta/respuesta -->
+                <div class="question-and-answer">
+                 <!-- Contenedor de una pregunta -->
+                  <div class="question">
+                    <!-- Encabezado: Icono, autor, fecha/hora -->
+                    <div class="question-header">
+                      <span class="glyphicon glyphicon-comment pull-left"></span> 
+                      <span class="question-author"><?php echo $question->getAuthor() ?></span>                
+                      <span class="question-posted-at"><?php echo $question->getPostedAt()->format('d/m/Y \a \l\a\s H:i') ?></span>                
+                    </div>
+                    <!-- Contenido de la pregunta -->
+                    <div class="question-content">
+                      <?php echo $question->getContent() ?>                      
+                    </div>
+                    <?php if (!$question->getAnswer()): ?>
+                      <!-- Boton para responder pregunta -->
+                      <div class="clearfix">                      
+                        <a class="btn btn-success btn-xs pull-right" href="">Responder</a>
+                      </div>
+                    <?php endif; ?>
+                  </div> <!-- End .question -->
+                  <?php if ($question->getAnswer()): ?>
+                    <!-- Contenedor de una respuesta -->
+                    <div class="answer">
+                       <!-- Encabezado: Icono, autor, fecha/hora -->
+                      <div class="answer-header">
+                        <span class="glyphicon glyphicon-comment pull-left"></span> 
+                        <span class="answer-author"><?php echo $question->getFavor()->getOwner() ?></span>                
+                        <span class="answer-posted-at">
+                          <?php echo $question->getAnswer()->getPostedAt()->format('d/m/Y \a \l\a\s H:i') ?>
+                        </span>                
+                      </div>
+                      <!-- Contenido de la pregunta -->
+                      <div class="answer-content">
+                        <?php echo $question->getAnswer()->getContent() ?>
+                      </div>
+                    </div> <!-- End .answer -->
+                  <?php endif; ?>
+              </div>                         
+              <?php endforeach; ?>
+            <?php endif; ?>                                                
+          </div>
+        </div>
+        
+        
         <br>
         <a class="btn btn-default pull-right" href="list.php">Volver al listado</a>
       </div><!-- End .panel-body -->
