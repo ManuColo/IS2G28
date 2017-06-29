@@ -29,19 +29,22 @@
                 <img class="media-object img-rounded favor-photo" 
                      src="../images/logo-gauchada.png" 
                      alt="Imagen de favor">
-              <?php endif; ?>
+              <?php endif; 
+              $owner = $favor->getOwner();?>
             </a>
           </div>
           <div class="media-body">
             <h4 class="media-heading favor-title">
-            <?php if (!$favor->getUnpublished()) {
+            <?php if (!$favor->getUnpublished()&& !$favor->getResolved()) {
 	            echo $favor->getTitle();
-	            $owner = $favor->getOwner();
 	            if ($owner === $user) {
 	            	?>
 	            	<button class="btn btn-danger btn-xs pull-right" id="unpublish">Despublicar</button>
 	            <?php }
-				} else { ?>
+            	} elseif ($favor->getResolved()) { ?>
+					<?php echo $favor->getTitle();?>
+	            	<span class="label label-success pull-right">Gauchada resuelta</span>
+            <?php } else { ?>
 					<del><?php echo $favor->getTitle();?></del>
 	            	<span class="text text-danger">Gauchada despublicada</span>
             <?php }?>
@@ -102,7 +105,7 @@
             			$imPostulated = True;
             		}
             	};
-            	if (($owner->getId() != $_SESSION['userId']) && !$imPostulated){
+            	if (($owner !== $user)&& !$imPostulated){
               	include '../postulations/commentPostulation.php';
             } ?>
 			</div> 
