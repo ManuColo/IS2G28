@@ -10,8 +10,10 @@ if ($_SESSION['logged']) {
 	->join('f.owner','u')
 	->where('f.deadline >= :today')
 	->andWhere('f.unpublished != :unpublished')
+	->andWhere('f.resolved != :resolved')
 	->setParameter('today', $today)
-	->setParameter('unpublished', True);
+	->setParameter('unpublished', True)
+	->setParameter('resolved', True);
 	if ($_POST['title'] != ''){
 		$qb->andWhere(
 				$qb->expr()->like('f.title',':title')

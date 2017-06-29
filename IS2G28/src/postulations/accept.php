@@ -12,6 +12,8 @@ if ($_SESSION['logged']) {
 		foreach ($favor->getMyPostulations() as $postulation) {
 			if ($postulation->getUser() === $candidate) {
 				$postulation->accept();
+				$candidate->addCredits();
+				$entityManager->persist($candidate);
 			} else {
 				$postulation->reject();
 			}
@@ -20,7 +22,7 @@ if ($_SESSION['logged']) {
 		$favor->setResolved(True);
 		$entityManager->persist($favor);
 		$entityManager->flush();
-		addMessage('Info','Se aceptó al candidato '.$candidate.' y se rechazó a los restantes. La gauchada ya no estará visible en el listado');
+		addMessage('info','Se aceptó al candidato '.$candidate.' y se rechazó a los restantes. La gauchada ya no estará visible en el listado');
 		header("location:../favors/list.php");
 	} else {
 		addMessage('danger','No pod&eacute;s aceptar postulantes en una gauchada que no es tuya');
