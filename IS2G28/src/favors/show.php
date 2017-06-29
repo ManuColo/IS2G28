@@ -8,6 +8,9 @@ if ($_SESSION['logged']) {
   $favorId = cleanInput($_GET['id']);  
   // Buscar via Doctrine el favor a visualizar
   $favor = $entityManager->getRepository('Favor')->find($favorId);
+  // Buscar via Doctrine el usuario logueado en la aplicación
+  $user = $entityManager->getRepository('User')->find($_SESSION['userId']);
+  
   // Incluir template que visualiza un favor
   include 'show.tpl.php';  
 } else {

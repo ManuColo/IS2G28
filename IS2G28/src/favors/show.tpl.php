@@ -144,20 +144,24 @@
               <?php endforeach; ?>
             <?php endif; ?>
             
-            <!-- Panel que incluye formulario de nueva pregunta -->
-            <div class="ask-question clearfix">
-              <form>
-                <input type="hidden" id="question_favor_id" name="question[favor_id]" value="<?= $favor->getId()?>">                
-                <div class="form-group">
-                  <label class="sr-only">Pregunta</label>
-                  <textarea id="question_content" name="question[content]" 
-                      class="form-control" rows="3" placeholder="Escriba una pregunta ...">                    
-                  </textarea>
-                </div>
-                <button type="submit" class="btn btn-info pull-right">Preguntar</button>
-              </form>              
-            </div> <!-- End .ask-question -->
-                
+            <!-- Mostrar formulario para nueva pregunta si el favor es publico (no vencido, no aceptado, no despublicado) y no le pertenece al usuario -->
+            <?php if (($favor->isActive()) && ($favor->getOwner() !== $user)): ?>
+              <!-- Panel que incluye formulario de nueva pregunta -->
+              <div class="ask-question clearfix">
+                <form action="ask.php" method="post">
+                  <input type="hidden" id="question_favor_id" name="question[favor_id]" value="<?= $favor->getId()?>">                
+                  <div class="form-group <?php echo isset($errors['content'])?'has-error':'' ?>">
+                    <label class="sr-only">Pregunta</label>
+                    <textarea id="question_content" name="question[content]" class="form-control" rows="3" placeholder="Escriba una pregunta (hasta 255 caracteres)"><?= isset($newQuestion)?$newQuestion->getContent():'' ?></textarea>
+                    <!-- Contenedor del mensaje de error -->
+                    <span class="error help-block <?php echo isset($errors['content'])?'shown':'hidden' ?>">
+                      <?php echo isset($errors['content'])?$errors['content']:'' ?>
+                    </span>  
+                  </div>
+                  <button type="submit" class="btn btn-info pull-right">Preguntar</button>
+                </form>              
+              </div> <!-- End .ask-question -->
+            <?php endif; ?>
           </div>
         </div>
         

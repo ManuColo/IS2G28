@@ -291,4 +291,18 @@ class Favor
     {
         return $this->questions;
     }
+    
+    /**
+     * Retorna true si un favor no esta vencido ni despublicado ni aceptado, false en caso contrario.
+     * 
+     * @return boolean
+     */
+    public function isActive()
+    {
+      $now = new DateTime();
+      $today = new DateTime($now->format('Y-m-d'));
+      
+      // Falta comprobar que no este despublicado ni que tenga aceptado un postulante
+      return $today <= $this->deadline;      
+    }
 }
