@@ -6,22 +6,33 @@ if ($_SESSION['logged']) {
 	$favorId = cleanInput($_GET['id']);
 	$user = $entityManager->getRepository('User')->find($_SESSION['userId']);
 	$favor = $entityManager->getRepository('Favor')->find($favorId);
+	$postulations = $favor->getMyPostulations();
 	if (!$favor->getUnpublished()) {
-		if ($favor->getOwner()=== $user) {
-			$favor->setUnpublished(True);
-			if ($favor->getMyPostulations()->count() === 0) {
-				$user->addCredits();
-				$entityManager->persist($user);
-				addMessage('success','La gauchada ya no será visible');
+		if (!$favor->getResolved()) {
+			if ($favor->getOwner()=== $user) {
+				$favor->setUnpublished(True);
+				if ($postulations->count() === 0) {
+					$user->addCredits();
+					$entityManager->persist($user);
+					addMessage('success','La gauchada ya no será visible');
+				} else {
+					foreach ($postulations as $postulation) {
+						if ($postulation->getStatus() === 'Pendiente'){
+							$postulation->reject();
+						}
+					}
+					addMessage('info','La gauchada ya no será visible, se ha notificado a los postulantes');
+				}
+				$entityManager->persist($favor);
+				$entityManager->flush();
+				header("location:list.php");
 			} else {
-				addMessage('info','La gauchada ya no será visible, se ha notificado a los postulantes');
+				addMessage('danger','No pod&eacute;s despublicar una gauchada que no es tuya');
+				header("location:show.php?id=".$favorId);
 			}
-			$entityManager->persist($favor);
-			$entityManager->flush();
-			header("location:list.php");
 		} else {
-			addMessage('danger','No pod&eacute;s despublicar una gauchada que no es tuya');
-			header("location:show.php?id=".$favorId);
+			addMessage('danger','No pod&eacute;s despublicar una gauchada que est&aacute; resuelta');
+			header("location:list.php");
 		}
 	} else {
 		addMessage('danger','No pod&eacute;s despublicar una gauchada que no est&aacute; publicada');
