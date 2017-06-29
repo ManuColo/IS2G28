@@ -101,7 +101,7 @@ if ($_SESSION['logged']) {
                     <td><a href="show.php?id=<?php echo  $favor->getId();?>"><?php echo $favor->getTitle();?></a></td>
                     <td><?php echo $favor->getCity();?></td>
                     <td><?php echo $favor->getDeadline()->format("d/m/Y");?></td>
-                    <td><?php echo $favor->getOwner() ?></td>
+                    <td><a href="../profile/public.php?idUs=<?php echo $favor->getOwner()->getId(); ?>"><?php echo $favor->getOwner() ?></a></td>
                   </tr>
                   <?php }; ?>
                 </table>

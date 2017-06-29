@@ -22,9 +22,11 @@
 				<?php foreach ($favor->getMyPostulations() as $postulation) { ?>
 				<tr>
 					<td>
+						<a href="../profile/public.php?idUs=<?php echo $postulation->getUser()->getId(); ?>">
 						<?php $userPost = $postulation->getUser();
 						echo $userPost->getName().' '.$userPost->getLastname();
 						?>
+						</a>
 					</td>
 					<td>
 						<?php echo $postulation->getComment(); ?>
