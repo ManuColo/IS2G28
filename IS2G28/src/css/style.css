@@ -234,3 +234,24 @@ nav {
 	margin-left:33%;
 	margin-top: 25px;
 }
+
+.imgUsChica img{
+	height:110px;
+	width:125px;
+	margin-left:-10px;
+	margin-top:-10px; 
+}
+
+.nameProfPub{
+	margin-left: 150px; 
+	margin-top: -100px;
+}
+
+.margSupPub{
+	margin-top:0;
+	margin-left:150px;
+}
+
+.repList{
+	margin-top:50px;
+}

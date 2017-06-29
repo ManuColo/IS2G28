@@ -63,7 +63,7 @@
               <li>
                 <span class="label label-warning">
                   <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                  <?php echo $owner ?>
+                  <a href="../profile/public.php?idUs=<?php echo $owner->getId(); ?>" class="text-white"><?php echo $owner ?></a>
                 </span>            
               </li>
               <li>
