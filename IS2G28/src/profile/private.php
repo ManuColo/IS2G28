@@ -27,10 +27,10 @@ if ($_SESSION['logged']) { ?>
             		<li id="menuEnc" class="nav-header"><p style="margin-bottom: 0px;">Mi Perfil</p></li>
             		<li class="nav-header"><a href="../registro/editRegForm.php">Editar Perfil</a></li>
             		<li class="nav-header"><strong>Gauchadas</strong></li>
-            		<li class="nav-header"><a href="#">Mis Gauchadas<b class="glyphicon glyphicon-menu-right" aria-hidden="true"></b></a></li>
-            		<li class="nav-header"><a href="#">Mis Postulaciones<b class="glyphicon glyphicon-menu-right" aria-hidden="true"></b></a></li>
+            		<li class="nav-header disabled"><a href="#">Mis Gauchadas<b class="glyphicon glyphicon-menu-right" aria-hidden="true"></b></a></li>
+            		<li class="nav-header disabled"><a href="#">Mis Postulaciones<b class="glyphicon glyphicon-menu-right" aria-hidden="true"></b></a></li>
             	    <li class="nav-header"><strong>Calificaciones</strong></li>
-            	    <li class="nav-header"><a href="#">Mis calificaciones<b class="glyphicon glyphicon-menu-right" aria-hidden="true"></b></a></li>
+            	    <li class="nav-header disabled"><a href="#">Mis calificaciones<b class="glyphicon glyphicon-menu-right" aria-hidden="true"></b></a></li>
 					<li class="nav-header"><strong>Comentarios</strong></li>
 					<li class="nav-header disabled"><a href="#">En mis gauchadas pedidas<b class="glyphicon glyphicon-menu-right" aria-hidden="true"></b></a></li>
 					<li class="nav-header disabled"><a href="#">En gauchadas que hice<b class="glyphicon glyphicon-menu-right" aria-hidden="true"></b></a></li>
