@@ -118,6 +118,10 @@ class Favor
     $this->myPostulations = new ArrayCollection();
     $this->questions = new ArrayCollection();
   }
+  
+  public function __toString() {
+  	return $this->getTitle();
+  }
 
   public function getId()
   {
