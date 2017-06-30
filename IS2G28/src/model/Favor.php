@@ -337,6 +337,6 @@ class Favor
       $today = new DateTime($now->format('Y-m-d'));
       
       // Falta comprobar que no este despublicado ni que tenga aceptado un postulante
-      return $today <= $this->deadline;      
+      return $today <= $this->deadline && !$this->unpublished && !$this->resolved;      
     }
 }

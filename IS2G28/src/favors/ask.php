@@ -23,15 +23,17 @@ $favor = $entityManager->getRepository('Favor')->find($questionData['favor_id'])
 $user = $entityManager->getRepository('User')->find($_SESSION['userId']);
 
 // Comprobar que el favor se encuentre activo (no vencido, no despublicado, no aceptado)
-if (!$favor->isActive()) {
-  addMessage('danger', 'No puede publicarse una pregunta en un favor no publicado.');
+if (!$favor->isActive()) {  
+  addMessage('danger', 'No puede publicarse una pregunta en un favor que ya no está publicado.');
   header("location:show.php?id=". $favor->getId());
+  exit();
 }
 
 // Comprobar que el dueño del favor no haga la pregunta
-if ($favor->getOwner() === $user) {
+if ($favor->getOwner() === $user) { 
   addMessage('danger', 'El dueño del favor no puede publicar una pregunta en uno de sus favores.');
   header("location:show.php?id=". $favor->getId());
+  exit();
 }
 
 // Instanciar pregunta con los datos recibidos
