@@ -1,5 +1,9 @@
 <?php
 
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
 /**
  * Clase que representa respuesta a una pregunta de un favor.
  *
@@ -124,4 +128,21 @@ class Answer
   {
     return $this->question;
   }
+  
+  /**
+   * Configura las reglas de validacion que se aplican sobre una instancia de Answer
+   * 
+   * @param ClassMetadata $metadata
+   */
+  public static function loadValidatorMetadata(ClassMetadata $metadata)
+  {
+    $metadata->addPropertyConstraint('content', new Assert\NotBlank(array(
+        'message' => 'Contenido de la respuesta requerido.'
+    )));    
+    $metadata->addPropertyConstraint('content', new Assert\Length(array(
+        'max' => 255,
+        'maxMessage' => 'La respuesta no puede exceder los {{ limit }} caracteres.'
+    )));
+  }
+  
 }

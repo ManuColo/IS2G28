@@ -121,18 +121,21 @@
                     <?php if (!$question->getAnswer() && ($favor->getOwner() === $user)): ?>
                       <!-- Boton para responder pregunta -->
                       <div class="clearfix">
-                        <button class="btn btn-success btn-xs btn-answer pull-right">Responder</button>                        
-                        <div class="new-answer hidden">
-                          <form action="" method="post">
-                            <input type="hidden" id="answer_question_id" name="answer[question_id]" value="<?= $question->getId()?>">                
-                            <div class="form-group <?php echo isset($answerErrors['content'])?'has-error':'' ?>">
-                              <label class="sr-only">Respuesta</label>
-                              <textarea id="answer_content" name="answer[content]" class="form-control" rows="3" placeholder="Escriba su respuesta (hasta 255 caracteres)"></textarea>
-                              <!-- Contenedor del mensaje de error -->
-                              <span class="error help-block <?php echo isset($answerErrors['content'])?'shown':'hidden' ?>">
-                                <?php echo isset($answerErrors['content'])?$answerErrors['content']:'' ?>
-                              </span>  
-                            </div>
+                        <button class="btn btn-success btn-xs btn-answer pull-right <?php echo ((isset($newAnswer) && ($newAnswer->getQuestion() === $question))?'hidden':'') ?>">Responder</button>                        
+                        <div class="new-answer <?php echo ((isset($newAnswer) && ($newAnswer->getQuestion() === $question))?'':'hidden') ?>">
+                          <form action="answer-question.php" method="post">
+                            <input type="hidden" id="answer_question_id" name="answer[question_id]" value="<?= $question->getId()?>">                            
+                              <div class="form-group <?php echo (isset($answerErrors['content']) && ($newAnswer->getQuestion() === $question))?'has-error':'' ?>">
+                                <label class="sr-only">Respuesta</label>
+                                <textarea id="answer_content" name="answer[content]" class="form-control" rows="3" placeholder="Escriba su respuesta (hasta 255 caracteres)"><?= ((isset($newAnswer) && ($newAnswer->getQuestion() === $question))?$newAnswer->getContent():'') ?></textarea>
+                                <?php if (isset($newAnswer) && $newAnswer->getQuestion() == $question): ?>
+                                  <!-- Contenedor del mensaje de error -->
+                                  <span class="error help-block <?php echo isset($answerErrors['content'])?'shown':'hidden' ?>">
+                                    <?php echo isset($answerErrors['content'])?$answerErrors['content']:'' ?>
+                                  </span>  
+                                <?php endif; ?>
+                              </div>
+                            
                             <button type="submit" class="btn btn-info btn-xs pull-right">Enviar respuesta</button>
                           </form> 
                           
