@@ -1,3 +1,6 @@
+<?php
+session_start();
+if ($_SESSION['logged']) { ?>
 <a role="button" id="btnMod" class="btn btn-warning" data-toggle="modal" href="#ventanaCP"> 
    <strong>Quiero postularme</strong> 
 </a>
@@ -21,3 +24,8 @@
 		</div>
 	</div>
 </div>
+<?php 
+} else {
+	header("location:../login/login.php?message=accessDenied");
+}
+?>

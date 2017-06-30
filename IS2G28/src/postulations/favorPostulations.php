@@ -1,3 +1,6 @@
+<?php
+session_start();
+if ($_SESSION['logged']) { ?>
 <div class="modal fade" id="favorPostulationsWindow" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document"> 
     	<div class="modal-content"> 
@@ -50,3 +53,8 @@
 		</div>
 	</div>
 </div>
+<?php 
+} else {
+	header("location:../login/login.php?message=accessDenied");
+}
+?>

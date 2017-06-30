@@ -69,7 +69,7 @@ if ($_SESSION['logged']) {
 		exit();
 	}
 }else {
-	header("location:../login/login.php");
+	header("location:../login/login.php?message=accessDenied");
 	exit();
 }
 ?>

@@ -41,6 +41,6 @@ if ($_SESSION['logged']) { ?>
 </html>
 <?php 
 } else {
-	header("location:../login/login.php");
+	header("location:../login/login.php?message=accessDenied");
 }
 ?>

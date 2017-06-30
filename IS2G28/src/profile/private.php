@@ -1,3 +1,6 @@
+<?php
+session_start();
+if ($_SESSION['logged']) { ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -13,7 +16,6 @@
 		<img class="img-responsive" src="../images/header-gauchada.png"/>
 	</div>
 	<?php 
-	session_start();
 	include('../common/menu.php');	
 	$user= $entityManager->find('User',$_SESSION['userId']);
 	?> 
@@ -60,3 +62,8 @@
   </div>		                                         
  </body>    
 </html>
+<?php 
+} else {
+	header("location:../login/login.php?message=accessDenied");
+}
+?>

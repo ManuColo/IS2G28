@@ -22,6 +22,6 @@ if($_SESSION['logged']){
 	header("location:../favors/list.php");
 	exit();
 } else {
-	header("location:../login/login.php");
+	header("location:../login/login.php?message=accessDenied");
 	exit();
 }?>

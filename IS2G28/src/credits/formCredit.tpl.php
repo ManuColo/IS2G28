@@ -1,3 +1,6 @@
+<?php
+session_start();
+if ($_SESSION['logged']) { ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -137,3 +140,8 @@
     </div>        
   </body>    
 </html>
+<?php 
+} else {
+	header("location:../login/login.php?message=accessDenied");
+}
+?>
