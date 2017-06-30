@@ -103,7 +103,7 @@
               <div class="form-group">
                 <div class="col-sm-9 col-sm-offset-3">                                  
                   <input type="submit" id="submit-favor" class="btn btn-primary" value="Guardar">
-                  <a class="btn btn-default" href="list.php" role="button">Cancelar</a>
+                  <a class="btn btn-default" href="show.php?id=<?= $favor->getId()?>" role="button">Cancelar</a>
                 </div>
               </div>              
           </form>
