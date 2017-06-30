@@ -100,7 +100,7 @@
               </li>        
             </ul>
             <!-- Boton para editar una gauchada (solo visible para el dueño de la misma) -->
-            <?php if ($user === $favor->getOwner()): ?>
+            <?php if (($user === $favor->getOwner())&&($cantPostulations == 0 )&& !$favor->getUnpublished() && !$favor->getResolved()): ?>
             <a class="btn btn-primary" href="edit.php?id=<?= $favor->getId() ?>">
               <span class="glyphicon glyphicon-edit"></span> Editar gauchada
             </a>

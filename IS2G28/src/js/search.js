@@ -10,7 +10,7 @@ $(function() {
 			doSearch();
 		}
 	});
-	$('#submitBuscar').click(function() {
+	$('.submitBuscar').click(function() {
 		doSearch();
 	});
 });

@@ -51,7 +51,7 @@ if ($_SESSION['logged']) {
               	<table class="table table-hover favorSearch">
 	              	<tr>
 						<td>
-							<span class="badge btn btn-warning" id="submitBuscar">Buscar:</span>
+							<span class="badge btn btn-warning submitBuscar">Buscar:</span>
 						</td>
 	                    <td>
 	                    	<input type="text" class="search searchControl" id="searchTitle" name="searchTitle" 
@@ -72,7 +72,7 @@ if ($_SESSION['logged']) {
 	                        	placeholder="Due&ntilde;o" value="<?php // echo $favor->getOwner() ?>">
 						</td>
 						<td>
-							<img class="img-responsive" id="submitBuscar" src="<?php echo $cfg->wwwRoot;?>/src/images/search.jpg"/>
+							<img class="img-responsive submitBuscar" src="<?php echo $cfg->wwwRoot;?>/src/images/search.jpg"/>
 	                    </td>
 					</tr>
 		        </table>

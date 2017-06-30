@@ -23,12 +23,22 @@ if ($_SESSION['logged']) {
 				!strpbrk($params['lastname'], '0123456789!"·$%&/()=|@#~½¬{[]}ºª?¿Ç\}_<>-̣+*`^')) {
 					if (($user->encryptPassword($params['password'],$user->getSalt())) == $user->getPass() ){
 						if (!$params['optradio']) {
-							if (isset ($_FILES['userPhoto'])) {
+							if (isset ($_FILES['userPhoto']) && $_FILES['userPhoto']['name']!='') {
 								//Validaciones
-								if($_FILES['userPhoto']['size']>1000000){
+								$maxFileSize = 1024 * 1000;
+								if($_FILES['userPhoto']['size']> $maxFileSize){
 									addMessage('danger','La imagen es demasiado grande');
 									header("location:./editRegForm.php");
-								} else{
+									exit;
+								} elseif (!eregi("\.jpg|\.jpeg|\.png|\.bmp|\.gif $",$_FILES['userPhoto']['name'])){
+									addMessage('danger','No estás subiendo una imagen');
+									header("location:./editRegForm.php");
+									exit;
+								} else {
+								if ($user->getPhoto()){
+									$targetFile = $cfg->uploadDir . $user->getPhoto();
+									unlink($targetFile);
+								}
 								// Mover el archivo correspondiente a la foto del favor al directorio de uploads
 								$photoFileName = time() . basename($_FILES['userPhoto']['name']);
 								$tmpName= $_FILES['userPhoto']['tmp_name'];
@@ -39,7 +49,8 @@ if ($_SESSION['logged']) {
 								}
 							}
 						} else {
-							// elimino de filesystem ($user->getPhoto());
+							$targetFile = $cfg->uploadDir . $user->getPhoto();
+							unlink($targetFile);
 							$user->setPhoto(null);
 						}
 						//Asigno los valores recibidos a variables
