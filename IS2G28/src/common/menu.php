@@ -64,7 +64,7 @@ $selected = substr($firstReduction, 0 , -($max - $result));
 	} else { ?>
 		<li <?php if ($selected == '') { ?>class="active"<?php $referer = 'index.php'; } ?>><a href="<?php echo $cfg->wwwRoot;?>/src">Inicio</a></li>
 		<li <?php if ($selected == 'login') { ?>class="active"<?php $referer = $selected.'/login.php'; } ?>><a href="<?php echo $cfg->wwwRoot;?>/src/login/login.php">Iniciar Sesi&oacute;n</a></li>
-		<li <?php if ($selected == 'registro') { ?>class="active"<?php $referer = $selected.'/registro.php'; } ?>><a href="<?php echo $cfg->wwwRoot;?>/src/registro/registro.php">Registrate</a></li>
+		<li <?php if ($selected == 'registro') { ?>class="active"<?php $referer = 'index.php'; } ?>><a href="<?php echo $cfg->wwwRoot;?>/src/registro/registro.php">Registrate</a></li>
 	<?php }?>
 	</ul>
 </nav>
