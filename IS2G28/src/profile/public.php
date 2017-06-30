@@ -57,7 +57,9 @@ if ($_SESSION['logged']) { ?>
 				<?php $postulations = $userView->getMyPostulations(); 
 				foreach ($postulations as $postulation) {
 					if ($postulation->getStatus() === 'Aceptado') {?>
-						<td><?php echo $postulation->getFavor()->getTitle(); ?></td>
+						<td><a href="../favors/show.php?id=<?php echo $postulation->getFavor()->getId(); ?>">
+							<?php echo $postulation->getFavor()->getTitle(); ?>
+						</a></td>
 						<td></td>
 						<td></td>
 				<?php }
