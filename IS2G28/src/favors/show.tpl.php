@@ -98,6 +98,12 @@
                 </span>            
               </li>        
             </ul>
+            <!-- Boton para editar una gauchada (solo visible para el dueño de la misma) -->
+            <?php if ($user === $favor->getOwner()): ?>
+            <a class="btn btn-primary" href="edit.php?id=<?= $favor->getId() ?>">
+              <span class="glyphicon glyphicon-edit"></span> Editar gauchada
+            </a>
+            <?php endif; ?>
             <div><?php 
             	$imPostulated = false; 
             	foreach ($postulations as $postulation) {
@@ -115,7 +121,8 @@
             			</span>
             		<?php }
             	} ?>
-			</div> 
+            </div> 
+
           </div>
           <?php if ($owner === $user) {
           			include '../postulations/favorPostulations.php'; 
@@ -124,8 +131,8 @@
             <p>No existe la gauchada especificada.</p>
           <?php endif; ?>
         </div><!-- End .media.favor -->
-        <br>
-        <a class="btn btn-default pull-right" href="list.php">Volver al listado</a>
+        <br>        
+        <a class="btn btn-default" href="list.php">Volver al listado</a>
       </div><!-- End .panel-body -->
       
     </div>
