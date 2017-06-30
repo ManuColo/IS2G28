@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (!isset($_SESSION)) {
+	session_start();
+}
 if ($_SESSION['logged']) { ?>
 <div class="modal fade" id="favorPostulationsWindow" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document"> 

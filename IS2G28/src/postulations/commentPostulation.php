@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (!isset($_SESSION)) {
+	session_start();
+}
 if ($_SESSION['logged']) { ?>
 <a role="button" id="btnMod" class="btn btn-warning" data-toggle="modal" href="#ventanaCP"> 
    <strong>Quiero postularme</strong> 
