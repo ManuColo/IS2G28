@@ -35,6 +35,10 @@ if ($_SESSION['logged']) {
 									header("location:./editRegForm.php");
 									exit;
 								} else {
+								if ($user->getPhoto()){
+									$targetFile = $cfg->uploadDir . $user->getPhoto();
+									unlink($targetFile);
+								}
 								// Mover el archivo correspondiente a la foto del favor al directorio de uploads
 								$photoFileName = time() . basename($_FILES['userPhoto']['name']);
 								$tmpName= $_FILES['userPhoto']['tmp_name'];
