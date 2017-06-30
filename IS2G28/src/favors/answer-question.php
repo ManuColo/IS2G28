@@ -28,12 +28,14 @@ $user = $entityManager->getRepository('User')->find($_SESSION['userId']);
 if (!$favor->isActive()) {
   addMessage('danger', 'No puede responder en un favor que ya no se encuentra publicado.');
   header("location:show.php?id=". $favor->getId());
+  exit();
 }
 
 // Comprobar que sea el dueño del favor quien responde la pregunta
 if ($favor->getOwner() !== $user) {
   addMessage('danger', 'No puede responder preguntas en un favor que no le pertenece.');
   header("location:show.php?id=". $favor->getId());
+  exit();
 }
 
 // Instanciar respuesta con los datos recibidos

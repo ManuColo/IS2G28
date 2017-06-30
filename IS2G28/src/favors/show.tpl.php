@@ -156,7 +156,7 @@
                       <?php echo $question->getContent() ?>                      
                     </div>
                     <!-- Incluir botón de respuesta si la pregunta no tiene respuesta y el usuario es el dueño de la guachada -->
-                    <?php if (!$question->getAnswer() && ($favor->getOwner() === $user)): ?>
+                    <?php if (!$question->getAnswer() && ($favor->getOwner() === $user) && ($favor->isActive())): ?>
                       <!-- Boton para responder pregunta -->
                       <div class="clearfix">
                         <button class="btn btn-success btn-xs btn-answer pull-right <?php echo ((isset($newAnswer) && ($newAnswer->getQuestion() === $question))?'hidden':'') ?>">Responder</button>                        
