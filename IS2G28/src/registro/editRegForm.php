@@ -76,7 +76,9 @@ if ($_SESSION['logged']) { ?>
               		<p>Pod&eacute;s seleccionar una imagen de perfil</p> 
               		<span><small>El tamaño m&aacute;ximo de la imagen es 1MB</small></span>
               		<input class="btn" type="file" id="userPhoto" name="userPhoto">
+              		<?php if ($user->getPhoto()){ ?>
               		<label><input type="checkbox" name="optradio" id="optradio"> Quiero eliminar mi imagen</label>
+              		<?php } ?>
                 	<!-- Contenedor del mensaje de error -->
                 	<span class="error help-block <?php echo isset($errors['photo'])?'shown':'hidden' ?>">
                 	<?php echo isset($errors['photo'])?$errors['photo']:'' ?>
