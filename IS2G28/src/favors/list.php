@@ -8,10 +8,14 @@ if ($_SESSION['logged']) {
 		->from('Favor', 'f')
 		->leftJoin('f.myPostulations', 'p')
 		->where('f.deadline >= :today')
+		->andWhere('f.unpublished != :unpublished')
+		->andWhere('f.resolved != :resolved')
 		->groupBy('f.id')
 		->orderBy('cont','ASC')
 		->addOrderBy('f.deadline','ASC')
-		->setParameter('today', $today);
+		->setParameter('today', $today)
+		->setParameter('unpublished', True)
+		->setParameter('resolved', True);
 	$query = $qb->getQuery();
 	$query->execute();
 	$favors = $query->getResult();
@@ -97,7 +101,7 @@ if ($_SESSION['logged']) {
                     <td><a href="show.php?id=<?php echo  $favor->getId();?>"><?php echo $favor->getTitle();?></a></td>
                     <td><?php echo $favor->getCity();?></td>
                     <td><?php echo $favor->getDeadline()->format("d/m/Y");?></td>
-                    <td><?php echo $favor->getOwner() ?></td>
+                    <td><a href="../profile/public.php?idUs=<?php echo $favor->getOwner()->getId(); ?>"><?php echo $favor->getOwner() ?></a></td>
                   </tr>
                   <?php }; ?>
                 </table>

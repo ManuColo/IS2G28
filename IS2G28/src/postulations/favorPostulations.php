@@ -16,15 +16,17 @@
 						Reputaci&oacute;n
 					</th>
 					<th>
-						Elegir
+						<p class="text-center">Estado</p>
 					</th>
 				</tr>
 				<?php foreach ($favor->getMyPostulations() as $postulation) { ?>
 				<tr>
 					<td>
+						<a href="../profile/public.php?idUs=<?php echo $postulation->getUser()->getId(); ?>">
 						<?php $userPost = $postulation->getUser();
 						echo $userPost->getName().' '.$userPost->getLastname();
 						?>
+						</a>
 					</td>
 					<td>
 						<?php echo $postulation->getComment(); ?>
@@ -33,6 +35,11 @@
 						<?php echo $userPost->printReputation(); ?>
 					</td>
 					<td>
+						<?php if ($favor->getResolved()){ ?>
+						<p class="text text-primary text-center bg-info"><?php echo $postulation->getStatus();?></p>
+						<?php } else {?>
+						<button class="btn btn-success btn-sm choose" id="<?php echo $postulation->getUser()->getId(); ?>">Seleccionar</button>
+						<?php }?>
 					</td>
 				</tr>
 				<?php } ?>

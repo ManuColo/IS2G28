@@ -99,9 +99,17 @@ Class Postulation {
 		return $this->date;
 	}
 	
+	public function accept(){
+		$this->setStatus('Aceptado');
+	}
+	
+	public function reject(){
+		$this->setStatus('Rechazado');
+	}
+	
 	public function __construct()
 	{
 		$this->comment = null;
-		$this->status = 'pending';
+		$this->status = 'Pendiente';
 	}
 }

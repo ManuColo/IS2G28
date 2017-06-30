@@ -51,6 +51,18 @@ class Favor
   protected $deadline;
   
   /**
+   * @Column(type="boolean", nullable=true)
+   * @var Boolean
+   */
+  private $unpublished;
+  
+  /**
+   * @Column(type="boolean", nullable=true)
+   * @var Boolean
+   */
+  private $resolved;
+  
+  /**
    * Dueño o propietario del favor.
    * 
    * @var User Usuario propietario del favor
@@ -83,6 +95,8 @@ class Favor
   
   public function __construct() {
     $this->cantApplications = 0;
+    $this->unpublished = False;
+    $this->resolved = False;
     $this->myPostulations = new ArrayCollection();
     $this->questions = new ArrayCollection();
   }
@@ -140,6 +154,26 @@ class Favor
   public function setDeadline($deadline)
   {
     $this->deadline = $deadline;
+  }
+  
+  public function getUnpublished()
+  {
+  	return $this->unpublished;
+  }
+  
+  public function setUnpublished($aBool)
+  {
+  	$this->unpublished = $aBool;
+  }
+  
+  public function getResolved()
+  {
+  	return $this->resolved;
+  }
+  
+  public function setResolved($aBool)
+  {
+  	$this->resolved = $aBool;
   }
   
   public function getOwner()

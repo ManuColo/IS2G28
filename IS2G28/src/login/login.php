@@ -38,8 +38,10 @@
 						if (isset($_GET['message'])) { 
 							if ($_GET['message']=='loginFail') {?>
 							<div class="alert alert-danger">Usuario o Clave Incorrectos</div>
-						<?php } else if ($_GET['message']=='userCreated') { ?>
-							<div class="alert alert-success">Usuario registrado<br />Inicie sesión para continuar</div>
+						<?php } else if ($_GET['message']=='accessDenied') { ?>
+							<div class="alert alert-danger">Acceso restringido<br />Inicie sesi&oacute;n para continuar</div>
+							<?php } else if ($_GET['message']=='userCreated') { ?>
+							<div class="alert alert-success">Usuario registrado<br />Inicie sesi&oacute;n para continuar</div>
 							<?php }
 						}
 						?>

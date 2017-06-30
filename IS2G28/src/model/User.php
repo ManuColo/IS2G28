@@ -284,10 +284,22 @@ Class User {
   }
   
   public function printReputation(){
-  	if ($this->reputation) {
-  		return $this->reputation;
+  	if ($this->reputation > 50) {
+  		return "Dios";
+  	} elseif ($this->reputation > 20) {
+  		return "Nobleza Gaucha";
+  	} elseif ($this->reputation > 10) {
+  		return "Tipazo";
+  	} elseif ($this->reputation > 5) {
+  		return "Gran Tipo";
+  	} elseif ($this->reputation > 0) {
+  		return "Buen Tipo";
+  	} elseif ($this->reputation == 0) {
+  		return "Observador";
+  	} elseif ($this->reputation < 0) {
+  		return "Irresponsable";
   	} else {
-  		return 0;
+  		return "Observador";
   	}
   }
   

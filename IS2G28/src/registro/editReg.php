@@ -27,8 +27,7 @@ if ($_SESSION['logged']) {
 							$targetFile = $cfg->uploadDir . $photoFileName;
 							move_uploaded_file($tmpName, $targetFile);
 							// Actualizar el objeto que modela el favor
-							$user->setPhoto($photoFileName);
-						}					
+							$user->setPhoto($photoFileName);}		
 						//Asigno los valores recibidos a variables
 						$nom=$params['name'];
 						$ape=$params['lastname'];
@@ -40,7 +39,7 @@ if ($_SESSION['logged']) {
 						//Actualización en bbdd
 						$entityManager-> flush();
 						addMessage('success','Usuario modificado');
-						header("location:editRegForm.php");
+						header("location:../profile/private.php");
 					} else {
 						addMessage('danger', 'Clave incorrecta');
 						include 'editRegForm.php';
@@ -49,7 +48,7 @@ if ($_SESSION['logged']) {
 				//Uno o varios de los datos no pasaron las validaciones del servidor
 				addMessage('danger','Error en los campos ingresados');
 				include 'editRegForm.php';
-			}
+				}
 					
 		} else {
 			//Los campos no llegan completos desde el formulario
