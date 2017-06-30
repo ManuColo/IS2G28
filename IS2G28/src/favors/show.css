@@ -141,3 +141,12 @@
   border: 1px solid #DDD;
   border-radius: 5px;
 }
+
+/* Estilos del panel que contiene el formulario para responder una pregunta */
+.new-answer {
+  margin-top: 10px;
+}
+
+.new-answer .form-group {
+  margin-bottom: 10px;
+}

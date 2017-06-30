@@ -4,6 +4,7 @@
   <title>Una Gauchada - Vista de un favor</title>
   <?php require '../common/common_headers.php'; ?> 
   <link type="text/css" rel="stylesheet" href="show.css">
+  <script type="text/javascript" src="show.js"></script>
 </head>
 <body>
   <div class="container">
@@ -116,10 +117,26 @@
                     <div class="question-content">
                       <?php echo $question->getContent() ?>                      
                     </div>
-                    <?php if (!$question->getAnswer()): ?>
+                    <!-- Incluir botón de respuesta si la pregunta no tiene respuesta y el usuario es el dueño de la guachada -->
+                    <?php if (!$question->getAnswer() && ($favor->getOwner() === $user)): ?>
                       <!-- Boton para responder pregunta -->
-                      <div class="clearfix">                      
-                        <a class="btn btn-success btn-xs pull-right" href="">Responder</a>
+                      <div class="clearfix">
+                        <button class="btn btn-success btn-xs btn-answer pull-right">Responder</button>                        
+                        <div class="new-answer hidden">
+                          <form action="" method="post">
+                            <input type="hidden" id="answer_question_id" name="answer[question_id]" value="<?= $question->getId()?>">                
+                            <div class="form-group <?php echo isset($answerErrors['content'])?'has-error':'' ?>">
+                              <label class="sr-only">Respuesta</label>
+                              <textarea id="answer_content" name="answer[content]" class="form-control" rows="3" placeholder="Escriba su respuesta (hasta 255 caracteres)"></textarea>
+                              <!-- Contenedor del mensaje de error -->
+                              <span class="error help-block <?php echo isset($answerErrors['content'])?'shown':'hidden' ?>">
+                                <?php echo isset($answerErrors['content'])?$answerErrors['content']:'' ?>
+                              </span>  
+                            </div>
+                            <button type="submit" class="btn btn-info btn-xs pull-right">Enviar respuesta</button>
+                          </form> 
+                          
+                        </div>
                       </div>
                     <?php endif; ?>
                   </div> <!-- End .question -->
