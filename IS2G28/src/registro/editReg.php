@@ -20,14 +20,19 @@ if ($_SESSION['logged']) {
 				!strpbrk($params['name'], '0123456789!"·$%&/()=|@#~½¬{[]}ºª?¿Ç\}_<>-̣+*`^') &&
 				!strpbrk($params['lastname'], '0123456789!"·$%&/()=|@#~½¬{[]}ºª?¿Ç\}_<>-̣+*`^')) {
 					if (($user->encryptPassword($params['password'],$user->getSalt())) == $user->getPass() ){
-						if (isset ($_FILES['userPhoto'])) {
-							// Mover el archivo correspondiente a la foto del favor al directorio de uploads
-							$photoFileName = time() . basename($_FILES['userPhoto']['name']);
-							$tmpName= $_FILES['userPhoto']['tmp_name'];
-							$targetFile = $cfg->uploadDir . $photoFileName;
-							move_uploaded_file($tmpName, $targetFile);
-							// Actualizar el objeto que modela el favor
-							$user->setPhoto($photoFileName);}		
+						if (!$params['optradio']) {
+							if (isset ($_FILES['userPhoto'])) {
+								// Mover el archivo correspondiente a la foto del favor al directorio de uploads
+								$photoFileName = time() . basename($_FILES['userPhoto']['name']);
+								$tmpName= $_FILES['userPhoto']['tmp_name'];
+								$targetFile = $cfg->uploadDir . $photoFileName;
+								move_uploaded_file($tmpName, $targetFile);
+								// Actualizar el objeto que modela el favor
+								$user->setPhoto($photoFileName);}
+						} else {
+							// elimino de filesystem ($user->getPhoto());
+							$user->setPhoto(null);
+						}
 						//Asigno los valores recibidos a variables
 						$nom=$params['name'];
 						$ape=$params['lastname'];

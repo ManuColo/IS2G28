@@ -10,6 +10,11 @@
 	width: 420px;
 }
 
+.editR {
+    margin: auto;
+    width: 450px;
+}
+
 .favor-new {
 	margin-top: 20px;  
 }
@@ -141,8 +146,9 @@ nav {
 	margin-right:20px;
 }
 .imgUs img {
-	margin-top:30px;
 	width:125px;
+	margin-top: 30px; 
+	margin-left: 3px;
 }
 
 .labelImg {
@@ -254,4 +260,22 @@ nav {
 
 .repList{
 	margin-top:50px;
+}
+
+#btnEl{
+	width: 80px; 
+	height: 27px; 
+	border-color: #babdb6; 
+	margin-left: 17px;
+}
+
+#btnEl p{
+	font-size:13px;
+	font-weight:normal;
+	margin-top: -3px;
+	font-family: sans-serif;
+}
+
+.imgCharger span{
+	margin-left:15px;
 }

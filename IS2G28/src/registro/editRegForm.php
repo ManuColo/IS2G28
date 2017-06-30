@@ -6,6 +6,13 @@
 	<script type="text/javascript">
 			//Validaciones en cliente
 			$(document).ready(function() {
+				$('#optradio').click(function(){
+					if ($("#optradio").is(':checked')) {
+						$("#userPhoto").attr('disabled', true);
+					} else{ 
+							$("#userPhoto").removeAttr('disabled');
+					}
+				});
 				$('#reg-form').on('submit', function() {
 					var nom = $('#name').val();
 					if (hasNumbers(nom)) {
@@ -40,7 +47,7 @@
 		include('../common/menu.php');	
 		$user= $entityManager->find('User',$_SESSION['userId']);
 		?> 
-      	<div class="panel panel-default login">
+      	<div class="panel panel-default editR">
         	<div class="panel-heading">
           	  <!-- Encabezado del formulario -->
           	  <h3 class="panel-title">Edici&oacute;n de usuario<img src="../images/logo-gauchada.png"/></h3>
@@ -53,7 +60,7 @@
             	<div class="imgUs">
             	<label for="userPhoto" class="col-sm-4 labelImg">
             	<?php if ($user->getPhoto()){ ?>
-           		<img class="media-object img-rounded favor-photo" 
+           		<img class="media-object img-rounded user-photo" 
            		src="../uploads/<?php echo $user->getPhoto() ?>" 
                 alt="<?php echo $user->getPhoto() ?>">
               	<?php } else{ ?>
@@ -66,7 +73,8 @@
               	<div class="col-sm-8 imgCharger">
               		<p>Pod&eacute;s seleccionar una imagen de perfil</p> 
               		<span><small>El tamaño m&aacute;ximo de la imagen es 1MB</small></span>
-              		<input type="file" id="userPhoto" name="userPhoto">
+              		<input class="btn" type="file" id="userPhoto" name="userPhoto">
+              		<label><input type="checkbox" name="optradio" id="optradio"> Quiero eliminar mi imagen</label>
                 	<!-- Contenedor del mensaje de error -->
                 	<span class="error help-block <?php echo isset($errors['photo'])?'shown':'hidden' ?>">
                 	<?php echo isset($errors['photo'])?$errors['photo']:'' ?>
