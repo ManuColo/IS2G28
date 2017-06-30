@@ -58,6 +58,7 @@ if ($_SESSION['logged']) { ?>
 				<div><p>Tus Cr&eacute;ditos: <?php echo $user->getCantCredits();?></p></div>
 			</blockquote>
 		</div>
+		<a type="button" id="ret" class="btn btn-primary" onClick="goBack();">Volver</a>
 	</div>
   </div>		                                         
  </body>    

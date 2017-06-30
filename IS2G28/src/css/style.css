@@ -279,3 +279,7 @@ nav {
 .imgCharger span{
 	margin-left:15px;
 }
+
+#ret {
+	float:right;
+}

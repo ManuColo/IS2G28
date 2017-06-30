@@ -54,6 +54,7 @@ if ($_SESSION['logged']) { ?>
 				<th>Comentario</th>
 			</tr>
 		</table>
+		<a type="button" id="ret" class="btn btn-primary" onClick="goBack();">Volver</a>
 	</div>
   </div>		                                         
  </body>    
