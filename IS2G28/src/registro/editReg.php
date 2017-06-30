@@ -39,7 +39,8 @@ if ($_SESSION['logged']) {
 								}
 							}
 						} else {
-							// elimino de filesystem ($user->getPhoto());
+							$targetFile = $cfg->uploadDir . $user->getPhoto();
+							unlink($targetFile);
 							$user->setPhoto(null);
 						}
 						//Asigno los valores recibidos a variables
