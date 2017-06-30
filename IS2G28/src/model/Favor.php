@@ -78,6 +78,14 @@ class Favor
    * @oneToMany(targetEntity="Postulation", mappedBy="favor")
    */
   private $myPostulations;
+  
+  /**
+   * Preguntas publicadas en el favor.
+   *
+   * @var Collection Colección de preguntas (Question[])
+   * @OneToMany(targetEntity="Question", mappedBy="favor")
+   */
+  private $questions;
 
   /**
    * @Column(type="integer")
@@ -90,6 +98,7 @@ class Favor
     $this->unpublished = False;
     $this->resolved = False;
     $this->myPostulations = new ArrayCollection();
+    $this->questions = new ArrayCollection();
   }
 
   public function getId()
@@ -262,4 +271,72 @@ class Favor
   }
   
   
+
+    /**
+     * Get cantApplications
+     *
+     * @return integer
+     */
+    public function getCantApplications()
+    {
+        return $this->cantApplications;
+    }
+
+    /**
+     * Remove myPostulation
+     *
+     * @param \Postulation $myPostulation
+     */
+    public function removeMyPostulation(\Postulation $myPostulation)
+    {
+        $this->myPostulations->removeElement($myPostulation);
+    }
+
+    /**
+     * Add question
+     *
+     * @param \Question $question
+     *
+     * @return Favor
+     */
+    public function addQuestion(\Question $question)
+    {
+        $this->questions[] = $question;
+
+        return $this;
+    }
+
+    /**
+     * Remove question
+     *
+     * @param \Question $question
+     */
+    public function removeQuestion(\Question $question)
+    {
+        $this->questions->removeElement($question);
+    }
+
+    /**
+     * Get questions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
+    
+    /**
+     * Retorna true si un favor no esta vencido ni despublicado ni aceptado, false en caso contrario.
+     * 
+     * @return boolean
+     */
+    public function isActive()
+    {
+      $now = new DateTime();
+      $today = new DateTime($now->format('Y-m-d'));
+      
+      // Falta comprobar que no este despublicado ni que tenga aceptado un postulante
+      return $today <= $this->deadline && !$this->unpublished && !$this->resolved;      
+    }
 }

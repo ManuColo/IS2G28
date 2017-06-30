@@ -4,7 +4,6 @@ require '../../config/doctrine_config.php';
 
 // Recuperar sesion del usuario
 session_start();
-
 // Redirigir usuario no logueado a la pagina de login
 if (!$_SESSION['logged']) {
   header("location:../login/login.php");

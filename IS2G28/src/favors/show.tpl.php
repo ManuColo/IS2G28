@@ -5,6 +5,7 @@
   <?php require '../common/common_headers.php'; ?>
   <script type="text/javascript" src="../js/show.js"></script> 
   <link type="text/css" rel="stylesheet" href="show.css">
+  <script type="text/javascript" src="show.js"></script>
 </head>
 <body>
   <div class="container">
@@ -131,6 +132,98 @@
             <p>No existe la gauchada especificada.</p>
           <?php endif; ?>
         </div><!-- End .media.favor -->
+                   
+        <!-- Panel de preguntas y respuestas de la gauchada -->
+        <div class="panel panel-default questions">
+          <div class="panel-heading">Preguntas sobre la gauchada</div>
+          <div class="panel-body">
+            <?php if (count($favor->getQuestions()) === 0): ?>
+              <p>No hay preguntas para esta gauchada.</p>
+            <?php else: ?>
+              <?php foreach ($favor->getQuestions() as $question): ?>
+                <!-- Contenedor de pregunta/respuesta -->
+                <div class="question-and-answer">
+                 <!-- Contenedor de una pregunta -->
+                  <div class="question">
+                    <!-- Encabezado: Icono, autor, fecha/hora -->
+                    <div class="question-header">
+                      <span class="glyphicon glyphicon-comment pull-left"></span> 
+                      <span class="question-author"><?php echo $question->getAuthor() ?></span>                
+                      <span class="question-posted-at"><?php echo $question->getPostedAt()->format('d/m/Y \a \l\a\s H:i') ?></span>                
+                    </div>
+                    <!-- Contenido de la pregunta -->
+                    <div class="question-content">
+                      <?php echo $question->getContent() ?>                      
+                    </div>
+                    <!-- Incluir botón de respuesta si la pregunta no tiene respuesta y el usuario es el dueño de la guachada -->
+                    <?php if (!$question->getAnswer() && ($favor->getOwner() === $user) && ($favor->isActive())): ?>
+                      <!-- Boton para responder pregunta -->
+                      <div class="clearfix">
+                        <button class="btn btn-success btn-xs btn-answer pull-right <?php echo ((isset($newAnswer) && ($newAnswer->getQuestion() === $question))?'hidden':'') ?>">Responder</button>                        
+                        <div class="new-answer <?php echo ((isset($newAnswer) && ($newAnswer->getQuestion() === $question))?'':'hidden') ?>">
+                          <form action="answer-question.php" method="post">
+                            <input type="hidden" id="answer_question_id" name="answer[question_id]" value="<?= $question->getId()?>">                            
+                              <div class="form-group <?php echo (isset($answerErrors['content']) && ($newAnswer->getQuestion() === $question))?'has-error':'' ?>">
+                                <label class="sr-only">Respuesta</label>
+                                <textarea id="answer_content" name="answer[content]" class="form-control" rows="3" placeholder="Escriba su respuesta (hasta 255 caracteres)"><?= ((isset($newAnswer) && ($newAnswer->getQuestion() === $question))?$newAnswer->getContent():'') ?></textarea>
+                                <?php if (isset($newAnswer) && $newAnswer->getQuestion() == $question): ?>
+                                  <!-- Contenedor del mensaje de error -->
+                                  <span class="error help-block <?php echo isset($answerErrors['content'])?'shown':'hidden' ?>">
+                                    <?php echo isset($answerErrors['content'])?$answerErrors['content']:'' ?>
+                                  </span>  
+                                <?php endif; ?>
+                              </div>
+                            
+                            <button type="submit" class="btn btn-info btn-xs pull-right">Enviar respuesta</button>
+                          </form> 
+                          
+                        </div>
+                      </div>
+                    <?php endif; ?>
+                  </div> <!-- End .question -->
+                  <?php if ($question->getAnswer()): ?>
+                    <!-- Contenedor de una respuesta -->
+                    <div class="answer">
+                       <!-- Encabezado: Icono, autor, fecha/hora -->
+                      <div class="answer-header">
+                        <span class="glyphicon glyphicon-comment pull-left"></span> 
+                        <span class="answer-author"><?php echo $question->getFavor()->getOwner() ?></span>                
+                        <span class="answer-posted-at">
+                          <?php echo $question->getAnswer()->getPostedAt()->format('d/m/Y \a \l\a\s H:i') ?>
+                        </span>                
+                      </div>
+                      <!-- Contenido de la pregunta -->
+                      <div class="answer-content">
+                        <?php echo $question->getAnswer()->getContent() ?>
+                      </div>
+                    </div> <!-- End .answer -->
+                  <?php endif; ?>
+              </div>                         
+              <?php endforeach; ?>
+            <?php endif; ?>
+            
+            <!-- Mostrar formulario para nueva pregunta si el favor es publico (no vencido, no aceptado, no despublicado) y no le pertenece al usuario -->
+            <?php if (($favor->isActive()) && ($favor->getOwner() !== $user)): ?>
+              <!-- Panel que incluye formulario de nueva pregunta -->
+              <div class="ask-question clearfix">
+                <form action="ask.php" method="post">
+                  <input type="hidden" id="question_favor_id" name="question[favor_id]" value="<?= $favor->getId()?>">                
+                  <div class="form-group <?php echo isset($errors['content'])?'has-error':'' ?>">
+                    <label class="sr-only">Pregunta</label>
+                    <textarea id="question_content" name="question[content]" class="form-control" rows="3" placeholder="Escriba una pregunta (hasta 255 caracteres)"><?= isset($newQuestion)?$newQuestion->getContent():'' ?></textarea>
+                    <!-- Contenedor del mensaje de error -->
+                    <span class="error help-block <?php echo isset($errors['content'])?'shown':'hidden' ?>">
+                      <?php echo isset($errors['content'])?$errors['content']:'' ?>
+                    </span>  
+                  </div>
+                  <button type="submit" class="btn btn-info pull-right">Preguntar</button>
+                </form>              
+              </div> <!-- End .ask-question -->
+            <?php endif; ?>
+          </div>
+        </div>
+        
+        
         <br>        
         <a class="btn btn-default" href="list.php">Volver al listado</a>
       </div><!-- End .panel-body -->

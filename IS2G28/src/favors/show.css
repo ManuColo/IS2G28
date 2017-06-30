@@ -41,3 +41,112 @@
 .favor .favor-properties li {
   margin-bottom: 3px;
 }
+
+/* Panel de preguntas y respuestas de una gauchada */
+.panel.questions {
+  background: none repeat scroll 0% 0% #FFFBFB;
+  border: 1px solid #FF902F;
+  border-radius: 15px;
+  margin-top: 15px;
+}
+
+.panel.questions .panel-heading {
+  background-image: linear-gradient(to bottom, #F8F0F0 0%, #F8F0F0 100%);
+  border-bottom: 1px solid #FF902F;
+  border-radius: 15px 15px 0px 0px;
+  font-size: 15px;
+  font-weight: bold;  
+  text-align: center;    
+}
+
+.panel.questions .panel-body {
+  padding: 15px;
+}
+
+.question-and-answer {
+  margin-bottom: 10px;
+}
+
+/* Estilos asociados a una pregunta del favor */
+.question {
+  border: 1px solid #EEE;
+  border-radius: 5px;  
+  padding: 10px;
+  background-color: #F9F9F9;
+}
+
+.question .question-header .glyphicon {
+  font-size: 28px;
+  margin-right: 10px !important;
+  color: #666;
+}
+
+.question .question-header .question-author {
+  font-size: 15px;
+  font-weight: bold;
+  color: #444;
+}
+
+.question .question-header .question-posted-at {
+  font-size: 12px;
+  color: #999;
+  margin-left: 5px;
+  font-style: italic;
+}
+
+.question .question-content {
+  margin-left: 38px;
+  color: #444;
+}
+
+/* Estilos asociados a una respuesta a una pregunta */
+.answer {
+  border: 1px solid #EEE;
+  border-radius: 5px;  
+  padding: 10px;
+  background-color: #FDFDFD;
+  margin-left: 10%;
+  margin-top: 5px;
+}
+
+.answer .answer-header .glyphicon {
+  font-size: 28px;
+  margin-right: 10px !important;
+  color: #666;
+}
+
+.answer .answer-header .answer-author {
+  font-size: 15px;
+  font-weight: bold;
+  color: #444;
+}
+
+.answer .answer-header .answer-posted-at {
+  font-size: 12px;
+  color: #999;
+  margin-left: 5px;
+  font-style: italic;
+}
+
+.answer .answer-content {
+  margin-left: 38px;
+  color: #444;
+}
+
+/* Estilos del panel que incluye el formulario de nueva pregunta */
+.ask-question {
+  background-color: #F8F0F0;
+  padding: 10px;  
+  margin-top: 15px;
+  border: 1px solid #DDD;
+  border-radius: 5px;
+}
+
+/* Estilos del panel que contiene el formulario para responder una pregunta */
+.new-answer {
+  margin-top: 10px;
+}
+
+.new-answer .form-group {
+  margin-bottom: 10px;
+}
