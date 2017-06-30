@@ -105,6 +105,12 @@
               <span class="glyphicon glyphicon-edit"></span> Editar gauchada
             </a>
             <?php endif; ?>
+            <!-- Boton para calificar postulante que realizó gauchada -->
+            <a class="btn btn-primary" data-toggle="modal" href="#qualification_modal">
+              <span class="glyphicon glyphicon-screenshot"></span> Calificar postulante
+            </a>
+            <?php include '../qualifications/form-qualification.tpl.php'; ?>
+            
             <div><?php 
             	$imPostulated = false; 
             	foreach ($postulations as $postulation) {
