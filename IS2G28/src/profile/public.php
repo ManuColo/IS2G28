@@ -53,6 +53,16 @@ if ($_SESSION['logged']) { ?>
 				<th>Puntuaci&oacute;n</th>
 				<th>Comentario</th>
 			</tr>
+			<tr>
+				<?php $postulations = $userView->getMyPostulations(); 
+				foreach ($postulations as $postulation) {
+					if ($postulation->getStatus() === 'Aceptado') {?>
+						<td><?php echo $postulation->getFavor()->getTitle(); ?></td>
+						<td></td>
+						<td></td>
+				<?php }
+				} ?>
+			</tr>
 		</table>
 		<a type="button" id="ret" class="btn btn-primary" onClick="goBack();">Volver</a>
 	</div>
