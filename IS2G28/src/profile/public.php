@@ -64,7 +64,7 @@ if ($_SESSION['logged']) { ?>
 						<?php echo $postulation->getFavor()->getTitle(); ?>
 					</a></th>
 					<td> 
-						<?php echo $postulation->getFavor()->getPostulantQualification()->getResult();?> 
+						<?php echo $postulation->getFavor()->getPostulantQualification();?> 
 					</td>
 					<td>
 						<?php echo $postulation->getFavor()->getPostulantQualification()->getComment();?>

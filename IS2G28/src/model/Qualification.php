@@ -155,4 +155,15 @@ class Qualification
     )));
   }
   
+  public function __toString()
+  {
+  	if ($this->getResult() < 0) {
+  		return 'Negativa';
+  	} elseif ($this->getResult() > 0) {
+  		return 'Positiva';
+  	} else {
+  		return 'Neutral';
+  	}
+  }
+  
 }
