@@ -25,10 +25,16 @@ if ($_SESSION['logged']) {
 						if (!$params['optradio']) {
 							if (isset ($_FILES['userPhoto'])) {
 								//Validaciones
-								if($_FILES['userPhoto']['size']>1000000){
+								$maxFileSize = 1024 * 1000;
+								if($_FILES['userPhoto']['size']> $maxFileSize){
 									addMessage('danger','La imagen es demasiado grande');
 									header("location:./editRegForm.php");
-								} else{
+									exit;
+								} elseif (!eregi("\.jpg|\.jpeg|\.png|\.bmp|\.gif $",$_FILES['userPhoto']['name'])){
+									addMessage('danger','No estás subiendo una imagen');
+									header("location:./editRegForm.php");
+									exit;
+								} else {
 								// Mover el archivo correspondiente a la foto del favor al directorio de uploads
 								$photoFileName = time() . basename($_FILES['userPhoto']['name']);
 								$tmpName= $_FILES['userPhoto']['tmp_name'];
