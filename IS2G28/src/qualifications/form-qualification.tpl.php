@@ -5,8 +5,9 @@
         <button type="button" class="close" data-dismiss="modal">×</button>
           <h3 class="modal-title">Calificar postulante aceptado</h3>
       </div>
-      <form method="post" action="">
+      <form method="post" action="../qualifications/qualify_postulant.php">
         <div class="modal-body">
+          <input type="hidden" id="qualification_favor_id" name="qualification[favor_id]" value="<?= $favor->getid() ?>">
           <div class="form-group">
             <label for="qualification_result" class="control-label">Calificación:</label>
             <div>
@@ -14,7 +15,7 @@
                 <input type="radio" name="qualification[result]" id="qualification_result_postitive" value="1"> Positiva
               </label>
               <label class="radio-inline">
-                <input type="radio" name="qualification[result]" id="qualification_result_neutral" value="0"> Neutral
+                <input type="radio" name="qualification[result]" id="qualification_result_neutral" value="0" checked="checked"> Neutral
               </label>
               <label class="radio-inline">
                 <input type="radio" name="qualification[result]" id="qualification_result_negative" value="-2"> Negativa
@@ -23,7 +24,7 @@
           </div>
           <div class="form-group">
             <label for="qualification_comment" class="control-label">Comentario:</label>
-            <textarea class="form-control" id="qualification_comment" name="qualification[comment]" placeholder="Deje su comentario ..."></textarea>            
+            <textarea class="form-control" id="qualification_comment" name="qualification[comment]" placeholder="Deje su comentario ..." required></textarea>            
           </div>                    
         </div>
         <div class="modal-footer">

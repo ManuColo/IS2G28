@@ -405,4 +405,14 @@ class Favor
       // Falta comprobar que no este despublicado ni que tenga aceptado un postulante
       return $today <= $this->deadline && !$this->unpublished && !$this->resolved;      
     }
+    
+    public function getAcceptedPostulant()
+    {
+      foreach ($this->getMyPostulations() as $postulation) {
+        if ($postulation->getStatus() === 'Aceptado') {
+          $acceptedPostulation = $postulation;
+        }        
+      }      
+      return $acceptedPostulation?$acceptedPostulation->getUser():null;            
+    }
 }

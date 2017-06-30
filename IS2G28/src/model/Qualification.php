@@ -1,5 +1,7 @@
 <?php
 
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Clase que representa calificación en un favor (del dueño o del postulante aceptado).
@@ -132,4 +134,25 @@ class Qualification
   {
     return $this->createdAt;
   }
+  
+  /**
+   * Configura las reglas de validacion que se aplican sobre una instancia de Qualification
+   * 
+   * @param ClassMetadata $metadata
+   */
+  public static function loadValidatorMetadata(ClassMetadata $metadata)
+  {
+    $metadata->addPropertyConstraint('result', new Assert\NotNull(array(
+        'message' => 'Resultado requerido.'
+    )));
+    
+    $metadata->addPropertyConstraint('comment', new Assert\NotBlank(array(
+        'message' => 'Comentario requerido.'
+    )));    
+    $metadata->addPropertyConstraint('comment', new Assert\Length(array(
+        'max' => 255,
+        'maxMessage' => 'El comentario no puede exceder los {{ limit }} caracteres.'
+    )));
+  }
+  
 }
