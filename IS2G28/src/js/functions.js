@@ -1,5 +1,7 @@
 function goBack() {
-	history.go(-1);
+	// history.go(-1);
+	var dest = path+"/src/common/redirector.php";
+	window.location.href = dest;
 }
 
 function isEmail(email) {

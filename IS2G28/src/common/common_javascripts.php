@@ -9,3 +9,4 @@ require_once $path.'config/config.php';
 <script type="text/javascript" src="<?php echo $cfg->wwwRoot?>/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="<?php echo $cfg->wwwRoot?>/node_modules/bootstrap-confirmation2/bootstrap-confirmation.js"></script>
 <script type="text/javascript" src="<?php echo $cfg->wwwRoot?>/src/js/functions.js"></script>
+<script type="text/javascript"> var path="<?php echo $cfg->wwwRoot?>"</script>
