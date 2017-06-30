@@ -73,7 +73,7 @@
               <li>
                 <span class="label label-warning">
                   <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                  0 comentarios
+                  <?php echo count($favor->getQuestions()) ;?> pregunta<?=(count($favor->getQuestions()) == 1)?'':'s' ?>                  
                 </span>            
               </li>
               <li>
