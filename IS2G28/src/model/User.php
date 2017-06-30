@@ -311,5 +311,34 @@ Class User {
   	)));
   	$metadata->setGroupSequence(array('User', 'Strict'));
   }
+
+    /**
+     * Remove myCredit
+     *
+     * @param \Credit $myCredit
+     */
+    public function removeMyCredit(\Credit $myCredit)
+    {
+        $this->myCredits->removeElement($myCredit);
+    }
+
+    /**
+     * Remove myFavor
+     *
+     * @param \Favor $myFavor
+     */
+    public function removeMyFavor(\Favor $myFavor)
+    {
+        $this->myFavors->removeElement($myFavor);
+    }
+
+    /**
+     * Remove myPostulation
+     *
+     * @param \Postulation $myPostulation
+     */
+    public function removeMyPostulation(\Postulation $myPostulation)
+    {
+        $this->myPostulations->removeElement($myPostulation);
+    }
 }
-?>
