@@ -39,6 +39,14 @@ class Qualification
    * @Column(type="string", length=255) 
    */
   private $comment;
+  
+  /**
+   * Instante en que se realizó la calificación
+   * 
+   * @var DateTime
+   * @Column(type="datetime")
+   */
+  private $createdAt;
     
    
   
@@ -99,5 +107,29 @@ class Qualification
   public function getComment()
   {
     return $this->comment;
+  }
+
+  /**
+   * Set createdAt
+   *
+   * @param \DateTime $createdAt
+   *
+   * @return Qualification
+   */
+  public function setCreatedAt($createdAt)
+  {
+    $this->createdAt = $createdAt;
+
+    return $this;
+  }
+
+  /**
+   * Get createdAt
+   *
+   * @return \DateTime
+   */
+  public function getCreatedAt()
+  {
+    return $this->createdAt;
   }
 }
