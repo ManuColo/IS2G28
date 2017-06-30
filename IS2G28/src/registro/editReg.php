@@ -23,7 +23,7 @@ if ($_SESSION['logged']) {
 				!strpbrk($params['lastname'], '0123456789!"·$%&/()=|@#~½¬{[]}ºª?¿Ç\}_<>-̣+*`^')) {
 					if (($user->encryptPassword($params['password'],$user->getSalt())) == $user->getPass() ){
 						if (!$params['optradio']) {
-							if (isset ($_FILES['userPhoto'])) {
+							if (isset ($_FILES['userPhoto']) && $_FILES['userPhoto']['name']!='') {
 								//Validaciones
 								$maxFileSize = 1024 * 1000;
 								if($_FILES['userPhoto']['size']> $maxFileSize){
