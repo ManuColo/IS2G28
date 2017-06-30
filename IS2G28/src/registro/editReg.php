@@ -15,6 +15,8 @@ if ($_SESSION['logged']) {
 		($params['lastname']!=null)&&
 		($params['phone']!=null)&&
 		($params['password']!=null)) {
+			//var_dump($_FILES);
+			//die();
 			//Validaciones de campos en servidor
 			if (is_numeric($params['phone']) &&
 				!strpbrk($params['name'], '0123456789!"·$%&/()=|@#~½¬{[]}ºª?¿Ç\}_<>-̣+*`^') &&
@@ -22,13 +24,20 @@ if ($_SESSION['logged']) {
 					if (($user->encryptPassword($params['password'],$user->getSalt())) == $user->getPass() ){
 						if (!$params['optradio']) {
 							if (isset ($_FILES['userPhoto'])) {
+								//Validaciones
+								if($_FILES['userPhoto']['size']>1000000){
+									addMessage('danger','La imagen es demasiado grande');
+									header("location:./editRegForm.php");
+								} else{
 								// Mover el archivo correspondiente a la foto del favor al directorio de uploads
 								$photoFileName = time() . basename($_FILES['userPhoto']['name']);
 								$tmpName= $_FILES['userPhoto']['tmp_name'];
 								$targetFile = $cfg->uploadDir . $photoFileName;
 								move_uploaded_file($tmpName, $targetFile);
 								// Actualizar el objeto que modela el favor
-								$user->setPhoto($photoFileName);}
+								$user->setPhoto($photoFileName);
+								}
+							}
 						} else {
 							// elimino de filesystem ($user->getPhoto());
 							$user->setPhoto(null);
