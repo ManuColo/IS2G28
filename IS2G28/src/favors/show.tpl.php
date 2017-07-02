@@ -110,7 +110,9 @@
             <?php if (($user === $favor->getOwner()) && (!$favor->getPostulantQualification()) && ($favor->getResolved())): ?>
               <a class="btn btn-primary" data-toggle="modal" href="#qualification_modal">
                 <span class="glyphicon glyphicon-screenshot"></span> Calificar postulante
-              </a>
+              </a> 
+              <p><strong> Resuelto por: <?php echo $favor->getAcceptedPostulant()->getName();?>
+								    <span> <?php echo $favor->getAcceptedPostulant()->getLastname();?></span></strong></p>
               <?php include '../qualifications/form-qualification.tpl.php'; ?>
             <?php endif; ?>
             
