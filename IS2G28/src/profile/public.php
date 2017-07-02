@@ -32,9 +32,9 @@ if ($_SESSION['logged']) { ?>
 			$idUserView= $_GET['idUs'];
 			$userView= $entityManager->getRepository('User')->findBy(array('id'=>$idUserView))[0];
 			if ($userView->getPhoto()){ ?>
-					<img class="media-object img-circle userPhoto" src="../uploads/<?php echo $userView->getPhoto() ?>" 
-					alt="<?php echo $userView->getPhoto() ?>">
-              		<?php } else{ ?>
+				<img class="media-object img-circle userPhoto" src="../uploads/<?php echo $userView->getPhoto() ?>" 
+				alt="<?php echo $userView->getPhoto() ?>">
+              	<?php } else{ ?>
                 			<img class="media-object img-circle userPhoto" src="../images/profile.jpeg" 
                    	alt="Imagen de favor">
               		<?php }?>
@@ -49,26 +49,35 @@ if ($_SESSION['logged']) { ?>
 		</div>
 		<table class="table table-hover repList">
 			<tr class="titleTableRep">
-				<th>Favor</th>
-				<th>Puntuaci&oacute;n</th>
-				<th>Comentario</th>
+				<th scope="col" width="40%">Favor</th>
+				<th scope="col"width="20%">Puntuaci&oacute;n</th>
+				<th scope="col"width="40%">Comentario</th>
 			</tr>
-			<?php $postulations = $userView->getMyPostulations(); 			
-			foreach ($postulations as $postulation) {?>
+			<?php if(count($userView->getMyPostulations()) === 0){?> 
+				<tr><td colspan="3">A&uacute;n no tiene gauchadas resueltas.</td></tr>
+				<?php } else {
+				$postulations = $userView->getMyPostulations(); 
+				foreach ($postulations as $postulation) {?>
 				<tr>
-				<?php if ($postulation->getStatus() === 'Aceptado') {?>
-					<td><a href="../favors/show.php?id=<?php echo $postulation->getFavor()->getId(); ?>">
+				<?php if ($postulation->getStatus() === 'Aceptado'&& $postulation->getFavor()->getPostulantQualification()!= null) {?>
+					<th scope="row" ><a href="../favors/show.php?id=<?php echo $postulation->getFavor()->getId(); ?>">
 						<?php echo $postulation->getFavor()->getTitle(); ?>
-					</a></td>
+					</a></th>
 					<td> 
 						<?php echo $postulation->getFavor()->getPostulantQualification()->getResult();?> 
 					</td>
 					<td>
 						<?php echo $postulation->getFavor()->getPostulantQualification()->getComment();?>
 					</td>
+				<?php } elseif ($postulation->getStatus() === 'Aceptado' && $postulation->getFavor()->getPostulantQualification()== null) {?>
+					<th scope="row" ><a href="../favors/show.php?id=<?php echo $postulation->getFavor()->getId(); ?>">
+						<?php echo $postulation->getFavor()->getTitle(); ?>
+					</a></th>
+					<td colspan="2"> A&uacute;n no ha sido calificado. </td>
 				<?php }?>
 				</tr>
-			<?php } ?>
+			<?php }
+				}?>
 		</table>
 		<a type="button" id="ret" class="btn btn-primary" onClick="goBack();">Volver</a>
 	</div>
