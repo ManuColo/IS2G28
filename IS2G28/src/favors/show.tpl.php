@@ -115,6 +115,7 @@
             <?php endif; ?>
             
             <div><?php 
+            	$resuelta=$favor->getResolved();
             	$imPostulated = false; 
             	foreach ($postulations as $postulation) {
             		if ($postulation->getUser() === $user) {
@@ -124,7 +125,9 @@
             	};
             	if ($owner !== $user) {
             		if (!$imPostulated) {
+            			if (!$resuelta){
               			include '../postulations/commentPostulation.php';
+            			}
             		} else { ?>
             			<span class="text bg-info pull-right">
             				Mi postulación está: <?php echo $myPostulation->getStatus();?>
