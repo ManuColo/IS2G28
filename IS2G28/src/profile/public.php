@@ -53,18 +53,22 @@ if ($_SESSION['logged']) { ?>
 				<th>Puntuaci&oacute;n</th>
 				<th>Comentario</th>
 			</tr>
-				<?php $postulations = $userView->getMyPostulations(); 
-				foreach ($postulations as $postulation) {
-					if ($postulation->getStatus() === 'Aceptado') {?>
-					<tr>
-						<td><a href="../favors/show.php?id=<?php echo $postulation->getFavor()->getId(); ?>">
-							<?php echo $postulation->getFavor()->getTitle(); ?>
-						</a></td>
-						<td></td>
-						<td></td>
-					</tr>
-				<?php }
-				} ?>
+			<?php $postulations = $userView->getMyPostulations(); 			
+			foreach ($postulations as $postulation) {?>
+				<tr>
+				<?php if ($postulation->getStatus() === 'Aceptado') {?>
+					<td><a href="../favors/show.php?id=<?php echo $postulation->getFavor()->getId(); ?>">
+						<?php echo $postulation->getFavor()->getTitle(); ?>
+					</a></td>
+					<td> 
+						<?php echo $postulation->getFavor()->getPostulantQualification()->getResult();?> 
+					</td>
+					<td>
+						<?php echo $postulation->getFavor()->getPostulantQualification()->getComment();?>
+					</td>
+				<?php }?>
+				</tr>
+			<?php } ?>
 		</table>
 		<a type="button" id="ret" class="btn btn-primary" onClick="goBack();">Volver</a>
 	</div>
