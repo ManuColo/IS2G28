@@ -43,7 +43,7 @@ if ($_SESSION['logged']) { ?>
 			$postulations = $query->getResult();
 		}?>
 		<div class="infoContainer" id="myFavors">
-			<h3>Mis Gauchadas</h3>
+			<h3>Mis Postulaciones</h3>
 			<table id="favorsList" class="table table-sm table-hover">
 				<tr>
 					<th class="col-sm-2">
