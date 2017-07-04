@@ -172,14 +172,22 @@ nav {
 #profileJumb{
 	height:100%;
 	background-color:#f1daae;
-	padding-right:35px;
+	padding-right: 35px;
+}
+
+.infoContainer {
+	display: block;
+	min-width: 320px;
+}
+
+.imgUsProf {
+	padding-bottom: 6px;
 }
 
 .imgUsProf img {
 	height:205px;
 	width:250px;
 	margin-left:32%;
-	margin-top: -335px; 
 	margin-bottom: 10px;
 }
 
@@ -206,6 +214,7 @@ nav {
 
 #menuPP{
 	background-color:#d3d7cf;
+	float: left;
 	width:222px;
 	height: 400px;
 	padding-bottom:5px;
@@ -243,7 +252,7 @@ nav {
 
 .margSupD{
 	float:right;
-	margin-top:-320px;
+	margin-top: -230px;
 	margin-right:0;
 }
 
@@ -252,8 +261,7 @@ nav {
 }
 
 .nameProf{
-	margin-left:30%;
-	margin-top: 25px;
+	margin: 20px 30%;
 }
 
 .imgUsChica img{
@@ -296,5 +304,17 @@ nav {
 }
 
 #ret {
-	float:right;
+	position: absolute;
+	right: 50px;
+}
+
+#myFavors {
+	margin-top: -20px;
+	margin-left: 165px;
+	min-height: 304px;
+}
+
+#favorsList {
+	margin-left: 10px;
+	width: 690px;
 }

@@ -105,18 +105,15 @@ class Favor
    */
   private $postulantQualification;
 
-  /**
-   * @Column(type="integer")
-   * @var integer
-   */
-  private $cantApplications;
-  
   public function __construct() {
-    $this->cantApplications = 0;
     $this->unpublished = False;
     $this->resolved = False;
     $this->myPostulations = new ArrayCollection();
     $this->questions = new ArrayCollection();
+  }
+  
+  public function __toString() {
+  	return $this->getTitle();
   }
 
   public function getId()
@@ -261,11 +258,7 @@ class Favor
 
     //$metadata->addPropertyConstraint('deadline', new Assert\GreaterThanOrEqual(new DateTime("today")));
   }
-  
-  public function setCantApplications($cant){
-  	$this->cantApplications = $cant;
-  }
-    
+     
   public function getCantCredits(){
   	return $this->cantCredits;
   }
@@ -287,18 +280,6 @@ class Favor
     }
         
   }
-  
-  
-
-    /**
-     * Get cantApplications
-     *
-     * @return integer
-     */
-    public function getCantApplications()
-    {
-        return $this->cantApplications;
-    }
 
     /**
      * Remove myPostulation
@@ -415,4 +396,17 @@ class Favor
       }      
       return $acceptedPostulation?$acceptedPostulation->getUser():null;            
     }
+    
+    public function getStatus(){
+    	if ($this->getUnpublished()){
+    		return "Despublicada";
+    	} elseif ($this->getResolved()){
+    		return "Resuelta";
+    	} elseif ($this->getDeadline() < date('m/y')){
+    		return "Vencida";
+    	} else {
+    		return "Activa";
+    	}
+    }
+    
 }
