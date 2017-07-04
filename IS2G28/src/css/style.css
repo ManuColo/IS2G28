@@ -201,7 +201,7 @@ nav {
 
 #menuEnc{
 	width:100%;
-	background-color:#babdb6;
+	margin-top:15px;
 }
 
 #menuEnc p {
@@ -213,14 +213,11 @@ nav {
 }
 
 #menuPP{
-	background-color:#d3d7cf;
+	margin-left:5px;
 	float: left;
 	width:222px;
-	height: 400px;
-	padding-bottom:5px;
-	margin-left:-60px;
-	margin-top: -48px;
-	border:rounded; 
+	height: 100%;
+	position: absolute; 
 }
 
 #menuPP a{
@@ -304,8 +301,8 @@ nav {
 }
 
 #ret {
-	position: absolute;
-	right: 50px;
+	position: relative;
+	float: right;
 }
 
 #myFavors {

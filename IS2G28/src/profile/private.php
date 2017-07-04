@@ -11,17 +11,18 @@ if ($_SESSION['logged']) { ?>
   </head>
   <body>
   <!-- Contenedor principal, requerido por Bootstrap -->
-  <div class="container">   
+  <div class="container" id="cont">   
 	<div id=header>
 		<img class="img-responsive" src="../images/header-gauchada.png"/>
 	</div>
 	<?php 
 	include('../common/menu.php');	
 	$user= $entityManager->find('User',$_SESSION['userId']);
+	
+	include '../common/sidebar.php'; 
 	?> 
     <div class="jumbotron" id="profileJumb">
-		<!-- Menú del usuario -->
-		<?php include '../common/sidebar.php'; ?>
+		
 		<div class="infoContainer">
 			<div class="imgUsProf">
 				<?php if ($user->getPhoto()){ ?>
