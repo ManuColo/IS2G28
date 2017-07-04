@@ -18,10 +18,11 @@ if ($_SESSION['logged']) { ?>
 	<?php 
 	include('../common/menu.php');	
 	$user= $entityManager->find('User',$_SESSION['userId']);
+	//Menú de usuario
+	include '../common/sidebar.php'; 
 	?> 
     <div class="jumbotron" id="profileJumb">
-		<!-- Menú del usuario -->
-		<?php include '../common/sidebar.php'; 
+		<?php 
 		if (!isset($_GET['order'])) {
 			$postulations = $user->getMyPostulations();
 			$order = 'ASC';

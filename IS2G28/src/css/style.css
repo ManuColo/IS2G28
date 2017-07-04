@@ -201,7 +201,7 @@ nav {
 
 #menuEnc{
 	width:100%;
-	margin-top:15px;
+	margin-top:25px;
 }
 
 #menuEnc p {
@@ -213,7 +213,7 @@ nav {
 }
 
 #menuPP{
-	margin-left:5px;
+	margin-left:2px;
 	float: left;
 	width:222px;
 	height: 100%;
@@ -307,7 +307,7 @@ nav {
 
 #myFavors {
 	margin-top: -20px;
-	margin-left: 165px;
+	margin-left: 180px;
 	min-height: 304px;
 }
 

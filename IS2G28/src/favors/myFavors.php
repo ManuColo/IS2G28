@@ -18,10 +18,9 @@ if ($_SESSION['logged']) { ?>
 	<?php 
 	include('../common/menu.php');	
 	$user= $entityManager->find('User',$_SESSION['userId']);
-	?> 
+	//Menú de usuario
+	include '../common/sidebar.php'; ?>
     <div class="jumbotron" id="profileJumb">
-		<!-- Menú del usuario -->
-		<?php include '../common/sidebar.php'; ?>
 		<div class="infoContainer" id="myFavors">
 			<h3>Mis Gauchadas</h3>
 			<table id="favorsList" class="table table-sm table-hover">
