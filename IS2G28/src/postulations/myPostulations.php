@@ -41,7 +41,7 @@ if ($_SESSION['logged']) { ?>
 				foreach ($postulations as $postulation) {?>
 				<tr>
 					<td class="col-sm-2">
-						<a href="show.php?id=<?php echo $postulation->getFavor()->getId(); ?>"><?php echo $postulation->getFavor(); ?></a>
+						<a href="../favors/show.php?id=<?php echo $postulation->getFavor()->getId(); ?>"><?php echo $postulation->getFavor(); ?></a>
 					</td>
 					<td class="col-sm-6">
 						<?php echo $postulation->getComment(); ?>
