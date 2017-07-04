@@ -21,7 +21,27 @@ if ($_SESSION['logged']) { ?>
 	?> 
     <div class="jumbotron" id="profileJumb">
 		<!-- Menú del usuario -->
-		<?php include '../common/sidebar.php'; ?>
+		<?php include '../common/sidebar.php'; 
+		if (!isset($_GET['order'])) {
+			$postulations = $user->getMyPostulations();
+			$order = 'ASC';
+		} else { 
+			$qb = $entityManager->createQueryBuilder();
+			$qb->select('p')
+			->from('Postulation', 'p')
+			->where('p.user = :user')
+			->setParameter('user', $user);
+			if ($_GET['order'] === 'ASC') {
+				$qb->orderBy('p.status','ASC');
+				$order = 'DESC';
+			} else {
+				$qb->orderBy('p.status','DESC');
+				$order = 'ASC';
+			}
+			$query = $qb->getQuery();
+			$query->execute();
+			$postulations = $query->getResult();
+		}?>
 		<div class="infoContainer" id="myFavors">
 			<h3>Mis Gauchadas</h3>
 			<table id="favorsList" class="table table-sm table-hover">
@@ -33,11 +53,10 @@ if ($_SESSION['logged']) { ?>
 						Comentario
 					</th>
 					<th class="col-sm-2">
-						Estado
+						<a href="myPostulations.php?order=<?php echo $order; ?>">Estado</a>
 					</th>
 				</tr>
 				<?php
-				$postulations = $user->getMyPostulations();
 				foreach ($postulations as $postulation) {?>
 				<tr>
 					<td class="col-sm-2">
