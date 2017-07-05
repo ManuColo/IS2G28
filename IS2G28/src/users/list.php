@@ -41,7 +41,7 @@ if ($_SESSION['logged']) {
 	                  foreach ($users as $userList) { ?>
 	                   <tr>
 	                    <td>
-	                      <a href="../profile/public.php?id=<?php echo  $userList->getId();?>">
+	                      <a href="../profile/public.php?idUs=<?php echo  $userList->getId();?>">
 	                        <?php 
 	                        if ($userList->getPhoto()) {?>
 	                        <img alt="<?php echo $$userList;?>" src="../uploads/<?php echo $userList->getPhoto() ?>" class="img-circle">
@@ -51,7 +51,7 @@ if ($_SESSION['logged']) {
 	                        ?>
 	                      </a>
 	                    </td>
-	                    <td><a href="../profile/public.php?id=<?php echo  $user->getId();?>"><?php echo $userList;?></a></td>
+	                    <td><a href="../profile/public.php?idUs=<?php echo  $user->getId();?>"><?php echo $userList;?></a></td>
 	                    <td><?php echo $userList->getMail();?></td>
 	                    <td><?php echo $userList->printReputation(); ?></td>
 	                  </tr>
