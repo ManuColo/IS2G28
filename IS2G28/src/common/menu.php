@@ -42,6 +42,9 @@ $selected = substr($firstReduction, 0 , -($max - $result));
 	if (isset($_SESSION['logged'])) {
 		if($_SESSION['logged']== true){ ?>
 			<li <?php if ($selected == '') { ?>class="active"<?php $referer = $selected.'index.php'; } ?>><a href="<?php echo $cfg->wwwRoot;?>/src">Inicio</a></li>
+			<?php if ($user->getIsAdmin()) { ?>
+				<li <?php if ($selected == 'users') { ?>class="active"<?php $referer = $selected.'list.php'; } ?>><a href="<?php echo $cfg->wwwRoot;?>/src/users/list.php">Usuarios</a></li>
+			<?php } ?>
 			<li <?php if ($selected == 'favors') { ?>class="active"<?php $referer = $selected.'/list.php'; } ?>><a href="<?php echo $cfg->wwwRoot;?>/src/favors/list.php">Gauchadas</a></li>
 			<li <?php if ($selected == 'credits') { ?>class="active"<?php $referer = $selected.'/formCredits.php'; } ?>><a href="<?php echo $cfg->wwwRoot;?>/src/credits/formCredits.php">Cr&eacute;ditos</a></li>
 			<li><a href="<?php echo $cfg->wwwRoot;?>/src/login/logout.php">Cerrar Sesi&oacute;n</a></li>

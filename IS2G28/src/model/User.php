@@ -95,12 +95,19 @@ Class User {
    */
   private $myPostulations;
   
+  /**
+   * @Column(type="boolean", nullable=true)
+   * @var Boolean
+   */
+  private $isAdmin;
+  
   public function __construct() {
   	$this->photo = '';
   	$this->cantCredits = 1;
     $this->myFavors = new ArrayCollection();
     $this->myCredits = new ArrayCollection();
     $this->myPostulations = new ArrayCollection();
+    $this->isAdmin = False;
   }
   
   /**
@@ -182,8 +189,12 @@ Class User {
 	public function addMyPostulation(Postulation $postulation) {
 		$this->myPostulations[] = $postulation;
 	}
+	
+	public function setIsAdmin($aBool){
+		$this->isAdmin = $aBool;
+	}
 
-  public function getId(){
+	public function getId(){
 		return $this->id;
 	}
 	
@@ -248,6 +259,10 @@ Class User {
 	 */
 	public function getMyPostulations() {
 		return $this->myPostulations;
+	}
+	
+	public function getIsAdmin(){
+		return $this->isAdmin;
 	}
 
 	public function encryptPassword($password,$salt=''){
