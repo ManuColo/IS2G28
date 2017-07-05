@@ -133,6 +133,7 @@
             		} else { ?>
             			<span class="text bg-info pull-right">
             				Mi postulación está: <?php echo $myPostulation->getStatus();?>
+            				<br> <?php include '../postulations/deletePostulation.php';?>
             			</span>
             		<?php }
             	} ?>
