@@ -9,7 +9,7 @@ $(document).ready(function(){
 			btnCancelClass:'btn btn-sm btn-success btn-xs',
 			onConfirm:
 				function(event,element){
-					location.href = '../postulations/myPostulations.php?'+window.location.search.substr(1);
+					location.href = '../postulations/deletePostulation.php?'+window.location.search.substr(1);
 				}
 		})
 });
@@ -19,16 +19,15 @@ if (!isset($_SESSION)) {
 	session_start();
 }
 if ($_SESSION['logged']) { ?>
-	<a role="button" id="btnDespost" class="btn btn-danger btn-xs pull-right" data-toggle="modal" href="#ventanaCP"> 
+	<button id="btnDespost" class="btn btn-danger btn-xs pull-right"> 
    		<strong>Despostularme</strong> 
-	</a>
-	<?php 
+	</button>
+	<?php
 	$post=$postulation->getId();
 	$delPos = $entityManager->getRepository('Postulation')->findBy(array('id'=>$post))[0];
 	$entityManager->remove($delPos);
 	$entityManager->flush();
 	addMessage('warning','Ya no est&aacute;s postulado a la gauchada');
-	
 } else {
 	header("location:../login/login.php?message=accessDenied");
 }
