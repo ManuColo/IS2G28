@@ -51,7 +51,7 @@ if ($_SESSION['logged']) {
 	                        ?>
 	                      </a>
 	                    </td>
-	                    <td><a href="../profile/public.php?idUs=<?php echo  $user->getId();?>"><?php echo $userList;?></a></td>
+	                    <td><a href="../profile/public.php?idUs=<?php echo  $userList->getId();?>"><?php echo $userList;?></a></td>
 	                    <td><?php echo $userList->getMail();?></td>
 	                    <td><?php echo $userList->printReputation(); ?></td>
 	                  </tr>

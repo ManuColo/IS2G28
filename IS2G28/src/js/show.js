@@ -11,9 +11,7 @@ $(document).ready(function(){
 					location.href = 'unpublish.php?'+window.location.search.substr(1);
 				}
 		})
-});
 
-$(document).ready(function(){
 	$('.choose').confirmation({
 			btnOkLabel:'Si',
 			btnCancelLabel:'No',
