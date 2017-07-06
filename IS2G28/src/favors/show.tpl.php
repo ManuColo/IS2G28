@@ -133,9 +133,12 @@
             		} else { ?>
             			<span class="text bg-info pull-right">
             				Mi postulación está: <?php echo $myPostulation->getStatus();?>
-            				<br> <?php include '../postulations/deletePostulation.php';?>
-            			</span>
-            		<?php }
+               			</span>
+               			<a class="btn btn-danger btn-xs pull-right btnDespost" id=<?php echo $myPostulation->getId();?>> 
+   							<strong>Despostularme</strong> 
+						</a>
+               			<?php $idPost=$myPostulation->getId(); 
+            		}
             	} ?>
             </div> 
 
