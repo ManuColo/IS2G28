@@ -6,8 +6,7 @@ if ($_SESSION['logged']) { ?>
   <head>
 	<title>Una Gauchada - Perfil de Usuario</title>
 	<?php require '../common/common_headers.php' ;?>
-	<script type="text/javascript">
-	</script>   
+	<script type="text/javascript" src="../js/public.js"></script>   
   </head>
   <body>
   <!-- Contenedor principal, requerido por Bootstrap -->
@@ -16,21 +15,16 @@ if ($_SESSION['logged']) { ?>
 		<img class="img-responsive" src="../images/header-gauchada.png"/>
 	</div>
 	<?php 
-	include('../common/menu.php');	
+	include('../common/menu.php');
+	$idUserView= $_GET['idUs'];
+	$userView= $entityManager->getRepository('User')->findBy(array('id'=>$idUserView))[0];
 	?> 
     <div class="jumbotron" id="profileJumb">
 		<div class="imgUsChica">
-			<?php 
-			/*if(isset($_GET['idFav'])){
-				$fav=$entityManager->getRepository('Favor')->findBy(array('owner_user_id'=>$_GET['idFav']))[0];
-				$idUserView=$fav->getOwner();
-			} else{
-				if(isset($_GET['idUs'])){
-					$idUserView= $_GET['id'];
-				}
-			}*/
-			$idUserView= $_GET['idUs'];
-			$userView= $entityManager->getRepository('User')->findBy(array('id'=>$idUserView))[0];
+			<?php
+			if ($user->getIsAdmin()&& !$userView->getIsAdmin()) { ?>
+	            	<button class="btn btn-danger btn-xs pull-right" id="makeAdmin">Nombrar Administrador</button>
+	        <?php }
 			if ($userView->getPhoto()){ ?>
 				<img class="media-object img-circle userPhoto" src="../uploads/<?php echo $userView->getPhoto() ?>" 
 				alt="<?php echo $userView->getPhoto() ?>">
