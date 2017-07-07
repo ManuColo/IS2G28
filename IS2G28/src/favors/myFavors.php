@@ -22,6 +22,7 @@ if ($_SESSION['logged']) { ?>
 	include '../common/sidebar.php'; ?>
     <div class="jumbotron" id="profileJumb">
 		<div class="infoContainer" id="myFavors">
+		<?php if ($user->getMyFavors()->count() > 0 ) {?>
 			<h3>Mis Gauchadas</h3>
 			<table id="favorsList" class="table table-sm table-hover">
 				<tr>
@@ -55,6 +56,9 @@ if ($_SESSION['logged']) { ?>
 				</tr>
 				<?php } ?>
 			</table>
+		<?php } else { ?>
+			<h3>No ten&eacute;s gauchadas pedidas</h3>
+		<?php } ?>
 		</div>
 		<a type="button" id="ret" class="btn btn-primary" onClick="goBack();">Volver</a>
 	</div>
