@@ -44,6 +44,7 @@ if ($_SESSION['logged']) { ?>
 			$postulations = $query->getResult();
 		}?>
 		<div class="infoContainer" id="myFavors">
+		<?php if ($postulations->count() > 0) {?>
 			<h3>Mis Postulaciones</h3>
 			<table id="favorsList" class="table table-sm table-hover">
 				<tr>
@@ -72,6 +73,9 @@ if ($_SESSION['logged']) { ?>
 				</tr>
 				<?php } ?>
 			</table>
+		<?php } else { ?>
+			<h3>No ten&eacute;s postulaciones</h3>
+		<?php } ?>
 		</div>
 		<a type="button" id="ret" class="btn btn-primary" onClick="goBack();">Volver</a>
 	</div>
