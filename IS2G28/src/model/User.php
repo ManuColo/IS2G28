@@ -54,7 +54,7 @@ Class User {
 	private $salt;
 	
 	/**
-	 * @Column(type="string")
+	 * @Column(type="string", nullable=true)
 	 * @var string
 	 */
 	private $photo;
