@@ -128,16 +128,19 @@
             	if ($owner !== $user) {
             		if (!$imPostulated) {
             			if (!$resuelta){
-              			include '../postulations/commentPostulation.php';
+              				include '../postulations/commentPostulation.php';
             			}
             		} else { ?>
             			<span class="text bg-info pull-right">
             				Mi postulación está: <?php echo $myPostulation->getStatus();?>
                			</span>
+               			<?php if (!$resuelta){?>
+               			<br />
                			<a class="btn btn-danger btn-xs pull-right btnDespost" id=<?php echo $myPostulation->getId();?>> 
    							<strong>Despostularme</strong> 
 						</a>
-               			<?php $idPost=$myPostulation->getId(); 
+               			<?php } 
+               			$idPost=$myPostulation->getId(); 
             		}
             	} ?>
             </div> 
