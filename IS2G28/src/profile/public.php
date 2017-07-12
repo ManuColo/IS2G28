@@ -42,15 +42,15 @@ if ($_SESSION['logged']) { ?>
 			<div><h4>Reputaci&oacute;n del usuario: <?php echo $userView->printReputation(); ?> </h4></div>
 		</div>
 		<table class="table table-hover repList">
-			<tr class="titleTableRep">
-				<th scope="col" width="40%">Favor</th>
-				<th scope="col"width="20%">Puntuaci&oacute;n</th>
-				<th scope="col"width="40%">Comentario</th>
-			</tr>
 			<?php if(count($userView->getMyPostulations()) === 0){?> 
 				<tr><td colspan="3">A&uacute;n no tiene gauchadas resueltas.</td></tr>
-				<?php } else {
-				$postulations = $userView->getMyPostulations(); 
+			<?php } else {?>
+					<tr class="titleTableRep">
+						<th scope="col" width="40%">Favor</th>
+						<th scope="col"width="20%">Puntuaci&oacute;n</th>
+						<th scope="col"width="40%">Comentario</th>
+					</tr>
+				<?php $postulations = $userView->getMyPostulations(); 
 				foreach ($postulations as $postulation) {?>
 				<tr>
 				<?php if ($postulation->getStatus() === 'Aceptado'&& $postulation->getFavor()->getPostulantQualification()!= null) {?>
