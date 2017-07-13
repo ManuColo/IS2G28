@@ -43,7 +43,9 @@ if ($_SESSION['logged']) {
 	                    <td><a href="../profile/public.php?idUs=<?php echo  $credit->getUserId();?>"><?php echo $credit->getUserId();?></a></td>
 	                    <td><?php echo $credit->getOperationDate()->format("d/m/Y");?></td>
 	                    <td><?php echo $credit->getCantidad();?></td>
-	                    <td><?php echo $credit->getAmount(); ?></td>
+	                    <td>$ <?php $amount=$credit->getAmount();
+	                    	echo number_format($amount,2,',','.'); ?>
+	                    </td>
 	                  </tr>
 	                  <?php }; ?>
 	                </table>
