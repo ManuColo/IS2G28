@@ -1,7 +1,19 @@
 <?php
 session_start();
 if ($_SESSION['logged']) {
-		?>
+	require '../../config/doctrine_config.php';
+	$today = new DateTime();
+	$qb = $entityManager->createQueryBuilder();
+	$qb->select('c, count(e) as HIDDEN cont')
+	->from('Credit', 'c')
+	->join('c.userId','u')
+	->leftJoin('u.myCredits', 'e')
+	->groupBy('c.id')
+	->orderBy('cont','ASC')
+	->addOrderBy('c.operationDate','ASC');
+	$query = $qb->getQuery();
+	$query->execute();
+	$favors = $query->getResult();?>
 		<!DOCTYPE html>
 			<html>
 			<head>
@@ -30,7 +42,33 @@ if ($_SESSION['logged']) {
 						<div class="panel-body">
 	            <?php if(count($credits) > 0): ?>
 	              <div class="table-responsive">
-	                <table class="table table-hover usersList">
+					<table class="table table-hover earningsSearch">
+	            	  <tr>
+						<td>
+							<span class="badge btn btn-warning submitBuscar">Buscar:</span>
+						</td>
+	                	<td>
+	                    	<input type="text" class="search searchControl" id="searchUser" name="searchUser" 
+	                        	placeholder="Usuario" value="<?php // echo $favor->getTitle() ?>">
+						</td>
+						<td>
+							<input type="text" class="search" id="searchDateIn" name="searchDateIn" 
+	                        	 value="<?php // echo $favor->getTitle() ?>"
+								data-provide="datepicker" data-date-format="dd/mm/yyyy" 
+								data-date-autoclose="true" placeholder="Fecha Inicial">
+						</td>
+						<td>
+							<input type="text" class="search" id="searchDateEnd" name="searchDateEnd" 
+	                        	 value="<?php // echo $favor->getTitle() ?>"
+								data-provide="datepicker" data-date-format="dd/mm/yyyy" 
+								data-date-autoclose="true" placeholder="Fecha Final">
+						</td>
+						<td>
+							<img class="img-responsive submitBuscar" id="sE" src="<?php echo $cfg->wwwRoot;?>/src/images/search.jpg"/>
+	                    </td>
+					  </tr>
+		       		</table>
+	            	<table class="table table-hover usersList">
 	                  <tr>
 	                    <th>Usuario</th>
 	                    <th>Fecha</th>
@@ -40,7 +78,7 @@ if ($_SESSION['logged']) {
 	                <?php
 	                  foreach ($credits as $credit) { ?>
 	                   <tr>
-	                    <td><a href="../profile/public.php?idUs=<?php echo  $credit->getUserId();?>"><?php echo $credit->getUserId();?></a></td>
+	                    <td><a href="../profile/public.php?idUs=<?php echo  $credit->getUserId();?>"><?php echo $credit->getUserId()->getMail();?></a></td>
 	                    <td><?php echo $credit->getOperationDate()->format("d/m/Y");?></td>
 	                    <td><?php echo $credit->getCantidad();?></td>
 	                    <td>$ <?php $amount=$credit->getAmount();
