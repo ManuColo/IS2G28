@@ -72,6 +72,15 @@ class Favor
   private $owner;
   
   /**
+   * Categoría del favor.
+   *
+   * @var Category Categoría del favor
+   * @ManyToOne(targetEntity="Category", inversedBy="myFavors")
+   * @JoinColumn(name="category", referencedColumnName="id", nullable=false)
+   */
+  private $category;
+  
+  /**
    * Postulaciones al favor.
    *
    * @var Collection Coleccion de postulacione(Postulation[])
@@ -200,6 +209,17 @@ class Favor
   {
     $owner->addMyFavor($this); // Para mantener consistente la relacion bidireccional
     $this->owner = $owner;
+  }
+  
+  public function getCategory()
+  {
+  	return $this->category;
+  }
+  
+  public function setCategory(Category $category)
+  {
+  	$category->addMyFavor($this); // Para mantener consistente la relacion bidireccional
+  	$this->category = $category;
   }
   
   /**

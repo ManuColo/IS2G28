@@ -1,6 +1,6 @@
 <?php
 /**
- * Description of User
+ * Description of Credit
  *
  * @author manuel
  * @Entity @Table(name="credits")
