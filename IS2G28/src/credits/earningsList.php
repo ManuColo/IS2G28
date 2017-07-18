@@ -8,9 +8,11 @@ if ($_SESSION['logged']) {
 	->from('Credit', 'c')
 	->join('c.userId','u')
 	->leftJoin('u.myCredits', 'e')
+	->where('c.operationDate >= :today')
 	->groupBy('c.id')
 	->orderBy('cont','ASC')
-	->addOrderBy('c.operationDate','ASC');
+	->addOrderBy('c.operationDate','ASC')
+	->setParameter('today', $today);
 	$query = $qb->getQuery();
 	$query->execute();
 	$favors = $query->getResult();?>
@@ -19,7 +21,7 @@ if ($_SESSION['logged']) {
 			<head>
 			<title>Una Gauchada - Ganancias</title>
 			<?php require '../common/common_headers.php' ; ?>
-			<script type="text/javascript" src="../js/search.js"></script>
+			<script type="text/javascript" src="../js/searchEarnings.js"></script>
 		  </head>
 		  <body>
 			<!-- Contenedor principal, requerido por Bootstrap -->	
@@ -68,7 +70,7 @@ if ($_SESSION['logged']) {
 	                    </td>
 					  </tr>
 		       		</table>
-	            	<table class="table table-hover usersList">
+	            	<table class="table table-hover earningsList">
 	                  <tr>
 	                    <th>Usuario</th>
 	                    <th>Fecha</th>

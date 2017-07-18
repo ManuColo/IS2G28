@@ -7,19 +7,28 @@ if ($_SESSION['logged']) {
 	$qb = $entityManager->createQueryBuilder();
 	$qb->select('c, count(e) as HIDDEN cont')
 	->from('Credit', 'c')
-	->leftJoin('c.myCredits', 'e')
 	->join('c.userId','u')
-	->where('c.id > 0');
-	if ($_POST['userId'] != ''){
+	->leftJoin('u.myCredits', 'e')
+	->where('c.operationDate >= :today')
+	->groupBy('c.id')
+	->orderBy('cont','ASC')
+	->addOrderBy('c.operationDate','ASC')
+	->setParameter('today', $today);
+	if ($_POST['user'] != ''){
 		$qb->andWhere(
-				$qb->expr()->like('u.mail',':userId')
+				$qb->expr()->like('u.mail',':user')
 				)
-				->setParameter('userId', '%'.$_POST['userId'].'%');
+				->setParameter('user', '%'.$_POST['user'].'%');
 	}
-	if ($_POST['operationDate'] != ''){
-		$operationDate = DateTime::createFromFormat('d/m/Y',$_POST['operationDate']);
-		$qb->andWhere('c.operationDate <= :operationDate')
-		->setParameter('operationDate', $operationDate);
+	if ($_POST['dateIn'] != ''){
+		$dateIn = DateTime::createFromFormat('d/m/Y',$_POST['dateIn']);
+		$qb->andWhere('c.operationDate > :dateIn')
+		->setParameter('dateIn', $dateIn);
+	}
+	if ($_POST['dateEnd'] != ''){
+		$dateEnd = DateTime::createFromFormat('d/m/Y',$_POST['dateEnd']);
+		$qb->andWhere('c.operationDate <= :dateEnd')
+		->setParameter('dateEnd', $dateEnd);
 	}
 	$qb->groupBy('c.id')
 	->orderBy('cont','ASC')
@@ -28,7 +37,7 @@ if ($_SESSION['logged']) {
 	$query->execute();
 	$credits = $query->getResult();
 	if (count($credits) > 0) { ?>
-	<table class="table table-hover creditList">
+	<table class="table table-hover earningsList">
 		<tr>
 			<th>Usuario</th>
 			<th>Fecha</th>
