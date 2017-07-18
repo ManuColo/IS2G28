@@ -72,6 +72,10 @@ if ($_SESSION['logged']) {
 	                        	placeholder="Due&ntilde;o" value="<?php // echo $favor->getOwner() ?>">
 						</td>
 						<td>
+	                    	<input type="text" class="search searchControl" id="searchCategory" name="searchCategory" 
+	                        	placeholder="Categor&iacute;a" value="<?php // echo $favor->getCategory()->getName() ?>">
+						</td>
+						<td>
 							<img class="img-responsive submitBuscar" src="<?php echo $cfg->wwwRoot;?>/src/images/search.jpg"/>
 	                    </td>
 					</tr>
@@ -83,6 +87,7 @@ if ($_SESSION['logged']) {
                     <th>Ciudad</th>
                     <th>Fecha l&iacute;mite</th>
                     <th>Due&ntilde;o</th>
+                    <th>Categor&iacute;a</th>
                   </tr>
                 <?php
                   foreach ($favors as $favor) { ?>
@@ -102,6 +107,7 @@ if ($_SESSION['logged']) {
                     <td><?php echo $favor->getCity();?></td>
                     <td><?php echo $favor->getDeadline()->format("d/m/Y");?></td>
                     <td><a href="../profile/public.php?idUs=<?php echo $favor->getOwner()->getId(); ?>"><?php echo $favor->getOwner() ?></a></td>
+                    <td><?php echo $favor->getCategory()->getName();?></td>
                   </tr>
                   <?php }; ?>
                 </table>
@@ -118,4 +124,4 @@ if ($_SESSION['logged']) {
 	<?php
 } else {
 	header("location:../login/login.php");
-}
+}?>
