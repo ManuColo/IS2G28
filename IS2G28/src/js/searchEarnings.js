@@ -21,13 +21,13 @@ $(function() {
 });
 
 function doSearch() {
+	var user = $.trim($('#searchUser').val());
 	var dateIn = $.trim($('#searchDateIn').val());
 	var dateEnd = $.trim($('#searchDateEnd').val());
-	var user = $.trim($('#searchUser').val());
 	if (searching)
 		search.abort();
 	search = $.ajax({
-		data: {dateIn: dateIn, dateEnd: dateEnd, userId: userId},
+		data: {userId: userId, dateIn: dateIn, dateEnd: dateEnd },
 		url: 'searchEarnings.php',
 		type: 'post',
 		beforeSend: function() {

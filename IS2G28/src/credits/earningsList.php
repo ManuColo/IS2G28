@@ -8,14 +8,14 @@ if ($_SESSION['logged']) {
 	->from('Credit', 'c')
 	->join('c.userId','u')
 	->leftJoin('u.myCredits', 'e')
-	->where('c.operationDate >= :today')
+	->where('c.operationDate <= :today')
 	->groupBy('c.id')
-	->orderBy('cont','ASC')
+	->orderBy('c.id','ASC')
 	->addOrderBy('c.operationDate','ASC')
 	->setParameter('today', $today);
 	$query = $qb->getQuery();
 	$query->execute();
-	$favors = $query->getResult();?>
+	$credits = $query->getResult();?>
 		<!DOCTYPE html>
 			<html>
 			<head>
@@ -32,8 +32,8 @@ if ($_SESSION['logged']) {
 			  	<?php 	
 				include('../common/menu.php');
 				if ($user->getIsAdmin()) {
-					require '../../config/doctrine_config.php';
-					$credits= $entityManager->getRepository('Credit')->findBy(array(),array('id'=>'DESC'));
+					//require '../../config/doctrine_config.php';
+					//$credits= $entityManager->getRepository('Credit')->findBy(array(),array('id'=>'DESC'));
 			  	?>
 				<div class="jumbotron">
 					<div class="panel panel-default index">
@@ -51,17 +51,17 @@ if ($_SESSION['logged']) {
 						</td>
 	                	<td>
 	                    	<input type="text" class="search searchControl" id="searchUser" name="searchUser" 
-	                        	placeholder="Usuario" value="<?php // echo $favor->getTitle() ?>">
+	                        	placeholder="Usuario" value="<?php // echo $credit->getUserId()->getMail() ?>">
 						</td>
 						<td>
 							<input type="text" class="search" id="searchDateIn" name="searchDateIn" 
-	                        	 value="<?php // echo $favor->getTitle() ?>"
+	                        	 value="<?php // echo $credit->getOperationDate() ?>"
 								data-provide="datepicker" data-date-format="dd/mm/yyyy" 
 								data-date-autoclose="true" placeholder="Fecha Inicial">
 						</td>
 						<td>
 							<input type="text" class="search" id="searchDateEnd" name="searchDateEnd" 
-	                        	 value="<?php // echo $favor->getTitle() ?>"
+	                        	 value="<?php // echo $credit->getOperationDate() ?>"
 								data-provide="datepicker" data-date-format="dd/mm/yyyy" 
 								data-date-autoclose="true" placeholder="Fecha Final">
 						</td>
@@ -80,7 +80,7 @@ if ($_SESSION['logged']) {
 	                <?php
 	                  foreach ($credits as $credit) { ?>
 	                   <tr>
-	                    <td><a href="../profile/public.php?idUs=<?php echo  $credit->getUserId();?>"><?php echo $credit->getUserId()->getMail();?></a></td>
+	                    <td><?php echo $credit->getUserId()->getMail();?>
 	                    <td><?php echo $credit->getOperationDate()->format("d/m/Y");?></td>
 	                    <td><?php echo $credit->getCantidad();?></td>
 	                    <td>$ <?php $amount=$credit->getAmount();

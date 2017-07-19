@@ -9,10 +9,7 @@ if ($_SESSION['logged']) {
 	->from('Credit', 'c')
 	->join('c.userId','u')
 	->leftJoin('u.myCredits', 'e')
-	->where('c.operationDate >= :today')
-	->groupBy('c.id')
-	->orderBy('cont','ASC')
-	->addOrderBy('c.operationDate','ASC')
+	->where('c.operationDate <= :today')
 	->setParameter('today', $today);
 	if ($_POST['user'] != ''){
 		$qb->andWhere(
@@ -22,7 +19,7 @@ if ($_SESSION['logged']) {
 	}
 	if ($_POST['dateIn'] != ''){
 		$dateIn = DateTime::createFromFormat('d/m/Y',$_POST['dateIn']);
-		$qb->andWhere('c.operationDate > :dateIn')
+		$qb->andWhere('c.operationDate >= :dateIn')
 		->setParameter('dateIn', $dateIn);
 	}
 	if ($_POST['dateEnd'] != ''){
@@ -31,7 +28,7 @@ if ($_SESSION['logged']) {
 		->setParameter('dateEnd', $dateEnd);
 	}
 	$qb->groupBy('c.id')
-	->orderBy('cont','ASC')
+	->orderBy('c.id','ASC')
 	->addOrderBy('c.operationDate','ASC');
 	$query = $qb->getQuery();
 	$query->execute();
@@ -46,9 +43,7 @@ if ($_SESSION['logged']) {
 		</tr>
 		<?php foreach ($credits as $credit) { ?>
 		<tr>
-			<td>
-				<a href="earningsList.php?id=<?php echo  $credit->getId();?>"><?php echo $credit->getUserId();?></a>
-			</td>
+			<td><?php echo $credit->getUserId()->getMail();?></td>
 			<td><?php echo $credit->getOperationDate();?></td>
 			<td><?php echo $credit->getCantidad()->format("d/m/Y");?></td>
 			<td><?php echo $credit->getAmount() ?></td>
