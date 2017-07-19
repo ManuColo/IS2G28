@@ -3,6 +3,7 @@ session_start();
 if ($_SESSION['logged']) {
 	require '../../config/doctrine_config.php';
 	$today = new DateTime();
+	$suma=0;
 	$qb = $entityManager->createQueryBuilder();
 	$qb->select('c, count(e) as HIDDEN cont')
 	->from('Credit', 'c')
@@ -84,11 +85,17 @@ if ($_SESSION['logged']) {
 	                    <td><?php echo $credit->getOperationDate()->format("d/m/Y");?></td>
 	                    <td><?php echo $credit->getCantidad();?></td>
 	                    <td>$ <?php $amount=$credit->getAmount();
-	                    	echo number_format($amount,2,',','.'); ?>
+	                    	echo number_format($amount,2,',','.'); 
+	                    	$suma= $suma+$amount?>
 	                    </td>
 	                  </tr>
 	                  <?php }; ?>
+	                  <tr class="totalEarnings">
+	                  	<td colspan="3"><p> Total: </p></td>
+	                  	<td><p>$ <?php echo number_format($suma,2,',','.');?></p></td>
+	                  </tr>
 	                </table>
+	                
 	              </div>
 	            <?php else: ?>
 	            <p style="font-size: 16px;">No se encontraron ganancias.</p>
