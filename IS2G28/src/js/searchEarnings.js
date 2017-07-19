@@ -27,7 +27,7 @@ function doSearch() {
 	if (searching)
 		search.abort();
 	search = $.ajax({
-		data: {userId: userId, dateIn: dateIn, dateEnd: dateEnd },
+		data: {user: user, dateIn: dateIn, dateEnd: dateEnd },
 		url: 'searchEarnings.php',
 		type: 'post',
 		beforeSend: function() {

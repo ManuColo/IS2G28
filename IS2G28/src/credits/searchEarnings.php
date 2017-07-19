@@ -1,7 +1,9 @@
 <?php
+require '../common/lib.php';
 session_start();
 if ($_SESSION['logged']) {
-	require '../../config/doctrine_config.php';
+	require_once __DIR__.'/../../config/doctrine_config.php';
+	$user= $entityManager->find('User',$_SESSION['userId']);
 	if ($user->getIsAdmin()) {
 	$today = new DateTime();
 	$qb = $entityManager->createQueryBuilder();
@@ -44,9 +46,11 @@ if ($_SESSION['logged']) {
 		<?php foreach ($credits as $credit) { ?>
 		<tr>
 			<td><?php echo $credit->getUserId()->getMail();?></td>
-			<td><?php echo $credit->getOperationDate();?></td>
-			<td><?php echo $credit->getCantidad()->format("d/m/Y");?></td>
-			<td><?php echo $credit->getAmount() ?></td>
+			<td><?php echo $credit->getOperationDate()->format("d/m/Y");?></td>
+			<td><?php echo $credit->getCantidad();?></td>
+			<td>$ <?php $amount=$credit->getAmount();
+	              echo number_format($amount,2,',','.'); ?>
+	        </td>
 		</tr>
        	<?php }; ?>
 	</table>
