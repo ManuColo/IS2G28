@@ -6,6 +6,7 @@
     <link type="text/css" rel="stylesheet" href="new.css">
     <link type="text/css" rel="stylesheet" href="edit.css">    
     <script type="text/javascript" src="new.js"></script>
+    <script type="text/javascript" src="edit.js"></script>
   </head>
   <body>
     <!-- Contenedor principal, requerido por Bootstrap -->
@@ -112,6 +113,6 @@
           </form>
         </div>                                
       </div>
-    </div>    
+    </div>         
   </body>    
 </html>
