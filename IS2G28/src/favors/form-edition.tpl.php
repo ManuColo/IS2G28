@@ -67,7 +67,7 @@
                       <!-- Checkbox para poder remover foto del favor -->
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox" id="favor_photo_deleted_flag">
+                          <input type="checkbox" id="favor_photo_deleted_flag" name="favor_photo_deleted_flag">
                           Quiero remover foto actual del favor. 
                         </label>
                       </div>

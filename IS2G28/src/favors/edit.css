@@ -11,8 +11,14 @@ img.favor-photo {
   margin-right: 10px;
 }
 
-p.help-block {
+.form-group p.help-block {
   margin: 3px 0px 0px;
   font-size: 13px;
+  color: #737373; 
+}
+
+.has-error .checkbox {
+  color: #333;
+  padding-top: 0px;
 }
 
