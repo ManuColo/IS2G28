@@ -38,7 +38,10 @@ if ($_SESSION['logged']) {
 	                  foreach ($categories as $category) { ?>
 	                   <tr>
 	                    <td><?php echo $category->getName();?></td>
-	                    <td></td>
+	                    <td>
+	                    	<img alt="edit" src="<?php echo $cfg->wwwRoot;?>/src/images/edit.png"/>
+	                    	<img alt="edit" src="<?php echo $cfg->wwwRoot;?>/src/images/delete.png"/>
+	                    </td>
 	                  </tr>
 	                  <?php }; ?>
 	                </table>
