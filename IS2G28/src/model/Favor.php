@@ -33,7 +33,7 @@ class Favor
   protected $description;
   
   /**
-   * @Column(type="string")
+   * @Column(type="string", nullable=true)
    * @var string 
    */
   protected $photo;
