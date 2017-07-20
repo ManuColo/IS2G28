@@ -97,7 +97,13 @@
                   		<?php } ?>
                   <?php } ?>
                 </span>            
-              </li>        
+              </li>
+              <li>
+                <span class="label label-warning">
+                  <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                  <?php echo $favor->getCategory()->getName() ?>
+                </span>            
+              </li>   
             </ul>
             <!-- Boton para editar una gauchada (solo visible para el dueño de la misma) -->
             <?php if (($user === $favor->getOwner())&&($cantPostulations == 0 )&& !$favor->getUnpublished() && !$favor->getResolved()): ?>

@@ -20,10 +20,11 @@ function doSearch() {
 	var city = $.trim($('#searchCity').val());
 	var deadline = $.trim($('#searchDeadline').val());
 	var owner = $.trim($('#searchOwner').val());
+	var category = $.trim($('#searchCategory').val());
 	if (searching)
 		search.abort();
 	search = $.ajax({
-		data: {title: title, city: city, deadline: deadline, owner: owner},
+		data: {title: title, city: city, deadline: deadline, owner: owner, category: category},
 		url: 'search.php',
 		type: 'post',
 		beforeSend: function() {
