@@ -102,6 +102,10 @@
                       <option value="<?php echo $category->getId() ?>"><?php echo $category->getName() ?></option>
                     <?php endforeach; ?>                                        
                   </select>
+                  <!-- Contenedor del mensaje de error -->
+                  <span class="error help-block">
+                    <?php echo isset($errors['city'])?$errors['city']:'' ?>
+                  </span>
                 </div>
               </div>
 
