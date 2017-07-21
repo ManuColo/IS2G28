@@ -98,9 +98,9 @@
                 <div class="col-sm-9">
                   <select class="form-control" id="favor_category" name="favor[category]">
                     <option value="">-- seleccione una categor&iacute;a --</option>
-                    <option value="1">Categoria 1</option>
-                    <option value="2">Categoria 2</option>
-                    <option value="3">Categoria 3</option>
+                    <?php foreach ($categories as $category): ?>
+                      <option value="<?php echo $category->getId() ?>"><?php echo $category->getName() ?></option>
+                    <?php endforeach; ?>                                        
                   </select>
                 </div>
               </div>
