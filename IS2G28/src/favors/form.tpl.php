@@ -92,6 +92,18 @@
                     </span>                    
                   </div>
               </div>
+              <!-- Categoria del favor -->
+              <div class="form-group">
+                <label for="favor_category" class="control-label col-sm-3">Categor&iacute;a</label>
+                <div class="col-sm-9">
+                  <select class="form-control" id="favor_category" name="favor[category]">
+                    <option value="">-- seleccione una categor&iacute;a --</option>
+                    <option value="1">Categoria 1</option>
+                    <option value="2">Categoria 2</option>
+                    <option value="3">Categoria 3</option>
+                  </select>
+                </div>
+              </div>
 
               <!-- Botones del formulario -->
               <div class="form-group">
