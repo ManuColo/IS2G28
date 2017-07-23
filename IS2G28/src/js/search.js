@@ -5,6 +5,11 @@ $(function() {
 	$('.searchControl').keyup(function() {
 		doSearch();
 	});
+	$('#searchDeadline').keyup(function() {
+		if(moment($(this).val()).isValid() || ($(this).val() == '')) {
+			doSearch();
+		}
+	});
 	$('#searchDeadline').on('change',function() {
 		if(moment($(this).val()).isValid()) {
 			doSearch();

@@ -8,10 +8,9 @@ if ($_SESSION['logged']) {
 	$today = new DateTime();
 	$suma=0;
 	$qb = $entityManager->createQueryBuilder();
-	$qb->select('c, count(e) as HIDDEN cont')
+	$qb->select('c')
 	->from('Credit', 'c')
 	->join('c.userId','u')
-	->leftJoin('u.myCredits', 'e')
 	->where('c.operationDate <= :today')
 	->setParameter('today', $today);
 	if ($_POST['user'] != ''){
@@ -22,6 +21,7 @@ if ($_SESSION['logged']) {
 	}
 	if ($_POST['dateIn'] != ''){
 		$dateIn = DateTime::createFromFormat('d/m/Y',$_POST['dateIn']);
+		$dateIn->modify( '-1 day' );
 		$qb->andWhere('c.operationDate >= :dateIn')
 		->setParameter('dateIn', $dateIn);
 	}
@@ -30,9 +30,7 @@ if ($_SESSION['logged']) {
 		$qb->andWhere('c.operationDate <= :dateEnd')
 		->setParameter('dateEnd', $dateEnd);
 	}
-	$qb->groupBy('c.id')
-	->orderBy('c.id','ASC')
-	->addOrderBy('c.operationDate','ASC');
+	$qb->orderBy('c.operationDate','ASC');
 	$query = $qb->getQuery();
 	$query->execute();
 	$credits = $query->getResult();

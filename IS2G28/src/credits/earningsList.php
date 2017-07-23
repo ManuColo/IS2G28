@@ -5,14 +5,10 @@ if ($_SESSION['logged']) {
 	$today = new DateTime();
 	$suma=0;
 	$qb = $entityManager->createQueryBuilder();
-	$qb->select('c, count(e) as HIDDEN cont')
+	$qb->select('c')
 	->from('Credit', 'c')
-	->join('c.userId','u')
-	->leftJoin('u.myCredits', 'e')
 	->where('c.operationDate <= :today')
-	->groupBy('c.id')
-	->orderBy('c.id','ASC')
-	->addOrderBy('c.operationDate','ASC')
+	->orderBy('c.operationDate','ASC')
 	->setParameter('today', $today);
 	$query = $qb->getQuery();
 	$query->execute();

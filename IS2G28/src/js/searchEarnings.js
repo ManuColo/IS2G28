@@ -5,8 +5,18 @@ $(function() {
 	$('.searchControl').keyup(function() {
 		doSearch();
 	});
+	$('#searchDateIn').keyup(function() {
+		if(moment($(this).val()).isValid() || ($(this).val() == '')) {
+			doSearch();
+		}
+	});
 	$('#searchDateIn').on('change',function() {
 		if(moment($(this).val()).isValid()) {
+			doSearch();
+		}
+	});
+	$('#searchDateEnd').keyup(function() {
+		if(moment($(this).val()).isValid() || ($(this).val() == '')) {
 			doSearch();
 		}
 	});
