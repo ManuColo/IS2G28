@@ -9,6 +9,10 @@ if ($_SESSION['logged']) {
   $favor->setDeadline('');
   $errors = array();
   
+  // Obtener categorias disponibles
+  // Las categorias se despliegan como opciones del campo categoría del formulario
+  $categories = $entityManager->getRepository('Category')->findAll();
+  
   include 'form.tpl.php';
 } else {
 	header("location:../login/login.php");
