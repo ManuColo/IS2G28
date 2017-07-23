@@ -252,18 +252,18 @@ class Favor
     )));    
     $metadata->addPropertyConstraint('description', new Assert\NotBlank(array(
         'message' => 'Descripcion requerida.'
-    )));
-    
+    )));    
     $metadata->addPropertyConstraint('photo', new Assert\Image(array(
         'maxSize' => '1024k',
         'mimeTypesMessage' => 'El archivo no es una imagen valida.',
         'maxSizeMessage' => 'La imagen es demasiado grande. El tamaño maximo permitido es {{ limit }} {{ suffix }}.'
-    )));
-    
+    )));    
     $metadata->addPropertyConstraint('city', new Assert\NotBlank(array(
         'message' => 'Ciudad requerida.'
     )));
-    
+    $metadata->addPropertyConstraint('category', new Assert\NotNull(array(
+        'message' => 'Categoría requerida.'
+    )));    
     $metadata->addPropertyConstraint('deadline', new Assert\NotBlank(array(
       'message' => 'Fecha limite requerida'
     )));

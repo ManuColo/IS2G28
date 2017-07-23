@@ -31,6 +31,10 @@ if ($_SESSION['logged']) {
   
   // Obtener el usuario logueado en el sistema
   $user = $entityManager->getRepository('User')->find($_SESSION['userId']);
+  
+  // Obtener categorias disponibles
+  // Las categorias se despliegan como opciones del campo categoría del formulario
+  $categories = $entityManager->getRepository('Category')->findAll();
 
   // Comprobar que no hay errores de validacion y que el usuario tenga suficientes creditos
   if ((count($violations) === 0) && $user->hasCredits()) {
@@ -91,7 +95,8 @@ function getRequestDataClean($requestData, $requestFiles)
   $favorData['city'] = cleanInput($requestData['city']);
   $favorData['deadline'] = cleanInput($requestData['deadline']);  
   // Cargar path del archivo temporal, correspondiente a la foto, enviado en la peticion
-  $favorData['photo'] = $requestFiles['favor_photo']['tmp_name'];  
+  $favorData['photo'] = $requestFiles['favor_photo']['tmp_name'];
+  $favorData['category'] = cleanInput($requestData['category']);
   
   return $favorData;
 }
@@ -105,6 +110,8 @@ function getRequestDataClean($requestData, $requestFiles)
  */
 function createFavor($favorData) 
 {
+  global $entityManager; // Permite acceso a la variable externa $entityManager desde la función
+  
   $favor = new Favor();
   $favor->setTitle($favorData['title']);
   $favor->setDescription($favorData['description']);
@@ -112,7 +119,12 @@ function createFavor($favorData)
   $favor->setCity($favorData['city']);
   // Convertir fecha limite desde un string en formato "dd/mm/yyyy" a un objeto DateTime  
   $favor->setDeadline(parseStringDate($favorData['deadline']));
-  
+  // Recuperar el objeto categoria y vincularlo al favor
+  $category = $entityManager->getRepository('Category')->find($favorData['category']);
+  if ($category) {
+    $favor->setCategory($category);
+  }
+    
   return $favor;
 }
 
