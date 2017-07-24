@@ -45,7 +45,7 @@ if ($_SESSION['logged']) {
 	                    <td class="actions" id="<?php echo $category->getId(); ?>">
 	                    <?php if ($category->getName()!=="Varios") {?>
 	                    	<img alt="Editar" title="Editar" src="<?php echo $cfg->wwwRoot;?>/src/images/edit.png"/>
-	                    	<img alt="Eliminar" title="Eliminar" src="<?php echo $cfg->wwwRoot;?>/src/images/delete.png"/>
+	                    	<img class="delete" src="<?php echo $cfg->wwwRoot;?>/src/images/delete.png"/>
 	                    <?php } ?>
 	                    </td>
 	                  </tr>
