@@ -47,6 +47,7 @@ $selected = substr($firstReduction, 0 , -($max - $result));
 				<ul class="dropdown-menu">
 				<li <?php if ($selected == 'users') { ?>class="active"<?php $referer = $selected.'list.php'; } ?>><a href="<?php echo $cfg->wwwRoot;?>/src/users/list.php">Usuarios</a></li>
 				<li <?php if ($selected == 'credits') { ?>class="active"<?php $referer = $selected.'earnings.php'; } ?>><a href="<?php echo $cfg->wwwRoot;?>/src/credits/earningsList.php">Ganancias</a></li>
+				<li <?php if ($selected == 'categories') { ?>class="active"<?php $referer = $selected.'list.php'; } ?>><a href="<?php echo $cfg->wwwRoot;?>/src/categories/list.php">Categor&iacute;as</a></li>
 				</ul>
 				</li>
 			<?php } ?>
