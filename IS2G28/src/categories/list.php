@@ -25,15 +25,9 @@ if ($_SESSION['logged']) {
 					<!-- Titulo de la seccion -->
 						<div class="panel-heading">
 							<a class="btn btn-primary pull-right" href="newCategory.php" style="line-height: 1">
-<<<<<<< HEAD
 				            	<span class="glyphicon glyphicon-plus-sign"></span> Nueva Categor&iacute;a
-				            </a>
-	            			<h3 class="panel-title">Listado de categor&iacute;as</h3>
-=======
-             				<span class="glyphicon glyphicon-plus-sign"></span> Nueva Categor&iacute;a
        						</a>
 	            			<h3 class="panel-title">Listado de categor&iacute;as</h3>            	          			
->>>>>>> refs/remotes/origin/master
 						</div>
 						<div class="panel-body">
 	            <?php if(count($categories) > 0): ?>
@@ -48,8 +42,10 @@ if ($_SESSION['logged']) {
 	                   <tr>
 	                    <td><?php echo $category->getName();?></td>
 	                    <td class="actions">
+	                    <?php if ($category->getName()!=="Varios") {?>
 	                    	<img alt="Editar" src="<?php echo $cfg->wwwRoot;?>/src/images/edit.png"/>
 	                    	<img alt="Eliminar" src="<?php echo $cfg->wwwRoot;?>/src/images/delete.png"/>
+	                    <?php } ?>
 	                    </td>
 	                  </tr>
 	                  <?php }; ?>
