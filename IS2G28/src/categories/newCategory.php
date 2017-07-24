@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (!isset($_SESSION)) {
+	session_start();
+}
 require_once __DIR__.'/../../config/doctrine_config.php';
 $user= $entityManager->find('User',$_SESSION['userId']);
 if ($_SESSION['logged']) {
