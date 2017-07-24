@@ -102,6 +102,22 @@
                     </span>                    
                   </div>
               </div>
+              
+              <!-- Categoria del favor -->
+              <div class="form-group">
+                <label for="favor_category" class="control-label col-sm-3">Categor&iacute;a</label>
+                <div class="col-sm-9">
+                  <select class="form-control" id="favor_category" name="favor[category]">                    
+                    <?php foreach ($categories as $category): ?>
+                      <?php if ($favor->getCategory() && $favor->getCategory()->getId() == $category->getId()): ?>
+                        <option value="<?php echo $category->getId() ?>" selected><?php echo $category->getName() ?></option>
+                      <?php else: ?>
+                        <option value="<?php echo $category->getId() ?>"><?php echo $category->getName() ?></option>
+                      <?php endif; ?>
+                    <?php endforeach; ?>                                        
+                  </select>                 
+                </div>
+              </div>
 
               <!-- Botones del formulario -->
               <div class="form-group">
