@@ -7,6 +7,7 @@ if ($_SESSION['logged']) {
 			<head>
 			<title>Una Gauchada - Categor&iacute;as</title>
 			<?php require '../common/common_headers.php' ; ?>
+			<script type="text/javascript" src="../js/categoryList.js"></script>
 		  </head>
 		  <body>
 			<!-- Contenedor principal, requerido por Bootstrap -->	
@@ -32,7 +33,7 @@ if ($_SESSION['logged']) {
 						<div class="panel-body">
 	            <?php if(count($categories) > 0): ?>
 	              <div class="table-responsive">
-	                <table class="table table-hover usersList">
+	                <table class="table table-hover categoryList">
 	                  <tr>
 	                    <th>Nombre</th>
 	                    <th>Acciones</th>
@@ -41,10 +42,10 @@ if ($_SESSION['logged']) {
 	                  foreach ($categories as $category) { ?>
 	                   <tr>
 	                    <td><?php echo $category->getName();?></td>
-	                    <td class="actions">
+	                    <td class="actions" id="<?php echo $category->getId(); ?>">
 	                    <?php if ($category->getName()!=="Varios") {?>
-	                    	<img alt="Editar" src="<?php echo $cfg->wwwRoot;?>/src/images/edit.png"/>
-	                    	<img alt="Eliminar" src="<?php echo $cfg->wwwRoot;?>/src/images/delete.png"/>
+	                    	<img alt="Editar" title="Editar" src="<?php echo $cfg->wwwRoot;?>/src/images/edit.png"/>
+	                    	<img alt="Eliminar" title="Eliminar" src="<?php echo $cfg->wwwRoot;?>/src/images/delete.png"/>
 	                    <?php } ?>
 	                    </td>
 	                  </tr>
