@@ -25,3 +25,9 @@
   color: #A94442;
   font-weight: bold;
 }
+
+.form-group p.help-block {
+  margin: 3px 0px 0px;
+  font-size: 13px;
+  color: #737373; 
+}

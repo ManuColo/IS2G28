@@ -20,7 +20,9 @@ $favorData = filter_input(INPUT_POST, 'favor', FILTER_DEFAULT, FILTER_REQUIRE_AR
 $favorId = filter_var($favorData['id'], FILTER_VALIDATE_INT, array(
     'options' => array('min_range' => 1)
 ));
-
+// Obtener flag que indica si debe eliminarse o no la foto actual del favor
+$deletedPhotoFlag = filter_input(INPUT_POST, 'favor_photo_deleted_flag', FILTER_VALIDATE_BOOLEAN);
+  
 
 // Comprobar que el ID del favor sea válido
 if (!$favorId) {
@@ -95,6 +97,15 @@ if (count($violations) === 0) {
   $favor->setDescription($updatedFavor->getDescription());
   $favor->setCity($updatedFavor->getCity());
   $favor->setDeadline(new DateTime($updatedFavor->getDeadline()));
+  
+  // Comprobar si debe eliminarse la foto actual del favor
+  $shouldDeletePhoto = $favor->getPhoto() && ($updatedFavor->getPhoto() || $deletedPhotoFlag);  
+  if ($shouldDeletePhoto) {
+    // Eliminar foto actual del favor del sistema de archivos
+    unlink($cfg->uploadDir . $favor->getPhoto());
+    // Actualizar propiedad del favor
+    $favor->setPhoto(null);    
+  }
    
   // Comprobar si se actualizó la foto del favor
   if ($updatedFavor->getPhoto()) {
@@ -103,14 +114,10 @@ if (count($violations) === 0) {
     $targetFile = $cfg->uploadDir . $photoFileName;
     move_uploaded_file($updatedFavor->getPhoto(), $targetFile);    
     // Actualizar foto asociada al favor actualizado
-    $updatedFavor->setPhoto($photoFileName);  
-    // Comprobar si el favor tenía una foto asociada
-    // De ser así, eliminar la foto del directorio de uploads
-    if ($favor->getPhoto()) {
-      unlink($cfg->uploadDir . $favor->getPhoto());
-    }        
+    $updatedFavor->setPhoto($photoFileName);      
     $favor->setPhoto($updatedFavor->getPhoto());    
-  }  
+  }        
+  
   // Persistir objeto Favor en la base de datos
   $entityManager->persist($favor);
   $entityManager->flush();
@@ -149,8 +156,11 @@ function getRequestDataClean($requestData, $requestFiles)
   $favorData['city'] = cleanInput($requestData['city']);
   $favorData['deadline'] = cleanInput($requestData['deadline']);  
   // Cargar path del archivo temporal, correspondiente a la foto, enviado en la peticion
-  $favorData['photo'] = $requestFiles['favor_photo']['tmp_name'];  
-  
+  if (isset($requestFiles['favor_photo'])) {
+    $favorData['photo'] = $requestFiles['favor_photo']['tmp_name'];  
+  } else {
+    $favorData['photo'] = null;
+  }  
   return $favorData;
 }
 

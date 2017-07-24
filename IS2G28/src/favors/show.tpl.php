@@ -97,7 +97,13 @@
                   		<?php } ?>
                   <?php } ?>
                 </span>            
-              </li>        
+              </li>
+              <li>
+                <span class="label label-warning">
+                  <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                  <?php echo $favor->getCategory()->getName() ?>
+                </span>            
+              </li>   
             </ul>
             <!-- Boton para editar una gauchada (solo visible para el dueño de la misma) -->
             <?php if (($user === $favor->getOwner())&&($cantPostulations == 0 )&& !$favor->getUnpublished() && !$favor->getResolved()): ?>
@@ -128,13 +134,20 @@
             	if ($owner !== $user) {
             		if (!$imPostulated) {
             			if (!$resuelta){
-              			include '../postulations/commentPostulation.php';
+              				include '../postulations/commentPostulation.php';
             			}
             		} else { ?>
             			<span class="text bg-info pull-right">
             				Mi postulación está: <?php echo $myPostulation->getStatus();?>
-            			</span>
-            		<?php }
+               			</span>
+               			<?php if (!$resuelta){?>
+               			<br />
+               			<a class="btn btn-danger btn-xs pull-right btnDespost" id=<?php echo $myPostulation->getId();?>> 
+   							<strong>Despostularme</strong> 
+						</a>
+               			<?php } 
+               			$idPost=$myPostulation->getId(); 
+            		}
             	} ?>
             </div> 
 

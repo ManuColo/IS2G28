@@ -59,7 +59,8 @@ $(document).ready(function() {
     var favorDescription = cleanInput($('#favor_description').val());      
     var favorCity = cleanInput($('#favor_city').val());
     var favorDeadline = cleanInput($('#favor_deadline').val());
-    //var favorPhoto = $('#favor_photo').val();                        
+    var favorCategory = cleanInput($('#favor_category').val());
+    //var favorPhoto = $('#favor_photo').val();                                
 
     // Validar datos introducidos en los campos del formulario
     if (favorTitle === '') {
@@ -90,6 +91,9 @@ $(document).ready(function() {
         }             
       }
     }
+    if (favorCategory === '') {
+      errors['favor_category'] = 'Categoría requerida';
+    }
 
     return errors;        
   }
@@ -102,7 +106,7 @@ $(document).ready(function() {
    */
   function showFormErrors(form, errors) {
     // Obtener controles del formulario
-    var formControls = form.find(':input');
+    var formControls = form.find(':input');    
     // Mostrar errores en el formulario                
     formControls.each(function() {          
       if (errors[this.id]) {

@@ -8,6 +8,7 @@ if ($_SESSION['logged']) {
 	->from('Favor', 'f')
 	->leftJoin('f.myPostulations', 'p')
 	->join('f.owner','u')
+	->join('f.category','c')
 	->where('f.deadline >= :today')
 	->andWhere('f.unpublished != :unpublished')
 	->andWhere('f.resolved != :resolved')
@@ -40,6 +41,12 @@ if ($_SESSION['logged']) {
 		)
 		->setParameter('owner', '%'.$_POST['owner'].'%');
 	}
+	if ($_POST['category'] != ''){
+		$qb->andWhere(
+				$qb->expr()->like('c.name',':category')
+				)
+				->setParameter('category', '%'.$_POST['category'].'%');
+	}
 	
 	$qb->groupBy('f.id')
 		->orderBy('cont','ASC')
@@ -55,6 +62,7 @@ if ($_SESSION['logged']) {
 			<th>Ciudad</th>
 			<th>Fecha l&iacute;mite</th>
 			<th>Due&ntilde;o</th>
+			<th>Categor&iacute;a</th>
 		</tr>
 		<?php foreach ($favors as $favor) { ?>
 		<tr>
@@ -72,6 +80,7 @@ if ($_SESSION['logged']) {
 			<td><?php echo $favor->getCity();?></td>
 			<td><?php echo $favor->getDeadline()->format("d/m/Y");?></td>
 			<td><?php echo $favor->getOwner() ?></td>
+			<td><?php echo $favor->getCategory()->getName() ?></td>
 		</tr>
        	<?php }; ?>
 	</table>
@@ -79,4 +88,4 @@ if ($_SESSION['logged']) {
 	<p style="font-size: 16px;">No hay favores publicados que cumplan con el criterio.</p>
 	<?php }
 	exit;
-}
+}?>

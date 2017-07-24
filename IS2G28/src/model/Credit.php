@@ -1,4 +1,6 @@
 <?php
+use Doctrine\DBAL\Types\FloatType;
+
 /**
  * Description of Credit
  *
@@ -26,6 +28,12 @@ Class Credit {
 	private $cantidad;
 	
 	/**
+	 * @Column(type="float")
+	 * @var FloatType
+	 */
+	private $amount;
+	
+	/**
 	* Usuario que compra el credito.
 	* 
 	* @var User Usuario propietario del credito
@@ -33,6 +41,10 @@ Class Credit {
 	* @JoinColumn(name="userId", referencedColumnName="id", nullable=false)
 	*/
 	private $userId;
+	
+	public function __construct() {
+		$this->amount = 30.00;
+	}
 	
 	public function setId($id){
 		$this->id = $id;
@@ -44,6 +56,10 @@ Class Credit {
 	
 	public function setCantidad($cantidad){
 		$this->cantidad = $cantidad;
+	}
+	
+	public function setAmount($amount){
+		$this->amount = $amount;
 	}
 	
 	public function setUserId($id){
@@ -60,6 +76,10 @@ Class Credit {
 	
 	public function getCantidad(){
 		return $this->cantidad;
+	}
+	
+	public function getAmount(){
+		return $this->amount;
 	}
 	
 	public function getUserId(){
