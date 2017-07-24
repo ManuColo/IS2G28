@@ -347,3 +347,42 @@ nav {
 	width: 30px;
 	height: 30px;
 }
+
+.category-new {
+  margin: 20px auto 0px;  
+}
+
+@media (min-width: 768px) {
+  .category-new {
+    width: 65%;  
+  }  
+}
+
+.category-new h3 {
+  font-weight: bold;
+  text-align: center;
+  font-variant: small-caps;
+}
+
+.category-new .alert-danger a {
+  color: #A94442;
+  font-weight: bold;
+}
+
+.form-group p.help-block {
+  margin: 3px 0px 0px;
+  font-size: 13px;
+  color: #737373; 
+}
+
+.category-new .form-control{
+	width: 90%;
+}
+
+#btnCategory{
+	margin-left:-60px;
+}
+.actions img {
+	width: 30px;
+	height: 30px;
+}
