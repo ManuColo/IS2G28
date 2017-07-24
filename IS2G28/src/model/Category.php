@@ -1,4 +1,8 @@
 <?php
+
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Description of Category
  *

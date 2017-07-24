@@ -24,7 +24,10 @@ if ($_SESSION['logged']) {
 					<div class="panel panel-default index">
 					<!-- Titulo de la seccion -->
 						<div class="panel-heading">
-	            <h3 class="panel-title">Listado de categor&iacute;as</h3>            	          			
+							<a class="btn btn-primary pull-right" href="newCategory.php" style="line-height: 1">
+             				<span class="glyphicon glyphicon-plus-sign"></span> Nueva Categor&iacute;a
+       						</a>
+	            			<h3 class="panel-title">Listado de categor&iacute;as</h3>            	          			
 						</div>
 						<div class="panel-body">
 	            <?php if(count($categories) > 0): ?>
