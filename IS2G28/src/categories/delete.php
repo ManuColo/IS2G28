@@ -8,7 +8,7 @@ if ($_SESSION['logged']) {
 	$user= $entityManager->find('User',$_SESSION['userId']);
 	if ($user->getIsAdmin()) {
 		$category = $entityManager->find('Category',$_POST['id']);
-		$defautlCategory= $entityManager->getRepository('Category')->findBy(array('name'=>'Varios'));
+		$defautlCategory= $entityManager->getRepository('Category')->findBy(array('name'=>'Varios'))[0];
 		if ($category!== $defautlCategory) {
 			$favors = $category->getMyFavors();
 			if (count($favors) > 0) {
