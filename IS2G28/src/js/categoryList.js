@@ -4,7 +4,10 @@ var deleting;
 $(function() {
 	editing = false;
 	deleting = false;
-	
+	loadActions();
+});
+
+function loadActions() {
 	$('.delete').confirmation({
 		btnOkLabel:'Si',
 		btnCancelLabel:'No',
@@ -27,11 +30,9 @@ $(function() {
 		var id= $.trim($(this).parent().attr('id'));
 		doModify(id);
 	});
-});
+}
 
 function modify(id) {
-	if (editing)
-		modify.abort();
 	modify = $.ajax({
 		data: {id: id},
 		url: 'edit.php',
@@ -47,10 +48,11 @@ function modify(id) {
 }
 
 function doModify(id) {
+	var name= $.trim($('#newName').val());
 	if (editing)
 		modify.abort();
 	modify = $.ajax({
-		data: {id: id},
+		data: {id: id,name: name},
 		url: 'edit.php',
 		type: 'post',
 		beforeSend: function() {
@@ -64,9 +66,9 @@ function doModify(id) {
 }
 
 function doDelete(id) {
-	if (editing)
-		modify.abort();
-	modify = $.ajax({
+	if (deleting)
+		del.abort();
+	del = $.ajax({
 		data: {id: id},
 		url: 'delete.php',
 		type: 'post',

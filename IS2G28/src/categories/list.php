@@ -42,10 +42,12 @@ if ($_SESSION['logged']) {
 	                  foreach ($categories as $category) { ?>
 	                   <tr>
 	                    <td><?php echo $category->getName();?></td>
-	                    <td class="actions" id="<?php echo $category->getId(); ?>">
 	                    <?php if ($category->getName()!=="Varios") {?>
+	                    <td class="actions" id="<?php echo $category->getId(); ?>">
 	                    	<img alt="Editar" title="Editar" src="<?php echo $cfg->wwwRoot;?>/src/images/edit.png"/>
 	                    	<img class="delete" src="<?php echo $cfg->wwwRoot;?>/src/images/delete.png"/>
+	                    <?php } else { ?>
+	                    	<td>
 	                    <?php } ?>
 	                    </td>
 	                  </tr>

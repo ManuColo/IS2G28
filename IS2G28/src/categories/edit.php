@@ -5,30 +5,66 @@ if (!isset($_SESSION)){
 if ($_SESSION['logged']) {
 	require_once __DIR__.'/../../config/doctrine_config.php';
 	$user= $entityManager->find('User',$_SESSION['userId']);
-	if ($user->getIsAdmin()) {
-		$categories= $entityManager->getRepository('Category')->findAll(array(),array('name'=>'DESC')); ?>
+	if ($user->getIsAdmin()) { ?>
 		<table class="table table-hover categoryList">
-		<tr>
-			<th>Nombre</th>
-			<th>Acciones</th>
-		</tr>
-		<?php foreach ($categories as $category) { ?>
-		<tr>
-			<td><?php echo $category->getName();?></td>
-			<td class="actions" id="<?php echo $category->getId(); ?>">
-			<?php if ($category->getName()!=="Varios") {
+			<tr>
+				<th>Nombre</th>
+				<th>Acciones</th>
+			</tr>
+		<?php
+		if (isset($_POST['name'])) {
+			$newCategory = $entityManager->getRepository('Category')->findBy(array('name'=>$_POST['name']));
+			if (count($newCategory) === 0) {
+				$editedCategory = $entityManager->find('Category',$_POST['id']);
+				$editedCategory->setName($_POST['name']);
+				$entityManager->persist($editedCategory);
+				$entityManager->flush();
+			}
+			$categories= $entityManager->getRepository('Category')->findAll(array(),array('name'=>'DESC'));
+			foreach ($categories as $category) { ?>
+			<tr>
+			<?php if ($category->getName()!=="Varios") { ?>
+				<td><?php echo $category->getName();?></td>
+				<td class="actions" id="<?php echo $category->getId(); ?>">
+					<img alt="Editar" title="Editar" src="<?php echo $cfg->wwwRoot;?>/src/images/edit.png"/>
+					<img alt="Eliminar" title="Eliminar" src="<?php echo $cfg->wwwRoot;?>/src/images/delete.png"/>
+			<?php } else { ?>
+				<td><?php echo $category->getName();?></td>
+				<td>
+			<?php } ?>
+				</td>
+			</tr>
+			<?php
+			}
+		} else {
+			$categories= $entityManager->getRepository('Category')->findAll(array(),array('name'=>'DESC'));
+			foreach ($categories as $category) { ?>
+			<tr>
+			<?php if ($category->getName()!=="Varios") { 
 				if ($category->getId() == $_POST['id']) {?>
-				<img alt="Finalizar" title="Finalizar" src="<?php echo $cfg->wwwRoot;?>/src/images/accept.png"/>
-				<img alt="Cancelar" title="Cancelar" src="<?php echo $cfg->wwwRoot;?>/src/images/back.png"/>
+				<td><input type="text" id="newName" value="<?php echo $category->getName();?>" /></td>
+				<td class="actions" id="<?php echo $category->getId(); ?>">
+					<img alt="Finalizar" title="Finalizar" src="<?php echo $cfg->wwwRoot;?>/src/images/accept.png"/>
+					<img alt="Cancelar" title="Cancelar" src="<?php echo $cfg->wwwRoot;?>/src/images/back.png"/>
 				<?php } else { ?>
-				<img alt="Editar" title="Editar" src="<?php echo $cfg->wwwRoot;?>/src/images/edit.png"/>
-				<img alt="Eliminar" title="Eliminar" src="<?php echo $cfg->wwwRoot;?>/src/images/delete.png"/>
+				<td><?php echo $category->getName();?></td>
+				<td class="actions" id="<?php echo $category->getId(); ?>">
+					<img alt="Editar" title="Editar" src="<?php echo $cfg->wwwRoot;?>/src/images/edit.png"/>
+					<img alt="Eliminar" title="Eliminar" src="<?php echo $cfg->wwwRoot;?>/src/images/delete.png"/>
 			<?php }
-			}?>
-			</td>
-		</tr>
-		<?php }; ?>
+			} else { ?>
+				<td><?php echo $category->getName();?></td>
+				<td>
+			<?php }?>
+				</td>
+			</tr>
+			<?php
+			}; ?>
 		</table>
+		<script type="text/javascript">
+			loadActions();
+		</script>
 	<?php }
+	}
 }
 ?>
