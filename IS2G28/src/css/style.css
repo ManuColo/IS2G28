@@ -343,3 +343,7 @@ nav {
 	font-weight:bold;
 	color:#337ab7;
 }
+.actions img {
+	width: 30px;
+	height: 30px;
+}
