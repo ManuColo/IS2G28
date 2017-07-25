@@ -60,10 +60,10 @@ if ($_SESSION['logged']) {
 			</tr>
 			<?php
 			}; ?>
+			<script type="text/javascript">
+				loadActions();
+			</script>
 		</table>
-		<script type="text/javascript">
-			loadActions();
-		</script>
 	<?php }
 	}
 }
