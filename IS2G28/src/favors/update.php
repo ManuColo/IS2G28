@@ -22,7 +22,7 @@ $favorId = filter_var($favorData['id'], FILTER_VALIDATE_INT, array(
 ));
 // Obtener flag que indica si debe eliminarse o no la foto actual del favor
 $deletedPhotoFlag = filter_input(INPUT_POST, 'favor_photo_deleted_flag', FILTER_VALIDATE_BOOLEAN);
-  
+
 
 // Comprobar que el ID del favor sea válido
 if (!$favorId) {
@@ -68,22 +68,11 @@ if (count($favor->getMyPostulations()) > 0) {
 
 // Obtener los datos editados del favor en un formato limpio
 $favorData = getRequestDataClean($favorData, $_FILES);
-
-var_dump($favorData);
-echo '<br>';
-
 // Guardar en una variable auxiliar la foto actual del favor
 $favorCurrentPhoto = $favor->getPhoto();
 
-var_dump($favorCurrentPhoto);
-echo '<br>';
-
 // Actualizar objeto favor con los datos actualizados procedentes de la petición
 $favor = updateFavor($favor, $favorData);
-
-Doctrine\Common\Util\Debug::dump($favor);
-echo '<br>';
-
 
 // Validar datos del favor editado
 $validator = Validation::createValidatorBuilder()
@@ -96,32 +85,31 @@ foreach ($violations as $violation) {
   $errors[$violation->getPropertyPath()] = $violation->getMessage();  
 }
 
-echo 'Pase validaciones';
-echo '<br>';
-
-
-
 // Comprobar que no haya errores de validación. De ser así, persistir los cambios en la base de datos
-if (count($violations) === 0) {  
+if (count($violations) === 0) {
+  
+  $uploadedPhoto = $favor->getPhoto();
+  
   // Comprobar si debe eliminarse la foto actual del favor
-  $shouldDeletePhoto = $favorCurrentPhoto && ($favor->getPhoto() || $deletedPhotoFlag);  
+  $shouldDeletePhoto = $favorCurrentPhoto && ($uploadedPhoto || $deletedPhotoFlag);  
   if ($shouldDeletePhoto) {
     // Eliminar foto actual del favor del sistema de archivos
     unlink($cfg->uploadDir . $favorCurrentPhoto);   
   }
-   
+    
   // Comprobar si se actualizó la foto del favor
-  if ($favor->getPhoto()) {
+  if ($uploadedPhoto) {
     // Mover el archivo correspondiente a la foto del favor al directorio de uploads
     $photoFileName = time() . basename($_FILES['favor_photo']['name']);
     $targetFile = $cfg->uploadDir . $photoFileName;
     move_uploaded_file($favor->getPhoto(), $targetFile);    
     // Actualizar foto asociada al favor actualizado
     $favor->setPhoto($photoFileName);          
-  }        
-  
-  echo 'Pase eliminacion de foto del FS';
-  echo '<br>';
+  } else if ($shouldDeletePhoto) {
+    $favor->setPhoto(null);          
+  } else {
+    $favor->setPhoto($favorCurrentPhoto);          
+  }
   
   // Persistir objeto Favor en la base de datos
   $entityManager->persist($favor);
@@ -130,11 +118,12 @@ if (count($violations) === 0) {
   header("location:show.php?id=" . $favor->getId());    
 }
 
+// Obtener categorias disponibles
+// Las categorias se despliegan como opciones del campo categoría del formulario
+$categories = $entityManager->getRepository('Category')->findAll();
 
 // Incluir template que contiene el formulario de edición con los datos del favor actualizados
-//$favorPhoto = $favor->getPhoto();
-//$favor = $updatedFavor;
-//$favor->setPhoto($favorPhoto);
+$favor->setPhoto($favorCurrentPhoto);
 $favor->setDeadline($favorData['deadline']);
 include 'form-edition.tpl.php';
 
@@ -190,9 +179,12 @@ function updateFavor(Favor $favor, $favorData)
   $favor->setDeadline(new DateTime(parseStringDate($favorData['deadline'])));
   // Recuperar el objeto categoria y vincularlo al favor
   $category = $entityManager->getRepository('Category')->find($favorData['category']);
+  $favor->setCategory($category);
+  /*
   if ($category) {
     $favor->setCategory($category);
   }
+  */
   
   return $favor;
 }
