@@ -44,9 +44,6 @@ if ($_SESSION['logged']) {
 			</td>
 		</tr>
 		<?php }; ?>
-			<script type="text/javascript">
-				loadActions();
-			</script>
 		</table>
 	<?php }
 }

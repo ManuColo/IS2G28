@@ -36,7 +36,7 @@ if ($_SESSION['logged']) {
 			</tr>
 			<?php
 			}
-		} else {
+		} elseif (isset($_POST['id'])) {
 			$categories= $entityManager->getRepository('Category')->findAll(array(),array('name'=>'DESC'));
 			foreach ($categories as $category) { ?>
 			<tr>
@@ -59,12 +59,27 @@ if ($_SESSION['logged']) {
 				</td>
 			</tr>
 			<?php
-			}; ?>
-			<script type="text/javascript">
-				loadActions();
-			</script>
+			}
+		
+		} else {
+			$categories= $entityManager->getRepository('Category')->findAll(array(),array('name'=>'DESC'));
+			foreach ($categories as $category) { ?>
+			<tr>
+			<?php if ($category->getName()!=="Varios") { ?>
+				<td><?php echo $category->getName();?></td>
+				<td class="actions" id="<?php echo $category->getId(); ?>">
+					<img alt="Editar" title="Editar" src="<?php echo $cfg->wwwRoot;?>/src/images/edit.png"/>
+					<img alt="Eliminar" title="Eliminar" src="<?php echo $cfg->wwwRoot;?>/src/images/delete.png"/>
+			<?php } else { ?>
+				<td><?php echo $category->getName();?></td>
+				<td>
+			<?php }?>
+				</td>
+			</tr>
+			<?php
+			}
+		} ?>
 		</table>
 	<?php }
-	}
 }
 ?>

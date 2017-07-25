@@ -382,3 +382,7 @@ nav {
 #btnCategory{
 	margin-left:-60px;
 }
+
+.categoryList tbody tr td, .categoryList tbody tr th {
+	line-height: 2;
+}
