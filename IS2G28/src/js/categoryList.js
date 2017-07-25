@@ -4,24 +4,7 @@ var deleting;
 $(function() {
 	editing = false;
 	deleting = false;
-	loadActions();
-});
 
-function loadActions() {
-	$('.delete').confirmation({
-		btnOkLabel:'Si',
-		btnCancelLabel:'No',
-		title:'Se eliminará esta categoría. Las gauchadas que están en esta categoría se moverán a Varios. Estás seguro?',
-		container:'body',
-		btnOkClass:'btn btn-sm btn-danger btn-xs',
-		btnCancelClass:'btn btn-sm btn-success btn-xs',
-		onConfirm:
-			function(event,element){
-				var id= $.trim($(this).parent().attr('id'));
-				doDelete(id);
-			}
-	})
-	
 	$(document).on('click',"img[title='Editar']",function() {
 		var id= $.trim($(this).parent().attr('id'));
 		change(id);
@@ -35,6 +18,24 @@ function loadActions() {
 		var id= $.trim($(this).parent().attr('id'));
 		doModify(id);
 	});
+	
+	loadConfirmation();
+});
+
+function loadConfirmation() {
+	$('.delete').confirmation({
+		btnOkLabel:'Si',
+		btnCancelLabel:'No',
+		title:'Se eliminará esta categoría. Las gauchadas que están en esta categoría se moverán a Varios. Estás seguro?',
+		container:'body',
+		btnOkClass:'btn btn-sm btn-danger btn-xs',
+		btnCancelClass:'btn btn-sm btn-success btn-xs',
+		onConfirm:
+			function(event,element){
+				var id= $.trim($(this).parent().attr('id'));
+				doDelete(id);
+			}
+	})
 }
 
 function change(id) {
@@ -48,6 +49,7 @@ function change(id) {
 		success: function(response) {
 			editing = false;
 			$('.categoryList').html(response);
+			loadConfirmation();
 		}
 	});
 }
@@ -65,6 +67,7 @@ function cancel() {
 		success: function(response) {
 			editing = false;
 			$('.categoryList').html(response);
+			loadConfirmation();
 		}
 	});
 }
@@ -83,6 +86,7 @@ function doModify(id) {
 		success: function(response) {
 			editing = false;
 			$('.categoryList').html(response);
+			loadConfirmation();
 		}
 	});
 }
@@ -100,6 +104,7 @@ function doDelete(id) {
 		success: function(response) {
 			deleting = false;
 			$('.categoryList').html(response);
+			loadConfirmation();
 		}
 	});
 }
