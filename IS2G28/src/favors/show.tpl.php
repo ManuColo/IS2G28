@@ -114,12 +114,20 @@
             
             <!-- Boton para calificar postulante que realizó gauchada -->
             <?php if (($user === $favor->getOwner()) && (!$favor->getPostulantQualification()) && ($favor->getResolved())): ?>
-              <a class="btn btn-primary" data-toggle="modal" href="#qualification_modal">
+              <a class="btn btn-primary" data-toggle="modal" href="#qualificationP_modal">
                 <span class="glyphicon glyphicon-screenshot"></span> Calificar postulante
               </a> 
               <p><strong> Resuelto por: <?php echo $favor->getAcceptedPostulant()->getName();?>
 								    <span> <?php echo $favor->getAcceptedPostulant()->getLastname();?></span></strong></p>
               <?php include '../qualifications/form-qualification.tpl.php'; ?>
+            <?php endif; ?>
+            
+            <!-- Boton para calificar al dueño de la gauchada -->
+            <?php if (($user === $favor->getAcceptedPostulant()) && (!$favor->getOwnerQualification()) && ($favor->getResolved())): ?>
+              <a class="btn btn-primary" data-toggle="modal" href="#qualificationO_modal">
+                <span class="glyphicon glyphicon-screenshot"></span> Calificar due&ntilde;o
+              </a> 
+              <?php include '../qualifications/formQualificationOwner.php'; ?>
             <?php endif; ?>
             
             <div><?php 
