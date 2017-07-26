@@ -22,7 +22,7 @@ $favorId = filter_var($favorData['id'], FILTER_VALIDATE_INT, array(
 ));
 // Obtener flag que indica si debe eliminarse o no la foto actual del favor
 $deletedPhotoFlag = filter_input(INPUT_POST, 'favor_photo_deleted_flag', FILTER_VALIDATE_BOOLEAN);
-  
+
 
 // Comprobar que el ID del favor sea válido
 if (!$favorId) {
@@ -68,55 +68,48 @@ if (count($favor->getMyPostulations()) > 0) {
 
 // Obtener los datos editados del favor en un formato limpio
 $favorData = getRequestDataClean($favorData, $_FILES);
-// Crear un objeto favor con los datos actualizados
-$updatedFavor = createFavor($favorData);
+// Guardar en una variable auxiliar la foto actual del favor
+$favorCurrentPhoto = $favor->getPhoto();
+
+// Actualizar objeto favor con los datos actualizados procedentes de la petición
+$favor = updateFavor($favor, $favorData);
 
 // Validar datos del favor editado
 $validator = Validation::createValidatorBuilder()
   ->addMethodMapping('loadValidatorMetadata')
   ->getValidator()
 ;
-$violations = $validator->validate($updatedFavor);
+$violations = $validator->validate($favor);
 $errors = array();
 foreach ($violations as $violation) {
   $errors[$violation->getPropertyPath()] = $violation->getMessage();  
 }
 
-/*
-// Imprimir errores de validacion
-if (count($violations) > 0) {
-  $errorsString = (string) $violations;
-  echo $errorsString;
-}
-*/
-
 // Comprobar que no haya errores de validación. De ser así, persistir los cambios en la base de datos
 if (count($violations) === 0) {
-  // Actualizar datos del favor
-  $favor->setTitle($updatedFavor->getTitle());
-  $favor->setDescription($updatedFavor->getDescription());
-  $favor->setCity($updatedFavor->getCity());
-  $favor->setDeadline(new DateTime($updatedFavor->getDeadline()));
+  
+  $uploadedPhoto = $favor->getPhoto();
   
   // Comprobar si debe eliminarse la foto actual del favor
-  $shouldDeletePhoto = $favor->getPhoto() && ($updatedFavor->getPhoto() || $deletedPhotoFlag);  
+  $shouldDeletePhoto = $favorCurrentPhoto && ($uploadedPhoto || $deletedPhotoFlag);  
   if ($shouldDeletePhoto) {
     // Eliminar foto actual del favor del sistema de archivos
-    unlink($cfg->uploadDir . $favor->getPhoto());
-    // Actualizar propiedad del favor
-    $favor->setPhoto(null);    
+    unlink($cfg->uploadDir . $favorCurrentPhoto);   
   }
-   
+    
   // Comprobar si se actualizó la foto del favor
-  if ($updatedFavor->getPhoto()) {
+  if ($uploadedPhoto) {
     // Mover el archivo correspondiente a la foto del favor al directorio de uploads
     $photoFileName = time() . basename($_FILES['favor_photo']['name']);
     $targetFile = $cfg->uploadDir . $photoFileName;
-    move_uploaded_file($updatedFavor->getPhoto(), $targetFile);    
+    move_uploaded_file($favor->getPhoto(), $targetFile);    
     // Actualizar foto asociada al favor actualizado
-    $updatedFavor->setPhoto($photoFileName);      
-    $favor->setPhoto($updatedFavor->getPhoto());    
-  }        
+    $favor->setPhoto($photoFileName);          
+  } else if ($shouldDeletePhoto) {
+    $favor->setPhoto(null);          
+  } else {
+    $favor->setPhoto($favorCurrentPhoto);          
+  }
   
   // Persistir objeto Favor en la base de datos
   $entityManager->persist($favor);
@@ -125,11 +118,12 @@ if (count($violations) === 0) {
   header("location:show.php?id=" . $favor->getId());    
 }
 
+// Obtener categorias disponibles
+// Las categorias se despliegan como opciones del campo categoría del formulario
+$categories = $entityManager->getRepository('Category')->findAll();
 
 // Incluir template que contiene el formulario de edición con los datos del favor actualizados
-$favorPhoto = $favor->getPhoto();
-$favor = $updatedFavor;
-$favor->setPhoto($favorPhoto);
+$favor->setPhoto($favorCurrentPhoto);
 $favor->setDeadline($favorData['deadline']);
 include 'form-edition.tpl.php';
 
@@ -160,26 +154,37 @@ function getRequestDataClean($requestData, $requestFiles)
     $favorData['photo'] = $requestFiles['favor_photo']['tmp_name'];  
   } else {
     $favorData['photo'] = null;
-  }  
+  }
+  $favorData['category'] = cleanInput($requestData['category']);
+  
   return $favorData;
 }
 
 /**
- * Retorna un nuevo objeto Favor que se inicializa con los datos limpios del favor
- * obtenidos desde la peticion.
+ * Retorna el objeto favor con sus datos actualizados.
  * 
+ * @param Favor $favor
  * @param array $favorData
- * @return \Favor
+ * @return Favor
  */
-function createFavor($favorData) 
+function updateFavor(Favor $favor, $favorData)
 {
-  $favor = new Favor();
+   global $entityManager; // Permite acceso a la variable externa $entityManager desde la función
+  
   $favor->setTitle($favorData['title']);
   $favor->setDescription($favorData['description']);
   $favor->setPhoto($favorData['photo']);
   $favor->setCity($favorData['city']);
   // Convertir fecha limite desde un string en formato "dd/mm/yyyy" a un objeto DateTime  
-  $favor->setDeadline(parseStringDate($favorData['deadline']));
+  $favor->setDeadline(new DateTime(parseStringDate($favorData['deadline'])));
+  // Recuperar el objeto categoria y vincularlo al favor
+  $category = $entityManager->getRepository('Category')->find($favorData['category']);
+  $favor->setCategory($category);
+  /*
+  if ($category) {
+    $favor->setCategory($category);
+  }
+  */
   
   return $favor;
 }

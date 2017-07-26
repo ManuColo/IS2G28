@@ -53,5 +53,9 @@ if (count($favor->getMyPostulations()) > 0) {
   exit();  
 }
 
+// Obtener categorias disponibles
+// Las categorias se despliegan como opciones del campo categoría del formulario
+$categories = $entityManager->getRepository('Category')->findAll();
+
 // Incluir formulario de edición de un favor
 include 'form-edition.tpl.php';

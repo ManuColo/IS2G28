@@ -102,6 +102,26 @@
                     </span>                    
                   </div>
               </div>
+              
+              <!-- Categoria del favor -->
+              <div class="form-group <?php echo isset($errors['category'])?'has-error':'' ?>">
+                <label for="favor_category" class="control-label col-sm-3">Categor&iacute;a</label>
+                <div class="col-sm-9">
+                  <select class="form-control" id="favor_category" name="favor[category]">                    
+                    <?php foreach ($categories as $category): ?>
+                      <?php if ($favor->getCategory() && $favor->getCategory()->getId() == $category->getId()): ?>
+                        <option value="<?php echo $category->getId() ?>" selected><?php echo $category->getName() ?></option>
+                      <?php else: ?>
+                        <option value="<?php echo $category->getId() ?>"><?php echo $category->getName() ?></option>
+                      <?php endif; ?>
+                    <?php endforeach; ?>                                        
+                  </select>
+                  <!-- Contenedor del mensaje de error -->
+                  <span class="error help-block <?php echo isset($errors['category'])?'shown':'hidden' ?>">
+                    <?php echo isset($errors['category'])?$errors['category']:'' ?>
+                  </span>
+                </div>
+              </div>
 
               <!-- Botones del formulario -->
               <div class="form-group">

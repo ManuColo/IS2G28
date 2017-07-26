@@ -216,9 +216,9 @@ class Favor
   	return $this->category;
   }
   
-  public function setCategory(Category $category)
+  public function setCategory($category)
   {
-  	$category->addMyFavor($this); // Para mantener consistente la relacion bidireccional
+  	//$category->addMyFavor($this); // Para mantener consistente la relacion bidireccional
   	$this->category = $category;
   }
   
