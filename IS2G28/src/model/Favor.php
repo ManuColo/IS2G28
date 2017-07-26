@@ -409,12 +409,13 @@ class Favor
     
     public function getAcceptedPostulant()
     {
-      foreach ($this->getMyPostulations() as $postulation) {
-        if ($postulation->getStatus() === 'Aceptado') {
-          $acceptedPostulation = $postulation;
-        }        
-      }      
-      return $acceptedPostulation?$acceptedPostulation->getUser():null;            
+    	$acceptedPostulation = null;
+		foreach ($this->getMyPostulations() as $postulation) {
+			if ($postulation->getStatus() === 'Aceptado') {
+				$acceptedPostulation = $postulation;
+			} 
+		}      
+		return $acceptedPostulation?$acceptedPostulation->getUser():null;            
     }
     
     public function getStatus(){
