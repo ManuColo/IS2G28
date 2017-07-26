@@ -355,6 +355,10 @@ nav {
 	font-weight:bold;
 	color:#337ab7;
 }
+.actions img {
+	width: 30px;
+	height: 30px;
+}
 
 .category-new {
   margin: 20px auto 0px;  
@@ -389,4 +393,8 @@ nav {
 
 #btnCategory{
 	margin-left:-60px;
+}
+
+.categoryList tbody tr td, .categoryList tbody tr th {
+	line-height: 2;
 }
