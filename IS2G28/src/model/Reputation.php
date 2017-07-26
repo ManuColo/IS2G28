@@ -24,7 +24,7 @@ class Reputation
    * Nombre de la reputación.
    * 
    * @var string
-   * @Column(type="string", length=30)
+   * @Column(type="string", length=30, unique=true)
    */
   private $name;
   
