@@ -9,8 +9,8 @@ if ($_SESSION['logged']) {
 	if ($user->getIsAdmin()) { ?>
 		<table class="table table-hover categoryList">
 			<tr>
-				<th>Nombre</th>
-				<th>Acciones</th>
+				<th id="tCatName">Nombre</th>
+				<th id="tCatAction">Acciones</th>
 			</tr>
 		<?php
 		if (isset($_POST['name'])) {

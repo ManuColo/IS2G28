@@ -398,3 +398,11 @@ nav {
 .categoryList tbody tr td, .categoryList tbody tr th {
 	line-height: 2;
 }
+
+#tCatName {
+	width:75%;
+}
+
+#tCatAction {
+	width:25%;
+}

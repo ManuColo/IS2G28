@@ -25,8 +25,8 @@ if ($_SESSION['logged']) {
 		$categories= $entityManager->getRepository('Category')->findAll(array(),array('name'=>'DESC')); ?>
 		<table class="table table-hover categoryList">
 		<tr>
-			<th>Nombre</th>
-			<th>Acciones</th>
+			<th id="tCatName">Nombre</th>
+			<th id="tCatAction">Acciones</th>
 		</tr>
 		<?php foreach ($categories as $category) { ?>
 		<tr>
