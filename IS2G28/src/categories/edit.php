@@ -14,24 +14,30 @@ if ($_SESSION['logged']) {
 			</tr>
 		<?php
 		if (isset($_POST['name'])) {
-			$newCategory = $entityManager->getRepository('Category')->findBy(array('name'=>$_POST['name']));
-			$editedCategory = $entityManager->find('Category',$_POST['id']);
-			if (count($newCategory) === 0 || $editedCategory->getName() === $_POST['name']) {
-				if ($editedCategory->getName() === $_POST['name']) {
-					$changed = False;
-					addMessage('info','No se realiz&oacute; ning&uacute;n cambio');
-					showMessage();
+			if ($_POST['name'] !== '') {
+				$newCategory = $entityManager->getRepository('Category')->findBy(array('name'=>$_POST['name']));
+				$editedCategory = $entityManager->find('Category',$_POST['id']);
+				if (count($newCategory) === 0 || $editedCategory->getName() === $_POST['name']) {
+					if ($editedCategory->getName() === $_POST['name']) {
+						$changed = False;
+						addMessage('info','No se realiz&oacute; ning&uacute;n cambio');
+						showMessage();
+					} else {
+						$editedCategory->setName($_POST['name']);
+						$entityManager->persist($editedCategory);
+						$entityManager->flush();
+						$changed = True;
+						addMessage('success','Categor&iacute;a actualizada');
+						showMessage();
+					}
 				} else {
-					$editedCategory->setName($_POST['name']);
-					$entityManager->persist($editedCategory);
-					$entityManager->flush();
-					$changed = True;
-					addMessage('success','Categor&iacute;a actualizada');
+					$changed = False;
+					addMessage('danger','La categor&iacute;a ya existe');
 					showMessage();
 				}
 			} else {
 				$changed = False;
-				addMessage('danger','La categor&iacute;a ya existe');
+				addMessage('danger','Ten&es que ingresar el nombre de la categor&iacute;a');
 				showMessage();
 			}
 			$categories= $entityManager->getRepository('Category')->findAll(array(),array('name'=>'DESC'));
