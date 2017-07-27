@@ -40,7 +40,89 @@ class Reputation
    * Puntaje mínimo de la reputación.
    * 
    * @var integer
-   * @Column(type="integer" )
+   * @Column(type="smallint" )
    */
   private $minScore;
+
+  /**
+   * Get id
+   *
+   * @return integer
+   */
+  public function getId()
+  {
+    return $this->id;
+  }
+
+  /**
+   * Set name
+   *
+   * @param string $name
+   *
+   * @return Reputation
+   */
+  public function setName($name)
+  {
+    $this->name = $name;
+
+    return $this;
+  }
+
+  /**
+   * Get name
+   *
+   * @return string
+   */
+  public function getName()
+  {
+    return $this->name;
+  }
+
+  /**
+   * Set image
+   *
+   * @param string $image
+   *
+   * @return Reputation
+   */
+  public function setImage($image)
+  {
+    $this->image = $image;
+
+    return $this;
+  }
+
+  /**
+   * Get image
+   *
+   * @return string
+   */
+  public function getImage()
+  {
+    return $this->image;
+  }
+
+  /**
+   * Set minScore
+   *
+   * @param integer $minScore
+   *
+   * @return Reputation
+   */
+  public function setMinScore($minScore)
+  {
+    $this->minScore = $minScore;
+
+    return $this;
+  }
+
+  /**
+   * Get minScore
+   *
+   * @return integer
+   */
+  public function getMinScore()
+  {
+    return $this->minScore;
+  }
 }
