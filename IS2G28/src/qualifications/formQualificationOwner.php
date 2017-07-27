@@ -1,11 +1,11 @@
-<div class="modal fade" id="qualificationP_modal" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true" data-backdrop="static"> 
+<div class="modal fade" id="qualificationO_modal" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true" data-backdrop="static"> 
 	<div class="modal-dialog" role="document"> 
     <div class="modal-content"> 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">×</button>
-          <h3 class="modal-title">Calificar postulante aceptado</h3>
+          <h3 class="modal-title">Calificar due&ntilde;o de la gauchada</h3>
       </div>
-      <form method="post" action="../qualifications/qualify_postulant.php">
+      <form method="post" action="../qualifications/qualifyOwner.php">
         <div class="modal-body">
           <input type="hidden" id="qualification_favor_id" name="qualification[favor_id]" value="<?= $favor->getid() ?>">
           <div class="form-group">
