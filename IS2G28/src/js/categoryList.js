@@ -49,6 +49,9 @@ function change(id) {
 		success: function(response) {
 			editing = false;
 			$('.categoryList').html(response);
+			if ($('#newName')){
+				$('#newName').trigger('focus');
+			}
 			loadConfirmation();
 		}
 	});
@@ -86,6 +89,9 @@ function doModify(id) {
 		success: function(response) {
 			editing = false;
 			$('.categoryList').html(response);
+			if ($('#newName')){
+				$('#newName').trigger('focus');
+			}
 			loadConfirmation();
 		}
 	});
