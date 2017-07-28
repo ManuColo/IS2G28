@@ -7,12 +7,14 @@
  */
 
 require_once __DIR__.'/../../config/doctrine_config.php';
+require_once __DIR__.'/../common/lib.php';
 
 session_start();
 
 // Comprobar si el usuario está logueado en el sistema
+// Si no está logueado, redirigirlo a la pantalla de inicio de sesión
 if (!$_SESSION['logged']) {
-  header('location: ../login/login.php');
+  header("location:../login/login.php?message=accessDenied");
   exit();
 }
 
@@ -20,7 +22,9 @@ if (!$_SESSION['logged']) {
 $user = $entityManager->getRepository('User')->find($_SESSION['userId']);
 
 // Comprobar si el usuario es un administrador
-if (!$user->getIsAdmin()) {
+// Si no es administrador, redirigirlo al listado de favores y notificarle el error
+if (!$user->getIsAdmin()) {  
+  addMessage('danger','Ten&eacute;s que ser administrador para acceder a la función requerida.');
   header('location: ../favors/list.php');
   exit();
 }
