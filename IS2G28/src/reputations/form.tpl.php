@@ -43,27 +43,39 @@
           <!-- Formulario de alta de una reputacion -->
           <form id="reputation-form" class="form-horizontal" action="create.php" method="post" enctype="multipart/form-data" >                           
             <!-- Nombre de la reputación -->
-            <div class="form-group">
+            <div class="form-group <?php echo isset($errors['name'])?'has-error':'' ?>">
               <label for="reputation_name" class="col-sm-3 control-label">Nombre</label>
               <div class="col-sm-9">
                 <input type="text" class="form-control" id="reputation_name" name="reputation[name]" 
-                       placeholder="Nombre de la reputación" value="<?php echo $reputation->getName() ?>">                
+                       placeholder="Nombre de la reputación" value="<?php echo $reputation->getName() ?>">
+                <!-- Contenedor del mensaje de error -->
+                <span class="error help-block <?php echo isset($errors['name'])?'shown':'hidden' ?>">
+                  <?php echo isset($errors['name'])?$errors['name']:'' ?>
+                </span>                 
               </div>
             </div>
             <!-- Imagen de la reputación -->
-            <div class="form-group">
+            <div class="form-group <?php echo isset($errors['image'])?'has-error':'' ?>">
               <label for="reputation_image" class="col-sm-3 control-label">Imagen</label>
               <div class="col-sm-9">
                 <input type="file" id="reputation_image" name="reputation_image">
-                <p class="help-block">El tamaño m&aacute;ximo de la imagen es 1024 kB.</p>                                  
+                <p class="help-block">El tamaño m&aacute;ximo de la imagen es 1024 kB.</p>
+                <!-- Contenedor del mensaje de error -->
+                <span class="error help-block <?php echo isset($errors['image'])?'shown':'hidden' ?>">
+                  <?php echo isset($errors['image'])?$errors['image']:'' ?>
+                </span>
               </div>
             </div>
             <!-- Puntaje minimo de la reputacion -->
-            <div class="form-group">
+            <div class="form-group <?php echo isset($errors['minScore'])?'has-error':'' ?>">
               <label for="reputation_min_score" class="control-label col-sm-3">Puntaje m&iacute;nimo</label>
               <div class="col-sm-9">
                 <input type="text" class="form-control" id="reputation_min_score" name="reputation[minScore]"
-                      placeholder="Puntaje minimo de la reputacion" value="<?= $reputation->getName() ?>" />                
+                      placeholder="Puntaje minimo de la reputacion" value="<?= $reputation->getMinScore() ?>" />
+                <!-- Contenedor del mensaje de error -->
+                <span class="error help-block <?php echo isset($errors['minScore'])?'shown':'hidden' ?>">
+                  <?php echo isset($errors['minScore'])?$errors['minScore']:'' ?>
+                </span>
               </div>
             </div>
             

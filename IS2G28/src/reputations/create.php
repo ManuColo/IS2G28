@@ -58,8 +58,6 @@ if (count($violations) == 0) {
   }  
 }
 
-
-
 if (count($errors) == 0) {
   // Mover la imagen asociada a la reputación al directorio de uploads
   // Actualizar objeto reputación con la ubicación definitiva de la imagen
@@ -76,16 +74,20 @@ if (count($errors) == 0) {
   header("location:new.php");  
 }
 
+// Incluir template que presenta el formulario de creación de una reputación
+include 'form.tpl.php';
+
 // Imprimir errores de validacion
+/*
 if (count($violations) > 0) {
   $errorsString = (string) $violations;
   echo $errorsString;
 }
-
 if (count($errors) > 0) {
   echo '<br>';
   var_dump($errors);
-}
+} 
+*/
 
  
 
