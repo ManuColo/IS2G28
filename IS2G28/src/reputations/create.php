@@ -45,16 +45,21 @@ foreach ($violations as $violation) {
   $errors[$violation->getPropertyPath()] = $violation->getMessage();  
 }
 
-if (count($violations) == 0) {
-  // Validar que no exista una reputación con el nombre especificado
+// Si no hay errores con el nombre de la reputación
+// Validar que no exista una reputación con el nombre especificado
+if (!isset($errors['name'])) {  
   $anotherReputation = $entityManager->getRepository('Reputation')->findByName($reputation->getName());
   if ($anotherReputation) {
-    $errors['name'] = 'El nombre elegido corresponde a otra reputación.';
+    $errors['name'] = 'Ya existe una reputación con el nombre especificado.';
   }  
-  // Validar que no exista una reputación con el puntaje mínimo especificado
+}
+
+// Si no hay errores con el puntaje mínimo de la reputación
+// Validar que no exista una reputación con el puntaje mínimo especificado
+if (!isset($errors['minScore'])) {
   $reputation2 = $entityManager->getRepository('Reputation')->findByMinScore($reputation->getMinScore());
   if ($reputation2) {
-    $errors['minScore'] = 'El puntaje elegido corresponde a otra reputación.';
+    $errors['minScore'] = 'Ya existe una reputación con el puntaje especificado.';
   }  
 }
 
