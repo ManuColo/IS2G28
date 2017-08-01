@@ -27,7 +27,7 @@ if (!$user->getIsAdmin()) {
 }
 
 // Recuperar las reputaciones del sistema
-$reputations = $entityManager->getRepository('Reputation')->findAll();
+$reputations = $entityManager->getRepository('Reputation')->findBy(array(), array('minScore' => 'ASC'));
 
 // Incluir template que contiene listado de reputaciones
 include 'list.tpl.php';
