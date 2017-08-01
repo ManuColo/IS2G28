@@ -5,6 +5,7 @@
  */
 
 require_once __DIR__.'/../../config/doctrine_config.php';
+require_once __DIR__.'/../common/lib.php';
 
 session_start();
 
