@@ -48,13 +48,6 @@ class Reputation
    */
   private $minScore;
   
-  /**
-   * Puntaje máximo de la reputación.
-   * 
-   * @var integer
-   * @Column(type="smallint") 
-   */
-  private $maxScore;
 
   /**
    * Get id
@@ -137,31 +130,7 @@ class Reputation
   {
     return $this->minScore;
   }
-  
-  /**
-   * Set maxScore
-   *
-   * @param integer $maxScore
-   *
-   * @return Reputation
-   */
-  public function setMaxScore($maxScore)
-  {
-    $this->maxScore = $maxScore;
-
-    return $this;
-  }
-
-  /**
-   * Get maxScore
-   *
-   * @return integer
-   */
-  public function getMaxScore()
-  {
-    return $this->maxScore;
-  }
-  
+    
   /**
    * Configura las reglas de validacion que se aplican sobre una reputación
    * 

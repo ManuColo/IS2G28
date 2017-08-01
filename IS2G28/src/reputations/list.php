@@ -29,11 +29,5 @@ if (!$user->getIsAdmin()) {
 // Recuperar las reputaciones del sistema
 $reputations = $entityManager->getRepository('Reputation')->findAll();
 
-// Imprimir las reputaciones
-foreach ($reputations as $reputation) {
-  echo $reputation->getName();
-  echo '<br>';  
-}
-
 // Incluir template que contiene listado de reputaciones
-//include 'list.tpl.php';
+include 'list.tpl.php';

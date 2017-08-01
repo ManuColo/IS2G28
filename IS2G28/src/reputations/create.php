@@ -70,12 +70,6 @@ if (count($errors) == 0) {
   $targetFile = $cfg->uploadDir . $imageFileName;
   move_uploaded_file($reputation->getImage(), $targetFile);    
   $reputation->setImage($imageFileName);
-
-  // Calcular el puntaje maximo de la nueva reputación
-  $overlappingReputation = getReputationIncludingScore($reputation->getMinScore());
-  $reputation->setMaxScore($overlappingReputation->getMaxScore());
-  // Recortar el rango de puntajes cubierto por la reputación superpuesta
-  $overlappingReputation->setMaxScore($reputation->getMinScore()-1);
   
   // Persistir nueva reputación en la base de datos
   $entityManager->persist($reputation);
@@ -145,48 +139,4 @@ function createReputation($reputationData)
   $reputation->setImage($reputationData['image']);
       
   return $reputation;
-}
-
-/**
- * Calcula el puntaje máximo para la reputación dada.
- * 
- * @param Reputation $reputation
- * 
- */
-function calculateMaxScore($reputation)
-{
-  global $entityManager;
-  
-  // Obtener todas las reputaciones del sistema
-  //$reputations = $entityManager->getRepository('Reputation')->findAll();
-  
-  // Obtener la reputación que le precedería según la escala de puntajes
-  
-  // Setear el puntaje maximo de la nueva reputación como el maximo de la reputación precedente
-  
-  // Actualizar maximo de la reputación precedente con el minimo de la nueva reputacion menos 1
-  
-  // Persistir cambios en la BD
-  
-  
-}
-
-function getReputationIncludingScore($score) 
-{
-  global $entityManager;
-  
-  $qb = $entityManager->createQueryBuilder();
-  $qb
-    ->select('r')
-    ->from('Reputation', 'r')
-    ->where('r.minScore <= :score')
-    ->andWhere('r.maxScore >= :score')
-    ->setParameter('score', $score)
-  ;
-  
-  // Obtener consulta
-  $query = $qb->getQuery();
-  
-  // Retornar resultado
-  return $query->getSingleResult();
 }
