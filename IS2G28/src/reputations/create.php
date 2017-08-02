@@ -75,8 +75,10 @@ if (count($errors) == 0) {
   $entityManager->persist($reputation);
   $entityManager->flush();
 
-  // Redirigir al usuario a la pantalla de alta nuevamente
-  header("location:new.php");  
+  // Redirigir al usuario al listado de reputaciones
+  addMessage('success', 'Se ha creado una nueva reputación exitosamente.');
+  header("location:list.php");
+  exit();
 }
 
 // Incluir template que presenta el formulario de creación de una reputación

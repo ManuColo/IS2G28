@@ -157,7 +157,7 @@ class Reputation
     )));
     $metadata->addPropertyConstraint('minScore', new Assert\Type(array(
         'type' => 'integer',
-        'message' => 'El valor {{ value }} no es un número entero válido.'
+        'message' => 'El valor {{ value }} no es un puntaje válido. Ingrese un número entero.'
     )));        
     
   }
