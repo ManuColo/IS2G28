@@ -40,7 +40,7 @@
                     <td class="reputation-name"><?= $reputation->getName() ?></td>
                     <td class="reputation-min-score"><?= $reputation->getMinScore() ?></td>
                     <td class="actions">
-                      <a class="btn btn-warning btn-sm" href="">
+                      <a class="btn btn-warning btn-sm" href="edit.php?id=<?= $reputation->getId() ?>">
                         <span class="glyphicon glyphicon-pencil"></span> Editar
                       </a>
                       <a class="btn btn-danger btn-sm" href="">
