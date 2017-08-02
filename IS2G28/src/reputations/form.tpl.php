@@ -83,7 +83,7 @@
             <div class="form-group">
               <div class="col-sm-9 col-sm-offset-3">                                  
                 <input type="submit" id="submit" class="btn btn-primary" value="Guardar">
-                <a class="btn btn-default" href="" role="button">Cancelar</a>
+                <a class="btn btn-default" href="list.php" role="button">Cancelar</a>
               </div>
             </div> 
             
