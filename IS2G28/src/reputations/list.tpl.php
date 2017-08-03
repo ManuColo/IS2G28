@@ -43,9 +43,9 @@
                       <a class="btn btn-warning btn-sm" href="edit.php?id=<?= $reputation->getId() ?>">
                         <span class="glyphicon glyphicon-pencil"></span> Editar
                       </a>
-                      <a class="btn btn-danger btn-sm" href="">
+                      <a class="btn-delete btn btn-danger btn-sm" href="delete.php?id=<?= $reputation->getId() ?>">
                         <span class="glyphicon glyphicon-trash"></span> Borrar
-                      </a>                          
+                      </a>
                     </td>
                   </tr>                    
                 <?php endforeach; ?>	                                      
@@ -58,5 +58,16 @@
       </div>
     </div>
     </div>
+    <script type="text/javascript"> 
+      $('.btn-delete').confirmation({
+        title: 'Esta seguro de borrar la reputación seleccionada?',
+        placement: 'right',
+        btnOkLabel:'Si',
+        btnCancelLabel:'No',
+        btnOkClass:'btn btn-sm btn-danger btn-xs',
+        btnCancelClass:'btn btn-sm btn-success btn-xs'        
+      });
+      
+    </script>
   </body>    
 </html>
