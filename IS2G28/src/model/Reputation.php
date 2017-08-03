@@ -14,6 +14,10 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 class Reputation 
 {
+  // Reputaciones no editables ni borrables
+  const IRRESPONSABLE = 'Irresponsable';
+  const OBSERVADOR = 'Observador';
+  
   /**
    * Identificador unívoco de la reputación.
    * 
@@ -129,6 +133,15 @@ class Reputation
   public function getMinScore()
   {
     return $this->minScore;
+  }
+  
+  /**
+   * Retorna verdadero si es una reputación default del sistema, falso en caso contrario.
+   * 
+   */
+  public function isDefault()
+  {
+    return $this->getName() == self::IRRESPONSABLE || $this->getName() == self::OBSERVADOR;    
   }
     
   /**

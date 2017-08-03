@@ -42,5 +42,13 @@ if (!$reputation) {
   exit();  
 }
 
+// Comprobar si la reputación es no editable
+// Si no lo es, redirigir al listado de reputaciones y notificar el error
+if ($reputation->isDefault()) {
+  addMessage('danger', 'No puede editarse la reputación especificada.');  
+  header("location:list.php");
+  exit();  
+}
+
 // Incluir template que visualiza formulario vinculado a una reputación
 include 'form.tpl.php';
