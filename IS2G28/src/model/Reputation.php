@@ -152,7 +152,8 @@ class Reputation
   public static function loadValidatorMetadata(ClassMetadata $metadata)
   {
     $metadata->addPropertyConstraint('name', new Assert\NotBlank(array(
-        'message' => 'Nombre requerido.'
+        'message' => 'Nombre requerido.',
+        'groups' => array('edition')
     )));    
     
     $metadata->addPropertyConstraint('image', new Assert\NotBlank(array(
@@ -161,16 +162,19 @@ class Reputation
     $metadata->addPropertyConstraint('image', new Assert\Image(array(
         'maxSize' => '1024k',
         'mimeTypesMessage' => 'El archivo no es una imagen valida.',
-        'maxSizeMessage' => 'La imagen es demasiado grande.'
+        'maxSizeMessage' => 'La imagen es demasiado grande.',
+        'groups' => array('edition')
     )));    
     
     // Reglas acerca del valor de la propiedad minScore
     $metadata->addPropertyConstraint('minScore', new Assert\NotBlank(array(
-        'message' => 'Puntaje mínimo requerido.'
+        'message' => 'Puntaje mínimo requerido.',
+        'groups' => array('edition')
     )));
     $metadata->addPropertyConstraint('minScore', new Assert\Type(array(
         'type' => 'integer',
-        'message' => 'El valor {{ value }} no es un puntaje válido. Ingrese un número entero.'
+        'message' => 'El valor {{ value }} no es un puntaje válido. Ingrese un número entero.',
+        'groups' => array('edition')
     )));        
     
   }

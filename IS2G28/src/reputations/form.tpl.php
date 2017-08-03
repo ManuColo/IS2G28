@@ -55,7 +55,11 @@
         <div class="panel-body">
           <!-- Formulario de alta de una reputacion -->
           <form id="reputation-form" action="<?php echo ($reputation->getId()?'update.php':'create.php') ?>" 
-                method="post" class="form-horizontal" enctype="multipart/form-data" >                           
+                method="post" class="form-horizontal" enctype="multipart/form-data" >
+            <!-- Identificador del favor (solo en caso de edición) -->
+            <?php if ($reputation->getId()): ?>
+              <input type="hidden" id="reputation_id" name="reputation[id]" value="<?= $reputation->getId() ?>">
+            <?php endif; ?>
             <!-- Nombre de la reputación -->
             <div class="form-group <?php echo isset($errors['name'])?'has-error':'' ?>">
               <label for="reputation_name" class="col-sm-3 control-label">Nombre</label>
