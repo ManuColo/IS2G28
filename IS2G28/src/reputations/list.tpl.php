@@ -40,10 +40,10 @@
                     <td class="reputation-name"><?= $reputation->getName() ?></td>
                     <td class="reputation-min-score"><?= $reputation->getMinScore() ?></td>
                     <td class="actions">
-                      <a class="btn btn-warning btn-sm" href="edit.php?id=<?= $reputation->getId() ?>">
+                      <a class="btn btn-warning btn-sm <?= $reputation->isDefault()?'disabled':'' ?>" href="edit.php?id=<?= $reputation->getId() ?>">
                         <span class="glyphicon glyphicon-pencil"></span> Editar
                       </a>
-                      <a class="btn-delete btn btn-danger btn-sm" href="delete.php?id=<?= $reputation->getId() ?>">
+                      <a class="btn-delete btn btn-danger btn-sm <?= $reputation->isDefault()?'disabled':'' ?>" href="delete.php?id=<?= $reputation->getId() ?>">
                         <span class="glyphicon glyphicon-trash"></span> Borrar
                       </a>
                     </td>
