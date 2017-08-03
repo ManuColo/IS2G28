@@ -1,5 +1,9 @@
 <?php
 
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
 /**
  * Clase que modela reputación de un usuario.
  * 
@@ -43,6 +47,7 @@ class Reputation
    * @Column(type="smallint" )
    */
   private $minScore;
+  
 
   /**
    * Get id
@@ -124,5 +129,36 @@ class Reputation
   public function getMinScore()
   {
     return $this->minScore;
+  }
+    
+  /**
+   * Configura las reglas de validacion que se aplican sobre una reputación
+   * 
+   * @param ClassMetadata $metadata
+   */
+  public static function loadValidatorMetadata(ClassMetadata $metadata)
+  {
+    $metadata->addPropertyConstraint('name', new Assert\NotBlank(array(
+        'message' => 'Nombre requerido.'
+    )));    
+    
+    $metadata->addPropertyConstraint('image', new Assert\NotBlank(array(
+        'message' => 'Imagen requerida.'
+    )));
+    $metadata->addPropertyConstraint('image', new Assert\Image(array(
+        'maxSize' => '1024k',
+        'mimeTypesMessage' => 'El archivo no es una imagen valida.',
+        'maxSizeMessage' => 'La imagen es demasiado grande.'
+    )));    
+    
+    // Reglas acerca del valor de la propiedad minScore
+    $metadata->addPropertyConstraint('minScore', new Assert\NotBlank(array(
+        'message' => 'Puntaje mínimo requerido.'
+    )));
+    $metadata->addPropertyConstraint('minScore', new Assert\Type(array(
+        'type' => 'integer',
+        'message' => 'El valor {{ value }} no es un puntaje válido. Ingrese un número entero.'
+    )));        
+    
   }
 }
