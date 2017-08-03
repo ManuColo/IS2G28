@@ -20,6 +20,13 @@
         text-align: center;
         font-variant: small-caps;
       }
+      
+      img.reputation-image {
+        width: 50px;
+        height: 50px;
+        float: left;
+        margin-right: 10px;
+      }
 
       
     </style>
@@ -37,11 +44,22 @@
       <div class="panel panel-default reputation">
         <div class="panel-heading">
           <!-- Titulo de la seccion -->
-          <h3 class="panel-title">Nueva reputaci&oacute;n</h3>
+          <h3 class="panel-title">
+            <?php if (!$reputation->getId()): ?>
+              Nueva reputaci&oacute;n
+            <?php else: ?>
+              Edici&oacute;n de reputaci&oacute;n
+            <?php endif; ?>
+          </h3>
         </div>
         <div class="panel-body">
           <!-- Formulario de alta de una reputacion -->
-          <form id="reputation-form" class="form-horizontal" action="create.php" method="post" enctype="multipart/form-data" >                           
+          <form id="reputation-form" action="<?php echo ($reputation->getId()?'update.php':'create.php') ?>" 
+                method="post" class="form-horizontal" enctype="multipart/form-data" >
+            <!-- Identificador del favor (solo en caso de edición) -->
+            <?php if ($reputation->getId()): ?>
+              <input type="hidden" id="reputation_id" name="reputation[id]" value="<?= $reputation->getId() ?>">
+            <?php endif; ?>
             <!-- Nombre de la reputación -->
             <div class="form-group <?php echo isset($errors['name'])?'has-error':'' ?>">
               <label for="reputation_name" class="col-sm-3 control-label">Nombre</label>
@@ -58,6 +76,9 @@
             <div class="form-group <?php echo isset($errors['image'])?'has-error':'' ?>">
               <label for="reputation_image" class="col-sm-3 control-label">Imagen</label>
               <div class="col-sm-9">
+                <?php if ($reputation->getId()): ?>
+                <img src="../uploads/<?php echo $reputation->getImage() ?>" alt="Imagen de reputaci&oacute;n" class="img-circle reputation-image">                    
+                <?php endif; ?>
                 <input type="file" id="reputation_image" name="reputation_image">
                 <p class="help-block">El tamaño m&aacute;ximo de la imagen es 1024 kB.</p>
                 <!-- Contenedor del mensaje de error -->

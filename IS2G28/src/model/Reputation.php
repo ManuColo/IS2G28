@@ -14,6 +14,10 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 class Reputation 
 {
+  // Reputaciones no editables ni borrables
+  const IRRESPONSABLE = 'Irresponsable';
+  const OBSERVADOR = 'Observador';
+  
   /**
    * Identificador unívoco de la reputación.
    * 
@@ -130,6 +134,15 @@ class Reputation
   {
     return $this->minScore;
   }
+  
+  /**
+   * Retorna verdadero si es una reputación default del sistema, falso en caso contrario.
+   * 
+   */
+  public function isDefault()
+  {
+    return $this->getName() == self::IRRESPONSABLE || $this->getName() == self::OBSERVADOR;    
+  }
     
   /**
    * Configura las reglas de validacion que se aplican sobre una reputación
@@ -139,7 +152,8 @@ class Reputation
   public static function loadValidatorMetadata(ClassMetadata $metadata)
   {
     $metadata->addPropertyConstraint('name', new Assert\NotBlank(array(
-        'message' => 'Nombre requerido.'
+        'message' => 'Nombre requerido.',
+        'groups' => array('edition')
     )));    
     
     $metadata->addPropertyConstraint('image', new Assert\NotBlank(array(
@@ -148,16 +162,19 @@ class Reputation
     $metadata->addPropertyConstraint('image', new Assert\Image(array(
         'maxSize' => '1024k',
         'mimeTypesMessage' => 'El archivo no es una imagen valida.',
-        'maxSizeMessage' => 'La imagen es demasiado grande.'
+        'maxSizeMessage' => 'La imagen es demasiado grande.',
+        'groups' => array('edition')
     )));    
     
     // Reglas acerca del valor de la propiedad minScore
     $metadata->addPropertyConstraint('minScore', new Assert\NotBlank(array(
-        'message' => 'Puntaje mínimo requerido.'
+        'message' => 'Puntaje mínimo requerido.',
+        'groups' => array('edition')
     )));
     $metadata->addPropertyConstraint('minScore', new Assert\Type(array(
         'type' => 'integer',
-        'message' => 'El valor {{ value }} no es un puntaje válido. Ingrese un número entero.'
+        'message' => 'El valor {{ value }} no es un puntaje válido. Ingrese un número entero.',
+        'groups' => array('edition')
     )));        
     
   }
