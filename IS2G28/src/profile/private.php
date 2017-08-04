@@ -6,8 +6,13 @@ if ($_SESSION['logged']) { ?>
   <head>
 	<title>Una Gauchada - Mi Perfil</title>
 	<?php require '../common/common_headers.php' ;?>
-	<script type="text/javascript">
-	</script>   
+  <style type="text/css">
+    .reputation img {      
+      width: 50px;
+      height: 50px;
+    }
+  </style>
+	<script type="text/javascript"></script>   
   </head>
   <body>
   <!-- Contenedor principal, requerido por Bootstrap -->
@@ -18,6 +23,22 @@ if ($_SESSION['logged']) { ?>
 	<?php 
 	include('../common/menu.php');	
 	$user= $entityManager->find('User',$_SESSION['userId']);
+  
+  $userReputation = $entityManager->getRepository('Reputation')->getReputationFromScore($user->getReputation());
+  
+  /*
+  echo $userReputation->getName();
+  echo $userReputation->getMinScore();
+  echo '<br>';
+
+  $reputations = $entityManager->getRepository('Reputation')->getReputationFromScore($user->getReputation());
+  foreach ($reputations as $rep) {
+    echo $rep->getName();
+    echo $rep->getMinScore();
+    echo '<br>';    
+  }  
+  */
+  
 	
 	include '../common/sidebar.php'; 
 	?> 
@@ -35,7 +56,16 @@ if ($_SESSION['logged']) { ?>
 			</div>
 			<div class="margSupD">
 				<blockquote>
-					<div><p>Tu Reputaci&oacute;n: <?php echo $user->printReputation(); ?> </p></div>
+					<div>
+            <p>
+              Tu Reputaci&oacute;n:
+              <span class="reputation">
+                <span class="label label-default"><?= $userReputation->getName() ?></span>
+                <img src="../uploads/<?= $userReputation->getImage() ?>" 
+                     alt="Imagen de <?= $userReputation->getName() ?>" class="img-circle">                
+              </span>
+            </p>            
+          </div>
 					<div><p>Tus Cr&eacute;ditos: <?php echo $user->getCantCredits();?></p></div>
 				</blockquote>
 			</div>

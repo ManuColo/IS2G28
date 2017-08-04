@@ -53,7 +53,10 @@ if ($_SESSION['logged']) {
 	                    </td>
 	                    <td><a href="../profile/public.php?idUs=<?php echo  $userList->getId();?>"><?php echo $userList;?></a></td>
 	                    <td><?php echo $userList->getMail();?></td>
-	                    <td><?php echo $userList->printReputation(); ?></td>
+                      <?php $userReputation = $entityManager->getRepository('Reputation')->getReputationFromScore($userList->getReputation()) ?>
+                      <td>
+                        <span class="label label-default"><?php echo $userReputation->getName() ?></span>
+                      </td>
 	                  </tr>
 	                  <?php }; ?>
 	                </table>

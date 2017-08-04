@@ -4,13 +4,15 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
+
 /**
  * Clase que modela reputación de un usuario.
  * 
  * La reputación describe la categoría de un usuario según su puntaje.
  *
  * @author juan
- * @Entity @Table(name="reputations")
+ * @Entity(repositoryClass="ReputationRepository") 
+ * @Table(name="reputations")
  */
 class Reputation 
 {
@@ -143,7 +145,7 @@ class Reputation
   {
     return $this->getName() == self::IRRESPONSABLE || $this->getName() == self::OBSERVADOR;    
   }
-    
+  
   /**
    * Configura las reglas de validacion que se aplican sobre una reputación
    * 

@@ -6,7 +6,13 @@ if ($_SESSION['logged']) { ?>
   <head>
 	<title>Una Gauchada - Perfil de Usuario</title>
 	<?php require '../common/common_headers.php' ;?>
-	<script type="text/javascript" src="../js/public.js"></script>   
+	<style type="text/css">
+    .reputation img {      
+      width: 50px;
+      height: 50px;
+    }
+  </style>
+  <script type="text/javascript" src="../js/public.js"></script>   
   </head>
   <body>
   <!-- Contenedor principal, requerido por Bootstrap -->
@@ -18,6 +24,8 @@ if ($_SESSION['logged']) { ?>
 	include('../common/menu.php');
 	$idUserView= $_GET['idUs'];
 	$userView= $entityManager->getRepository('User')->findBy(array('id'=>$idUserView))[0];
+  $userReputation = $entityManager->getRepository('Reputation')->getReputationFromScore($userView->getReputation());
+  
 	?> 
     <div class="jumbotron" id="profileJumb">
 		<div class="imgUsChica">
@@ -39,7 +47,16 @@ if ($_SESSION['logged']) { ?>
 			<img class="logoMin" src="../images/logo-gauchada.png"/></h3>
 		</div>
 		<div class="margSupPub">
-			<div><h4>Reputaci&oacute;n del usuario: <?php echo $userView->printReputation(); ?> </h4></div>
+			<div>        
+        <h4>
+          Reputaci&oacute;n del usuario:
+          <span class="reputation">
+            <span class="label label-default"><?= $userReputation->getName() ?></span>
+            <img src="../uploads/<?= $userReputation->getImage() ?>" 
+                 alt="Imagen de <?= $userReputation->getName() ?>" class="img-circle">                
+          </span>
+        </h4>
+      </div>
 		</div>
 		<table class="table table-hover repList">
 			<?php if(count($userView->getMyPostulations()) === 0){?> 

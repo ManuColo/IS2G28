@@ -104,6 +104,7 @@ Class User {
   public function __construct() {
   	$this->photo = '';
   	$this->cantCredits = 1;
+    $this->reputation = 0;
     $this->myFavors = new ArrayCollection();
     $this->myCredits = new ArrayCollection();
     $this->myPostulations = new ArrayCollection();
@@ -298,7 +299,7 @@ Class User {
     return $this->cantCredits > 0;    
   }
   
-  public function printReputation(){
+  public function printReputation(){    
   	if ($this->reputation > 50) {
   		return "Dios";
   	} elseif ($this->reputation > 20) {
