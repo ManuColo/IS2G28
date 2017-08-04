@@ -299,6 +299,31 @@ Class User {
     return $this->cantCredits > 0;    
   }
   
+  /**
+   * Retorna true si el usuario tiene alguna calificación pendiente de realizar, false en caso contrario.
+   * 
+   * @return boolean
+   */
+  public function hasPendingQualifications() {
+    $hasPendingPostulantQualifications = false;
+    foreach ($this->myFavors as $favor) {
+      if (!$favor->getUnpublished() && $favor->getResolved() && !$favor->getPostulantQualification()) {
+        $hasPendingPostulantQualifications = true;
+      }      
+    }    
+    $hasPendingOwnerQualifications = false;
+    foreach ($this->myPostulations as $postulation) {      
+      if ($postulation->getStatus() === 'Aceptado') {
+        $postulatedFavor = $postulation->getFavor();
+        if (!$postulatedFavor->getOwnerQualification()) {
+          $hasPendingOwnerQualifications = true;
+        }				
+			}
+    }
+    
+    return $hasPendingPostulantQualifications || $hasPendingOwnerQualifications;
+  }
+  
   public function printReputation(){    
   	if ($this->reputation > 50) {
   		return "Dios";
