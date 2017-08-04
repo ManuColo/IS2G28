@@ -155,7 +155,7 @@ class Reputation
   {
     $metadata->addPropertyConstraint('name', new Assert\NotBlank(array(
         'message' => 'Nombre requerido.',
-        'groups' => array('edition')
+        'groups' => array('Default', 'edition')
     )));    
     
     $metadata->addPropertyConstraint('image', new Assert\NotBlank(array(
@@ -165,18 +165,18 @@ class Reputation
         'maxSize' => '1024k',
         'mimeTypesMessage' => 'El archivo no es una imagen valida.',
         'maxSizeMessage' => 'La imagen es demasiado grande.',
-        'groups' => array('edition')
+        'groups' => array('Default', 'edition')
     )));    
     
     // Reglas acerca del valor de la propiedad minScore
     $metadata->addPropertyConstraint('minScore', new Assert\NotBlank(array(
         'message' => 'Puntaje mínimo requerido.',
-        'groups' => array('edition')
+        'groups' => array('Default', 'edition')
     )));
     $metadata->addPropertyConstraint('minScore', new Assert\Type(array(
         'type' => 'integer',
         'message' => 'El valor {{ value }} no es un puntaje válido. Ingrese un número entero.',
-        'groups' => array('edition')
+        'groups' => array('Default', 'edition')
     )));        
     
   }
