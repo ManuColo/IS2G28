@@ -3,6 +3,7 @@ if (!isset($_SESSION)) {
 	session_start();
 }
 require_once __DIR__.'/../../config/doctrine_config.php';
+require_once __DIR__.'/../common/lib.php';
 $user= $entityManager->find('User',$_SESSION['userId']);
 if ($_SESSION['logged']) {
 	if ($user->getIsAdmin()) {
