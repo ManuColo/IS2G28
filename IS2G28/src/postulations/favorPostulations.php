@@ -37,7 +37,8 @@ if ($_SESSION['logged']) { ?>
 						<?php echo $postulation->getComment(); ?>
 					</td>
 					<td>
-						<?php echo $userPost->printReputation(); ?>
+						<?php $userReputation = $entityManager->getRepository('Reputation')->getReputationFromScore($userPost->getReputation());
+						echo $userReputation->getName(); ?>
 					</td>
 					<td>
 						<?php if ($favor->getResolved()){ ?>
